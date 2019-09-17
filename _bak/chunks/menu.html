@@ -1,0 +1,41 @@
+{$categories = $wa->shop->categories(0, 2, true)}
+{$curcat = $category.id}
+
+{if $categories}
+{foreach $categories as $category}
+<div id="parent-cat-{$category.id}" class="header__menu">
+  <div class="menu">
+    <div class="container">
+      <div class="menu__inner">
+        <div class="menu__row">
+          {if $category.childs}
+            {foreach $category.childs as $child}
+            <div class="menu__col">
+              {if $child.id == $curcat}
+              <div class="menu__col-title is-active">{$child.name|escape}</div>
+              {else}
+              <div class="menu__col-title">{$child.name|escape}</div>
+              {/if}
+                {if $child.childs}
+                <div class="menu__col-list">
+                  {foreach $child.childs as $schild}
+                  <div class="menu__col-item">
+                    {if $schild.id == $curcat}
+                    <a href="/{$schild.full_url}" class="menu__col-link is-active">{$schild.name}</a>
+                    {else}
+                    <a href="/{$schild.full_url}" class="menu__col-link">{$schild.name}</a>
+                    {/if}
+                  </div>
+                  {/foreach}
+                </div>
+                {/if}
+            </div>
+            {/foreach}
+          {/if}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/foreach}
+{/if}

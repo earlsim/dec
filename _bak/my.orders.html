@@ -1,0 +1,132 @@
+{* @event frontend_category.%plugin_id% *}
+{foreach $frontend_category as $_}{$_}{/foreach}
+<div class="page__head show-l">
+  <div class="container">
+    <div class="page__head-row">
+      <div class="page__head-col">
+        <div class="page__title">Мои заказы</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{$cururl = $wa->currentUrl(false, true)}
+<div data-type="profile" class="page__content js-page-content">
+  <div class="profile">
+    <div class="container container--xxs-nopd" data-notinuse="container--m-nopd">
+      <div class="profile__inner">
+        <div class="profile__tabs">
+          <a href="/my/orders/" class="profile__tab {if $cururl == '/my/orders/'}is-active{/if}">
+            Мои заказы
+          </a>
+          <a href="/my/profile/" class="profile__tab {if $cururl == '/my/profile/'}is-active{/if}">
+            Информация профиля
+          </a>
+        </div>
+        <div class="profile__content">
+          <div class="profile__title">История заказов</div>
+          <div class="profile__orders show-l">
+            <div class="profile__orders-row profile__orders-row--heading">
+              <div class="profile__orders-col profile__orders-col--id">#</div>
+              <div class="profile__orders-col profile__orders-col--status">Статус</div>
+              <div class="profile__orders-col profile__orders-col--items">Товары</div>
+              <div class="profile__orders-col profile__orders-col--shipping">Доставка</div>
+              <div class="profile__orders-col profile__orders-col--payment">Оплата</div>
+              <div class="profile__orders-col profile__orders-col--date">Дата</div>
+            </div>
+            {foreach $orders as $o}
+            <a href="{$o.url}" class="profile__orders-row">
+              <div class="profile__orders-col profile__orders-col--id">{$o.id_str}</div>
+              <div class="profile__orders-col profile__orders-col--status">
+                <span style="{$o.state->getStyle(1)}">
+                  {$o.state->getName()}
+                </span>
+              </div>
+              <div class="profile__orders-col profile__orders-col--items">
+                {if !empty($o.items)}
+                {foreach $o.items as $i}
+                <div class="profile__orders-item">
+                {$i.name|escape} x {$i.quantity}
+                </div>
+                {/foreach}
+                {/if}
+              </div>
+              <div class="profile__orders-col profile__orders-col--shipping">
+                {if $o.shipping_name}
+                {$o.shipping_name|escape}
+                {else}
+                &nbsp;
+                {/if}
+              </div>
+              <div class="profile__orders-col profile__orders-col--payment">
+                {if $o.payment_name}
+                {$o.payment_name|escape}
+                {else}
+                &nbsp;
+                {/if}
+              </div>
+              <div class="profile__orders-col profile__orders-col--date">
+                  {$o.create_datetime|wa_date:'humandate'}
+              </div>
+            </a>
+            {foreachelse}
+            <div class="page__msg">У вас пока нет заказов :(</div>
+            {/foreach}
+          </div>
+          <div class="profile__m-orders hide-l">
+            {foreach $orders as $o}
+            <a href="{$o.url}" class="profile__m-orders-row">
+              <div class="profile__m-orders-col profile__m-orders-col--idstate">
+                <div class="profile__m-orders-row-title">
+                  {$o.id_str}
+                  <span style="{$o.state->getStyle(1)}">
+                    {$o.state->getName()}
+                  </span>
+                </div>
+                <div class="profile__m-orders-col profile__m-orders-col--date">
+                  {$o.create_datetime|wa_date:'humandate'}
+                </div>
+              </div>
+
+              <div class="profile__m-orders-col profile__m-orders-col--items">
+                <span>Товары:</span>
+                {if !empty($o.items)}
+                {foreach $o.items as $i}
+                <div class="profile__m-orders-item">
+                {$i.name|escape} x {$i.quantity}
+                </div>
+                {/foreach}
+                {/if}
+              </div>
+              <div class="profile__m-orders-col profile__m-orders-col--shipping">
+                <span>Доставка:</span>
+                {if $o.shipping_name}
+                {$o.shipping_name|escape}
+                {else}
+                &nbsp;
+                {/if}
+              </div>
+              <div class="profile__m-orders-col profile__m-orders-col--payment">
+                <span>Оплата:</span>
+                {if $o.payment_name}
+                {$o.payment_name|escape}
+                {else}
+                &nbsp;
+                {/if}
+              </div>
+            </a>
+            {foreachelse}
+            <div class="page__msg">У вас пока нет заказов :(</div>
+            {/foreach}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{$wa->globals('isMyAccount', true)}
+
+<!-- plugin hook: 'frontend_my_orders' -->
+{* @event frontend_my_orders.%plugin_id% *}
+{foreach $frontend_my_orders as $_}{$_}{/foreach}

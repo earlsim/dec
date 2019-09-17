@@ -1,0 +1,8 @@
+{include file="`$wa_active_theme_path`/homepage/homepage.html" inline}
+
+{if $smarty.get.mode == 'dev'}
+<pre>
+{$wa->isMobile()|@var_dump}
+{$wa->userAgent()|@var_dump}
+</pre>
+{/if}

@@ -1,0 +1,54 @@
+{$cururl = $wa->currentUrl(false, true)}
+{$wa->title("Вход - Студия ярких событий Декораторъ")}
+{if strpos($cururl, 'login') == 1}
+<div class="page">
+  <div class="container">
+    <div class="page__head">
+      <h1 class="page__title">
+        Вход
+      </h1>
+    </div>
+  </div>
+  <div class="page__login">
+    <div class="container">
+      <div>
+        <form method = "POST" action="" class="login-form js-login-form">
+          {$wa->csrf()}
+          <input class="v-h" name ="wa_auth_login" value="1">
+          <input class="v-h" name ="wa_json_mode" value="1">
+          <input class="v-h" name ="need_redirects" value="1">
+          <div class="login-form__item--mrt64 js-field-wrap">
+            <div class="login-form__mail field-text">
+              <input type="email" id="login" class="field-text__input" name="login" autocomplete="off" placeholder="example@yandex.ru" required>
+              <span class="field-text__bar"></span>
+              <label for="login" class="field-text__label">E-mail</label>
+            </div>
+            <div class="signup-form__msg js-field-msg">
+              <div class=""></div>
+            </div>
+          </div>
+          <div class="login-form__item">
+            <div class="login-form__password field-text">
+              <input type="password"  class="field-text__input" id="password" name="password" autocomplete="off" required>
+              <label for="password" class="field-text__label">Пароль</label>
+              <span class="field-text__bar"></span>
+            </div>
+          </div>
+          <div class="login-form__item--mrt48">
+            <div class="login-form__submit field-text">
+              <input type="hidden" name="wa_auth_login" value="1">
+              <input type="submit" class="btn btn--full login-form-btn" value="Войти">
+            </div>
+          </div>
+          <div class="login-form__item"><span class="login-form__item-span">Не зарегистрированы?</span>
+            <a href="/signup/">Регистрация</a>
+          </div>
+          <div class="login-form__item">
+            <a class="form__link" href="/forgotpassword/">Забыли пароль?</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{/if}

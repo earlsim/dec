@@ -1,0 +1,111 @@
+.header-cart-container {
+  position: absolute;
+  z-index: 5;
+  top: 100%;
+  right: 0;
+  width: 366px;
+  max-width: 100%;
+  background: #FFF;
+  box-shadow: 0 0 24px rgba(72, 22, 93, 0.15);
+  transform: translateX(110%);
+  transition: transform .4s;
+
+  &.is-opened {
+    transform: translateX(0);
+  }
+
+  @media ($ma-s) {
+    width: 100%;
+  }
+}
+
+.header-cart-container__btn {
+  width: 100%;
+}
+
+.header-cart-container__item {
+
+  &:first-child {
+    padding-top: 24px;
+  }
+}
+
+.header-cart-container__bottom {
+  padding: 26px 24px;
+  background: $c-block;
+}
+
+.header-cart-container__delivery {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  & span {
+    &:first-child {
+      flex-grow: 1;
+      font-size: 14px;
+      line-height: 1.25em;
+      font-weight: 500;
+      color: $c-text-secondary;
+      text-transform: uppercase;
+    }
+    &:nth-child(2) {
+      font-family: $f-secondary;
+      font-size: 18px;
+      line-height: 1em;
+      font-weight: 700;
+      color: $c-text-secondary;
+    }
+    &:last-child {
+      margin-bottom: -1px;
+      margin-left: 4px;
+      font-size: 14px;
+      line-height: 1.45em;
+      font-weight: 500;
+      color: $c-text-secondary;
+    }
+  }
+}
+
+.header-cart-container__result {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  // margin-top: 12px;
+
+  & span {
+    &:first-child {
+      flex-grow: 1;
+      font-size: 14px;
+      line-height: 1.25em;
+      font-weight: 500;
+      color: $c-text-secondary;
+      text-transform: uppercase;
+    }
+    &:nth-child(2) {
+      font-family: $f-secondary;
+      font-size: 24px;
+      line-height: 1em;
+      font-weight: 700;
+    }
+    &:last-child {
+      margin-bottom: -1px;
+      margin-left: 4px;
+      font-size: 14px;
+      line-height: 1.45em;
+      font-weight: 500;
+      color: $c-text-secondary;
+    }
+  }
+}
+
+.header-cart-container__empty {
+  padding: 26px 24px;
+  font-size: 14px;
+  line-height: 1.25em;
+  font-weight: 500;
+  color: $c-text-secondary;
+  text-align: center;
+  text-transform: uppercase;
+  background: $c-block;
+}

@@ -1,0 +1,21 @@
+.signup-form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+.signup-form__item {
+  margin-top: 36px;
+  text-align: center;
+
+  &--mrt48 {
+    margin-top: 48px;
+  }
+  &--mrt64 {
+    margin-top: 64px;
+  }
+}
+.signup-form__submit {
+  text-align: center;
+}
+.signup-form__item-span {
+  color: $c-text-secondary;
+}

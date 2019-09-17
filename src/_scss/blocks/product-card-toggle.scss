@@ -1,0 +1,33 @@
+.product-card-toggle {
+  position: relative;
+  perspective: 1000px;
+  transition: all 1s;
+
+  &.is-active {
+    // transform: perspective(1000px) translateZ(50px);
+
+    & .product-card-toggle__front {
+      transform: rotateY(180deg);
+    }
+
+    & .product-card-toggle__back {
+      transform: rotateY(360deg);
+    }
+  }
+}
+
+.product-card-toggle__front {
+  transition: all 1s;
+  backface-visibility: hidden;
+}
+
+.product-card-toggle__back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  transition: all 1s;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+}

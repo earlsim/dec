@@ -1,0 +1,172 @@
+{* @event frontend_category.%plugin_id% *}
+{foreach $frontend_category as $_}{$_}{/foreach}
+<div class="page__head show-l">
+  <div class="container">
+    <div class="page__head-row">
+      <div class="page__head-col">
+        <div class="page__title">{$category.name}</div>
+        {if count($products) > 1}
+        <div class="page__count">
+          {$productText = sprintf(_w('%d товар', '%d товаров', '%d товара', count($products)))}
+          {$productText = mb_substr($productText, mb_strpos($productText, ' '))}
+          <div class="page__count-num">{$products_count}</div>
+          <div class="page__count-label">{$productText}</div>
+        </div>
+        {/if}
+      </div>
+      {if count($products) > 1}
+      {$sorting = !empty($category.params.enable_sorting)}
+      <div class="page__head-col">
+        <div class="page__head-action">
+          <div class="sorting">
+            <div class="sorting__wrap">
+              <div class="sorting__label">
+                Сортировать:
+              </div>
+              <div class="sorting__select js-select">
+                <label for="sortby" class="sorting__icon js-select-btn">
+                  <svg class="svg-icon">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-chevron"></use>
+                  </svg>
+                </label>
+                {$active_sort = $smarty.get.sort}
+                {$active_order = $smarty.get.order}
+                <select name="sortby" id="sortby" class="sorting__select-control js-select-control-url">
+                  <option {if !$active_sort} selected{/if} value="{$wa->currentUrl(0, 1)}?{http_build_query($smarty.get)}">По популярности</option>
+                  <option {if $active_sort eq 'name'}selected{/if} value="?{http_build_query(array_merge($smarty.get, ['sort' => 'name', 'order' => 'asc']))}">По названию</option>
+                  <option {if $active_sort eq 'price' and $active_order eq 'asc'}selected{/if} value="?{http_build_query(array_merge($smarty.get, ['sort' => 'price', 'order' => 'asc']))}">По возрастанию цены</option>
+                  <option {if $active_sort eq 'price' and $active_order eq 'desc'}selected{/if} value="?{http_build_query(array_merge($smarty.get, ['sort' => 'price', 'order' => 'desc']))}">По убыванию цены</option>
+                  <option {if $active_sort eq 'create_datetime'}selected{/if} value="?{http_build_query(array_merge($smarty.get, ['sort' => 'create_datetime', 'order' => 'desc']))}">По новинкам</option>
+                  <option {if $active_sort eq 'stock'}selected{/if} value="?{http_build_query(array_merge($smarty.get, ['sort' => 'stock', 'order' => 'desc']))}">В наличии</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/if}
+    </div>
+  </div>
+</div>
+
+{$categories = $wa->shop->categories(0, 2, true)}
+{$curcat = $category.id}
+{$parentId = $category.parent_id}
+{$parent = $wa->shop->category($root_category_id)}
+
+<div data-type="catalog" class="page__content js-page-content">
+  <div class="catalog">
+    <div class="container container--xxs-nopd" data-notinuse="container--m-nopd">
+      <div class="catalog__inner">
+        {include file="`$wa_active_theme_path`/category.sidebar.html" inline}
+        {include file="`$wa_active_theme_path`/category.list.html" productTotal=$products_count inline}
+      </div>
+      <div class="page__bottom">
+        {include file="`$wa_active_theme_path`/chunks/pagination.html" products_count=$products_count inline per_page=$per_page total=$pages_count attrs=['class' => "pagination"]}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{if false}
+{if $category.subcategories}
+<div class="container container--pd0">
+  <div class="page__categories">
+    <div class="categories">
+      {foreach $category.subcategories as $sc}
+      <div class="categories__item">
+        <a href="{$sc.url}" class="category">
+          <div class="category__pic">
+            <img src="{$sc.cat_image}" alt="" class="category__img">
+          </div>
+          <div class="category__info">
+            <div class="category__title">{$sc.name|escape}</div>
+            <div class="category__count">
+              <div class="tag tag--categories">
+                {$cid=$sc.id}
+                {$catcount = $wa->shop->productsCount("category/$cid")}
+                {$catcount}
+              </div>
+              <span>{_w('Product', 'Products', $products_count)}</span>
+            </div>
+            <button href="{$sc.url}" class="btn btn--h35 btn--bold category__btn">Перейти</button>
+          </div>
+        </a>
+      </div>
+      {/foreach}
+    </div>
+  </div>
+</div>
+{/if}
+<div class="container">
+  <div class="page__head {if $category.subcategories}page__head--hidemob{/if}">
+    <h1 class="page__title">
+      {$category.name}
+    </h1>
+    {if $products}
+    <div class="page__head-count">
+      <div class="tag tag--count">
+        {$products_count}
+      </div>
+      <span class="page__head-label">{_w('Product', 'Products', $products_count)}</span>
+    </div>
+    {/if}
+    <div class="page__head-more">
+      {if count($products) > 1}
+      {$sorting = !empty($category.params.enable_sorting)}
+      <div class="sort-by-select">
+        {$active_sort = $smarty.get.sort}
+        {$active_order = $smarty.get.order}
+        <select name="sortby" class="sort-by-select__control">
+          <option {if !$active_sort} selected{/if} value="{$wa->currentUrl(0, 1)}?{http_build_query($smarty.get)}">По популярности</option>
+          <option {if $active_sort eq 'name'}selected{/if} value="?{http_build_query(array_merge($smarty.get, ['sort' => 'name', 'order' => 'asc']))}">По названию</option>
+          <option  {if $active_sort eq 'price' and $active_order eq 'asc'}selected{/if} value="?{http_build_query(array_merge($smarty.get, ['sort' => 'price', 'order' => 'asc']))}">По возрастанию цены</option>
+          <option {if $active_sort eq 'price' and $active_order eq 'desc'}selected{/if} value="?{http_build_query(array_merge($smarty.get, ['sort' => 'price', 'order' => 'desc']))}">По убыванию цены</option>
+          <option {if $active_sort eq 'create_datetime'}selected{/if} value="?{http_build_query(array_merge($smarty.get, ['sort' => 'create_datetime', 'order' => 'desc']))}">По новинкам</option>
+          <option {if $active_sort eq 'stock'}selected{/if} value="?{http_build_query(array_merge($smarty.get, ['sort' => 'stock', 'order' => 'desc']))}">В наличии</option>
+        </select>
+      </div>
+      {/if}
+    </div>
+  </div>
+</div>
+
+<div class="container container--mb60 container--pd0">
+  <div class="products {if $category.subcategories}products--hidemob{/if}">
+    {if count($products) > 0}
+    {if $filters}
+      {include file='blocks/shop-filters.html'}
+    {/if}
+    {/if}
+    {if !$products}
+    {if !empty($filters)}
+    <h2 class="category__h2">Не найдено товаров по заданным условиям фильтрации</h2>
+    <a class="category__clear btn btn--bd" href="{$wa->currentUrl(0,1)}">Очистить фильтр</a>
+    {else}
+    <h2 class="category__h2">В этой категории нет товаров</h2>
+    {/if}
+    {else}
+    {include file='products/product-cards.html' sorting=!empty($category.params.enable_sorting)}
+    {/if}
+  </div>
+  {if isset($pages_count) && $pages_count > 1}
+  <div class="pagination js-pagination"  data-times="2" data-link-text="[`Load more`]" data-loading-str="[`Loading...`]">
+    {wa_pagination total=$pages_count attrs=['class' => "pagination"]}
+  </div>
+  <div class="products-showmore js-showmore">
+    <div class="products-showmore__spinner">
+      <div class="products-showmore__spinner-icon">
+        <svg class="svg-icon">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-spinner"></use>
+        </svg>
+      </div>
+    </div>
+    <div class="products-showmore__caption">
+      <button class="circle-btn circle-btn--white circle-btn--plus"></button>
+      <span class="products-showmore__span">Показать ещё</span>
+    </div>
+  </div>
+  {/if}
+</div>
+{/if}

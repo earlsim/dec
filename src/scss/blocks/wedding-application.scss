@@ -1,0 +1,74 @@
+.wedding-application {
+  margin-top: 36px;
+  margin-bottom: 16px;
+
+  @media (min-width: 1200px) {
+    margin-top: 280px;
+    margin-bottom: 72px;
+  }
+}
+
+.wedding-application__inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  @media ($m-s) {
+    flex-direction: row;
+  }
+}
+
+.wedding-application__title {
+  max-width: 100%;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.23em;
+
+  @media (min-width: 1200px) {
+    width: 680px;
+    font-size: 48px;
+  }
+}
+
+.wedding-application__text {
+  max-width: 100%;
+  margin-top: 24px;
+  font-size: 18px;
+  line-height: 1.85em;
+
+  &--light {
+    font-size: 16px;
+    // line-height: 37px;
+    color: #858B93;
+  }
+
+  @media (min-width: 1200px) {
+    width: 680px;
+    margin-top: 36px;
+    font-size: 24px;
+
+    &--light {
+      font-size: 20px;
+    }
+  }
+}
+
+.wedding-application__btn {
+  margin-top: 36px;
+
+  @media (min-width: 1200px) {
+    margin-top: 48px;
+  }
+}
+
+.wedding-application__imgt {
+  max-width: 100%;
+  margin-top: 36px;
+
+  @media ($m-s) {
+    max-width: 40%;
+    margin-top: 0;
+    margin-left: 36px;
+  }
+}

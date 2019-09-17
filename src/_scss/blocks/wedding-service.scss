@@ -1,0 +1,76 @@
+.wedding-service {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  &:not(:first-child) {
+    margin-top: 36px;
+  }
+
+  @media ($m-s) {
+    flex-direction: row;
+
+    &--reverse {
+      flex-direction: row-reverse;
+
+      & .wedding-service__content {
+        margin-right: 36px;
+        margin-left: 0;
+      }
+    }
+  }
+
+  @media (min-width: 1200px) {
+
+    &:not(:first-child) {
+      margin-top: 144px;
+    }
+  }
+}
+
+.wedding-service__picture {
+
+  @media ($m-s) {
+    width: 49%;
+  }
+}
+
+.wedding-service__content {
+  margin-top: 36px;
+
+  @media ($m-s) {
+    width: 560px;
+    max-width: 51%;
+    margin-top: 0;
+    margin-left: 36px;
+  }
+}
+
+.wedding-service__title {
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.25em;
+
+  @media ($m-s) {
+    font-weight: 500;
+    font-size: 36px;
+  }
+}
+
+.wedding-service__caption {
+  margin-top: 24px;
+  font-size: 18px;
+  line-height: 1.75em;
+  color: #858B93;
+
+  @media ($m-s) {
+    font-size: 20px;
+  }
+}
+
+.wedding-service__btn {
+  margin-top: 36px;
+  height: 56px;
+  line-height: 56px;
+}

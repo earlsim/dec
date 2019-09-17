@@ -1,0 +1,125 @@
+<div class="page">
+  <div class="container">
+    <div class="page__breadcrumbs">
+      <div class="breadcrumbs">
+        <div class="breadcrumbs__item">
+          <a href="/" class="breadcrumbs__link breadcrumbs__link--home">Главная</a>
+        </div>
+        <div class="breadcrumbs__separator">
+          <div class="breadcrumbs__icon">
+          </div>
+        </div>
+        <div class="breadcrumbs__item is-active">
+          <span class="breadcrumbs__current">Авторизация</span>
+        </div>
+      </div>
+    </div>
+    {$wa->authAdapters()}
+    <div class="page__auth auth">
+      <div class="auth__wrapper">
+        <div class="auth__layer js-sign-containter {if isset($smarty.get.action) and $smarty.get.action == 'signup'}is-signup{/if}">
+          <div class="auth__form js-sign-form">
+            {if isset($smarty.get.action) and $smarty.get.action == 'signup'}
+            {include file="`$wa_active_theme_path`/forms/signup-form.html" inline}
+            {else}
+            {include file="`$wa_active_theme_path`/forms/login-form.html" inline}
+            {/if}
+          </div>
+          <div class="auth__welcome">
+            <div class="auth__message">
+              <h2 class="auth__title">Нет учетной записи?</h2>
+              <button class="btn btn--whitebd auth__welcome-btn js-sign-btn">Регистрация</button>
+            </div>
+          </div>
+          <div class="auth__welcome auth__welcome--signup">
+            <div class="auth__message">
+              <h2 class="auth__title">Есть учетная запись?</h2>
+              <button class="btn btn--whitebd auth__welcome-btn js-sign-btn">Войти</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="login-form-data" style="display: none;">
+  {if isset($smarty.get.action) and $smarty.get.action == 'signup'}
+  {include file="`$wa_active_theme_path`/forms/login-form.html" inline}
+  {else}
+  {include file="`$wa_active_theme_path`/forms/signup-form.html" inline}
+  {/if}
+</div>
+
+{if false}
+<form action="/signup/" method="post">
+  <div class="wa-field wa-field-firstname">
+    <div class="wa-name">Имя</div>
+    <div class="wa-value">
+      <input title="Имя" type="text" name="data[firstname]" value="">
+    </div>
+  </div>
+  <div class="wa-field wa-field-lastname">
+    <div class="wa-name">Фамилия</div>
+    <div class="wa-value">
+      <input title="Фамилия" type="text" name="data[lastname]" value="">
+    </div>
+  </div>
+  <div class="wa-field wa-separator">
+
+  </div>
+  <div class="wa-field wa-field-email">
+    <div class="wa-name">Email</div>
+    <div class="wa-value">
+      <input title="Email" type="text" name="data[email]" value="">
+    </div>
+  </div>
+  <div class="wa-field wa-field-password">
+    <div class="wa-name">Пароль</div>
+    <div class="wa-value">
+      <input type="password" name="data[password]" value="">
+    </div>
+  </div>
+  <div class="wa-field wa-field-password_confirm">
+    <div class="wa-name">Подтвердите пароль</div>
+    <div class="wa-value">
+      <input type="password" name="data[password_confirm]" value="">
+    </div>
+  </div>
+  <div class="wa-field">
+    <div class="wa-value wa-submit">
+  <input type="submit" value="Зарегистрироваться"> или <a href="/login/">войдите</a>, если у вас уже есть аккаунт
+  </div>
+</div>
+</form>
+
+
+
+<div class="page">
+  <div class="container">
+    {if !empty($confirmed_email)}
+
+        <h1>[s`Thank you!`]</h1>
+        <p>[s`You have successfully confirmed your email.`]</p>
+
+    {elseif !empty($contact)}
+
+        <h1>[s`Thank you!`]</h1>
+        <p>[s`You have successfully signed up.`]</p>
+
+        {if !empty($email_confirmation_hash)}
+            <p><em>[s`A confirmation link has been sent to you by email. Please click this link to confirm your signup and to sign in.`]</em></p>
+        {/if}
+
+    {else}
+
+        <h1>[s`Sign up`]</h1>
+        {$wa->authAdapters()}
+        {$wa->signupForm($errors)}
+
+        <div class="clear-both"></div>
+
+    {/if}
+  </div>
+</div>
+{/if}

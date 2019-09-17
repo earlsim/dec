@@ -1,0 +1,148 @@
+{$cururl = $wa->currentUrl(false, true)}
+{$urls = array("/cart/", "/search/")}
+{$myurl = ($wa->myUrl()) }
+<div class="breadcrumbs">
+  <div class="container">
+    <div class="breadcrumbs__inner">
+      <div class="breadcrumbs__grid">
+        <div class="breadcrumbs__grid-item">
+          <a href="/" class="breadcrumbs__link">Главная</a>
+        </div>
+        <div class="breadcrumbs__grid-item">
+          <div class="breadcrumbs__icon">
+            <svg class="svg-icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-chevron-m"></use>
+            </svg>
+          </div>
+        </div>
+        {if $category}
+        {foreach $breadcrumbs as $item}
+        <div class="breadcrumbs__grid-item">
+          <a href="{$item.url}" class="breadcrumbs__link">{$item.name}</a>
+        </div>
+        <div class="breadcrumbs__grid-item">
+          <div class="breadcrumbs__icon">
+            <svg class="svg-icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-chevron-m"></use>
+            </svg>
+          </div>
+        </div>
+        {/foreach}
+        <div class="breadcrumbs__grid-item">
+          <a href="/{$cururl}" class="breadcrumbs__link is-disabled">{$category.name}</a>
+        </div>
+        {elseif $product}
+        {foreach $breadcrumbs as $item}
+        <div class="breadcrumbs__grid-item">
+          <a href="{$item.url}" class="breadcrumbs__link">{$item.name}</a>
+        </div>
+        <div class="breadcrumbs__grid-item">
+          <div class="breadcrumbs__icon">
+            <svg class="svg-icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-chevron-m"></use>
+            </svg>
+          </div>
+        </div>
+        {/foreach}
+        <div class="breadcrumbs__grid-item">
+          <a href="/{$cururl}" class="breadcrumbs__link is-disabled">{$product.name}</a>
+        </div>
+        {elseif $cururl == '/wishlist/'}
+        <div class="breadcrumbs__grid-item">
+          <a href="/wishlist/" class="breadcrumbs__link is-disabled">Избранное</a>
+        </div>
+        {elseif $page}
+        <div class="breadcrumbs__grid-item">
+          <a href="{$page.url}" class="breadcrumbs__link is-disabled">{$page.name}</a>
+        </div>
+        {elseif $cururl == '/signup/'}
+        <div class="breadcrumbs__grid-item">
+          <a href="/my/" class="breadcrumbs__link is-disabled">Личный кабинет</a>
+        </div>
+        <div class="breadcrumbs__grid-item">
+          <div class="breadcrumbs__icon">
+            <svg class="svg-icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-chevron-m"></use>
+            </svg>
+          </div>
+        </div>
+        <div class="breadcrumbs__grid-item">
+          <a href="/wishlist/" class="breadcrumbs__link is-disabled">Регистрация</a>
+        </div>
+        {elseif $cururl == '/login/'}
+        <div class="breadcrumbs__grid-item">
+          <a href="/my/" class="breadcrumbs__link is-disabled">Личный кабинет</a>
+        </div>
+        <div class="breadcrumbs__grid-item">
+          <div class="breadcrumbs__icon">
+            <svg class="svg-icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-chevron-m"></use>
+            </svg>
+          </div>
+        </div>
+        <div class="breadcrumbs__grid-item">
+          <a href="/wishlist/" class="breadcrumbs__link is-disabled">Авторизация</a>
+        </div>
+        {elseif strpos($cururl, 'checkout') == 1}
+        <div class="breadcrumbs__grid-item">
+          <a href="/wishlist/" class="breadcrumbs__link is-disabled">Оформление заказа</a>
+        </div>
+        {elseif strpos($cururl, 'search') == 1}
+        <div class="breadcrumbs__grid-item">
+          <a href="/search/" class="breadcrumbs__link is-disabled">Результаты поиска</a>
+        </div>
+        {elseif $cururl == '/cart/'}
+        <div class="breadcrumbs__grid-item">
+          <a href="/wishlist/" class="breadcrumbs__link is-disabled">Корзина</a>
+        </div>
+        {elseif $cururl == '/my/orders/'}
+        <div class="breadcrumbs__grid-item">
+          <a href="/my/" class="breadcrumbs__link">Личный кабинет</a>
+        </div>
+        <div class="breadcrumbs__grid-item">
+          <div class="breadcrumbs__icon">
+            <svg class="svg-icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-chevron-m"></use>
+            </svg>
+          </div>
+        </div>
+        <div class="breadcrumbs__grid-item">
+          <a href="/my/orders" class="breadcrumbs__link is-disabled">Мои заказы</a>
+        </div>
+        {elseif $cururl == '/my/profile/'}
+        <div class="breadcrumbs__grid-item">
+          <a href="/my/" class="breadcrumbs__link">Личный кабинет</a>
+        </div>
+        <div class="breadcrumbs__grid-item">
+          <div class="breadcrumbs__icon">
+            <svg class="svg-icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-chevron-m"></use>
+            </svg>
+          </div>
+        </div>
+        <div class="breadcrumbs__grid-item">
+          <a href="/my/orders" class="breadcrumbs__link is-disabled">Информация профиля</a>
+        </div>
+        {elseif strpos($cururl, 'order') !== false}
+        <div class="breadcrumbs__grid-item">
+          <a href="/my/" class="breadcrumbs__link">Личный кабинет</a>
+        </div>
+        <div class="breadcrumbs__grid-item">
+          <div class="breadcrumbs__icon">
+            <svg class="svg-icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-chevron-m"></use>
+            </svg>
+          </div>
+        </div>
+        <div class="breadcrumbs__grid-item">
+          <a href="/my/orders" class="breadcrumbs__link is-disabled">Мои заказы</a>
+        </div>
+        {else}
+        <div class="breadcrumbs__grid-item">
+          <a href="/{$cururl}" class="breadcrumbs__link is-disabled">{$category.name}</a>
+        </div>
+        {/if}
+      </div>
+    </div>
+  </div>
+</div>

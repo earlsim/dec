@@ -1,0 +1,187 @@
+<div class="wait-wrapper js-wait-wrapper">
+  <div class="wait-wrapper__inner">
+    <div class="wait-wrapper__spinner spinner">
+      <div id="i-waiter" class="spinner__svg">
+      </div>
+      <div class="spinner__logo">
+        <svg class="svg-icon">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-f"></use>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+{$categories = $wa->shop->categories(0, 2, true)}
+{$topMenu = $wa->menu->get(1)}
+<footer class="footer">
+  <div class="container container--s-nopd">
+    <div class="footer__inner">
+      <div class="footer__col footer__col--left">
+        <div class="footer__col-block">
+          <a href="/" class="footer__logo">
+            <svg class="svg-icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-logo"></use>
+            </svg>
+          </a>
+          <div class="footer__logo-subtitle">
+            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore</p>
+          </div>
+          <div class="footer__payments">
+            <div class="footer__payments-grid">
+              <div class="footer__payments-item">
+                <div class="footer__payments-card js-notify" style="width: 68px; height: 40px;">
+                  <svg class="svg-icon">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-mastercard"></use>
+                  </svg>
+                </div>
+              </div>
+              <div class="footer__payments-item">
+                <div class="footer__payments-card" style="width: 65px; height: 20px;">
+                  <svg class="svg-icon">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-visa"></use>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer__m-nav hide-m">
+          {if $categories}
+          {foreach array_reverse($categories) as $key => $category}
+          <div class="m-catalog">
+            <div class="m-catalog__block">
+              <div class="m-catalog__nav">
+                <div class="m-catalog__nav-list js-m-catalog-list">
+
+                  <div class="m-catalog__nav-item js-m-catalog-item">
+                    <div class="m-catalog__nav-btn js-m-catalog-btn">
+                      <div data-catid="{$category.id}" class="m-catalog__nav-label m-catalog__nav-label--fz16">{$category.name}</div>
+                      <div class="m-catalog__nav-icon">
+                        <svg class="svg-icon">
+                          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-chevron-m"></use>
+                        </svg>
+                      </div>
+                    </div>
+                    {if $category.childs}
+                    <div class="m-catalog__sub js-m-catalog-sub">
+                      <div class="m-catalog__sub-list">
+                        {foreach $category.childs as $child}
+                        <div class="m-catalog__sub-item">
+                          <a data-catid="{$child.id}" href="/{$child.full_url}" class="m-catalog__sub-btn">
+                            <div class="m-catalog__sub-label m-catalog__sub-label--fz16">{$child.name}</div>
+                          </a>
+                        </div>
+                        {/foreach}
+                      </div>
+                    </div>
+                    {/if}
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          {/foreach}
+          {/if}
+          <div class="m-menu__nav">
+            <div class="m-menu__nav">
+              <div class="m-menu__nav-list js-m-menu-list">
+                {foreach $topMenu as $item}
+                <div class="m-menu__nav-item js-m-menu-item">
+                  <a href="{$item.url}" class="m-menu__nav-btn">
+                    <div class="m-menu__nav-label">{$item.name}</div>
+                  </a>
+                </div>
+                {/foreach}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer__nav show-m">
+          <div class="footer__nav-row">
+            <div class="footer__nav-col">
+              <a href="#" class="footer__nav-title">Для него</a>
+              <div class="footer__nav-list">
+                <a href="#" class="footer__nav-item">Обувь</a>
+                <a href="#" class="footer__nav-item">Одежда</a>
+                <a href="#" class="footer__nav-item">Аксессуары</a>
+              </div>
+            </div>
+            <div class="footer__nav-col">
+              <a href="#" class="footer__nav-title">Для неё</a>
+              <div class="footer__nav-list">
+                <a href="#" class="footer__nav-item">Обувь</a>
+                <a href="#" class="footer__nav-item">Одежда</a>
+                <a href="#" class="footer__nav-item">Аксессуары</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer__col footer__col--right">
+        <div class="footer__col-block">
+          {$phone = str_replace(" ","",$wa->block('global.phone'))}
+          <a href="tel:{$phone}" class="footer__phone">
+            {$wa->block("global.phone")}
+          </a>
+          <div class="footer__social social">
+            <div class="social__grid">
+              <div class="social__item">
+                <a target="_blank" rel="nofollow noreferrer noopener" href="{$wa->block('global.fb')}" class="social__btn">
+                  <svg class="svg-icon">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-fb"></use>
+                  </svg>
+                </a>
+              </div>
+              <div class="social__item">
+                <a href="{$wa->block('global.vk')}" target="_blank" rel="nofollow noreferrer noopener" class="social__btn">
+                  <svg class="svg-icon">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-vk"></use>
+                  </svg>
+                </a>
+              </div>
+              <div class="social__item">
+                <a href="{$wa->block('global.twitter')}" target="_blank" rel="nofollow noreferrer noopener" class="social__btn">
+                  <svg class="svg-icon">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-twitter"></use>
+                  </svg>
+                </a>
+              </div>
+              <div class="social__item">
+                <a href="{$wa->block('global.ok')}" target="_blank" rel="nofollow noreferrer noopener" class="social__btn">
+                  <svg class="svg-icon">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-ok"></use>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <a href="#callback-popup" class="footer__btn btn js-mfp">
+            Свяжитесь с нами
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<div class="sub-footer">
+  <div class="container">
+    <div class="sub-footer__inner">
+      <div class="sub-footer__links">
+        <div class="sub-footer__links-grid">
+          <div class="sub-footer__links-item">
+            <a href="/confidence-and-supply/" class="sub-footer__links-link">Политика конфиденциальности</a>
+          </div>
+          <div class="sub-footer__links-item">
+            <a href="/cookies/" class="sub-footer__links-link">Политика использования файлов cookies</a>
+          </div>
+        </div>
+      </div>
+      <a href="https://aleskeroff.ru/" target="_blank" rel="nofollow noreferrer noopener" class="sub-footer__copyright">
+        <svg class="svg-icon">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-aleskeroff"></use>
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>

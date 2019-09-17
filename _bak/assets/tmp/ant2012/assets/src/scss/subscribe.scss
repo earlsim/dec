@@ -1,0 +1,95 @@
+.subscribe {
+  padding: 20px 15px;
+  background-image: url(../img/bg/subscribe_bg.jpg);
+  background-size: cover;
+  background-position: right bottom;
+
+  @media ($m-s) {
+    padding: 20px;
+  }
+
+  @media ($m-m) {
+    padding: 40px;
+  }
+}
+
+.subscribe__title {
+  display: flex;
+  justify-content: flex-start;
+  max-width: 240px;
+  text-transform: uppercase;
+  font-family: $f-oswald;
+  font-size: 20px;
+  line-height: 1.5em;
+
+  @media ($m-s) {
+    max-width: 480px;
+    font-size: 30px;
+  }
+
+  @media ($m-m) {
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 40px;
+    text-align: center;
+  }
+}
+
+.subscribe__form {
+  margin: 20px 0 0 0;
+  max-width: 800px;
+
+  @media ($m-s) {
+    margin: 40px auto 0 auto;
+  }
+}
+
+.subscribe__input {
+  display: flex;
+}
+
+.subscribe__text {
+  margin-top: 10px;
+  padding: 0 0 0 20px;
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 1.5em;
+  border-bottom: 1px solid transparent;
+
+  & > a {
+    border-bottom: 1px solid rgba($color: #000000, $alpha: 0.5);
+  }
+
+  @media ($m-s) {
+    max-width: 400px;
+    margin-top: 20px;
+    font-size: 14px;
+  }
+
+  @media ($m-m) {
+    max-width: 620px;
+  }
+}
+
+.subscribe__btn {
+  width: 160px;
+  height: 50px;
+  font-size: 14px;
+
+  @media ($m-m) {
+    width: 210px;
+    font-size: 16px;
+  }
+}
+
+.subscribe__m-btn {
+  margin: 20px auto 0 auto;
+  width: 260px;
+  height: 40px;
+  font-size: 16px;
+  line-height: 1.5em;
+
+  @media ($m-xxs) {
+    margin: 20px auto 0 0;
+  }
+}

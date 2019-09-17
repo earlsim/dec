@@ -1,0 +1,102 @@
+  <div class="container">
+    <div class="page__breadcrumbs">
+      <div class="breadcrumbs">
+        <div class="breadcrumbs__item">
+          <a href="/" class="breadcrumbs__link breadcrumbs__link--home">Главная</a>
+        </div>
+        <div class="breadcrumbs__separator">
+          <div class="breadcrumbs__icon">
+          </div>
+        </div>
+        <div class="breadcrumbs__item is-active">
+          <a href="/personal/" class="breadcrumbs__link">Личный кабинет</a>
+        </div>
+        <div class="breadcrumbs__separator">
+          <div class="breadcrumbs__icon">
+          </div>
+        </div>
+        <div class="breadcrumbs__item is-active">
+          <span class="breadcrumbs__current">Заказ {$order.id_str}</span>
+        </div>
+      </div>
+    </div>
+    <div class="page__head">
+      <h1 class="page__title">
+        Заказ {$order.id_str}
+      </h1>
+    </div>
+  </div>
+  <div class="container container--mpd0">
+    <div class="page__cabinet cabinet">
+      <div class="cabinet__order order">
+        <div class="order__products">
+            {foreach $order.items as $item}
+          <div class="order__products-item product-info">
+            {if $item.type == 'service'} class="service"{/if}
+            <div class="product-info__picwrap">
+              <div class="product-info__pic">
+              {$wa->shop->productImgHtml($item, '200x0', ['itemprop' => 'image', 'alt' => $p.name, 'default' => "`$wa_theme_url`img/dummy200.png"])}
+              </div>
+            </div>
+            <div class="product-info__desc">
+              <h3 class="product-info__title">{$item.name}</h3>
+              <div class="product-info__cost">{wa_currency_html($item.price, '')} руб</div>
+              <div class="product-info__qty">Количество: <span>{$item.quantity} шт</span></div>
+            </div>
+             </div>
+            {/foreach}
+        </div>
+        <div class="order__info">
+          <div class="order__info-title">Информация о заказе</div>
+          <div class="order__info-list">
+            <div class="order__info-item">
+              <div class="order__info-label">Статус:</div>
+              <div class="order__info-value order__info-value--ttl">{$order.state->getName()}</div>
+            </div>
+            {if $order.shipping_name}
+            <div class="order__info-item">
+              <div class="order__info-label">Способ доставки:</div>
+              <div class="order__info-value">{$order.shipping_name}</div>
+            </div>
+            {/if}
+            {if $order.payment_name}
+            <div class="order__info-item">
+              <div class="order__info-label">Cпособ оплаты:</div>
+              <div class="order__info-value order__info-value--ttl">{$order.payment_name}</div>
+            </div>
+            {/if}
+            <div class="order__info-item">
+              <div class="order__info-label">Адрес доставки:</div>
+              <div class="order__info-value">{$order.params['shipping_address.zip']}, {$shipping_region.name}, {$order.params['shipping_address.city']}, {$order.params['shipping_address.street']}</div>
+            </div>
+          </div>
+          <div class="order__summary">
+            {if wa_currency_html($order.shipping, '') > 0}
+            <div class="order__summary-item">
+              <div class="order__summary-label">Доставка:</div>
+
+              <div class="order__summary-value">{wa_currency_html($order.shipping, '')} руб</div>
+            </div>
+            {/if}
+            {if wa_currency_html($order.discount, '') > 0}
+            <div class="order__summary-item">
+              <div class="order__summary-label">Скидка:</div>
+              <div class="order__summary-value">{wa_currency_html($order.discount, '')} руб</div>
+            </div>
+            {/if}
+            <div class="order__summary-item">
+              <div class="order__summary-label order__summary-label--ttu400">ИТОГО:</div>
+              <div class="order__summary-value order__summary-value--f30-700">{wa_currency_html($order.total, '')} руб</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a href="/my/" class="order__back link">Вернуться к списку заказов</a>
+
+    </div>
+  </div>
+
+{$wa->globals('isMyAccount', true)}
+
+{* @event frontend_my_order.%plugin_id% *}
+{foreach $frontend_my_order as $_}{$_}{/foreach}

@@ -1,0 +1,140 @@
+.payment-methods {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 48px 0 64px 0;
+
+  @media ($m-m) {
+    margin: 64px 0 96px 0;
+  }
+}
+.payment-methods__item {
+  width: 100%;
+
+  @media ($m-m) {
+    padding: 0 24px;
+    max-width: 672px;
+    width: 50%;
+  }
+}
+.payment-methods__item__header {
+  padding: 17px 24px 13px 0;
+  box-shadow: 0 0 24px rgba(72, 22, 93, 0.15);
+}
+.payment-methods__item__body {
+  padding: 36px 24px 24px 94px;
+  background-color: $c-white;
+}
+.payment-methods__item__body__text {
+  font-size: 20px;
+  line-height: 1.850em;
+}
+.payment-methods__item__body__icons {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+  margin-bottom: 24px;
+
+  @media ($m-m) {
+    &:hover > &__ico:not(:last-child) {
+    margin-left: 8px;
+    transition: all .5s;
+    }
+  }
+
+}
+.payment-method__item__header__title {
+  display: flex;
+  align-items: baseline;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: normal;
+  vertical-align: baseline;
+
+  &:before {
+    content: attr(data-id);
+    margin-left: 24px;
+    margin-right: 32px;
+    font-family: "Bebas Neue", Arial, sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: normal;
+    color: $c-text-secondary;
+  }
+}
+.payment-methods__item__body__icons__ico {
+  display: inline-block;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  cursor: pointer;
+    img {
+      width: 100%;
+    }
+
+  &:hover {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    transition: all .5s;
+  }
+
+  &:not(:last-child){
+
+    margin-left: -14px;
+
+    @media ($m-m) {
+      margin-left: -28px;
+      transition: margin .4s;
+    }
+
+  }
+}
+
+.delivery-cost {
+  max-width: 920px;
+  margin: 64px auto 0 auto;
+
+  &__table{
+    margin-bottom: 36px;
+
+    &__header {
+      padding: 20px 24px 24px 24px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 1.250em;
+      box-shadow: 0 0 24px rgba(72, 22, 93, 0.15);
+
+      &__place {
+        flex-basis: 69%;
+      }
+      &__cost {
+        flex-basis: 31%;
+        text-align: center;
+      }
+    }
+    &__body {
+      background-color: $c-white;
+
+      &__row {
+        display: flex;
+        justify-content: space-between;
+        padding: 17px 24px;
+        font-size: 16px;
+        line-height: 1.250em;
+        color: #58585A;
+        &:nth-child(even) {
+          background: rgba(72, 22, 93, 0.05);
+        }
+
+        &__name {
+          flex-basis: 69%;
+        }
+        &__value {
+          flex-basis: 31%;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+

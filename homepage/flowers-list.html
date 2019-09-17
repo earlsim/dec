@@ -1,0 +1,33 @@
+<div class="block">
+  <div class="container">
+    <div class="block__content">
+      <div class="flowers-list">
+        <div class="flowers-list__items">
+          <div class="grid">
+            {$menuItems = $wa->menu->get(6)}
+            {$itemCount = count($menuItems)}
+            {$count = 4}
+            {$randCount = rand(1,5)}
+            {foreach range($randCount, $randCount+3) as $i}
+            {$item = $menuItems[$i]}
+            <div class="grid__c grid__c--1-2 grid__c--m-1-4">
+              <a href="{$item.url}" class="flower-card">
+                <div class="flower-card__pic">
+                  <img src="{$wa_url}wa-data/public/shop/categories/menu/{$item.id}.jpg" alt="{$item.name}" class="flower-card__img">
+                </div>
+                <h4 class="flower-card__title">{$item.name}</h4>
+                <div class="flower-card__price">
+                  <span>от</span>
+                  <span>200</span>
+                  <span>руб.</span>
+                </div>
+              </a>
+            </div>
+            {/foreach}
+          </div> 
+        </div>
+        <a href="/catalog/" class="flowers-list__more">Показать еще</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+.error {
+  background-color: $c-main;
+}
+
+.error__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  max-height: 100vh;
+  color: #FFF;
+}
+
+.error__img {
+  width: 100%;
+  max-width: 400px;
+
+  @media ($m-m) {
+    width: auto;
+    max-width: 100%;
+  }
+}
+
+.error__content {
+  text-align: center;
+
+  @media ($m-m) {
+    position: absolute;
+    bottom: 48px;
+  }
+}
+
+.error__caption {
+  font-size: 24px;
+}
+
+.error__btn {
+  margin-top: 24px;
+
+  & .btn {
+    background-color: $c-block;
+    color: $c-main;
+  }
+}

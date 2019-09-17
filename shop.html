@@ -1,0 +1,16 @@
+  {$cururl = $wa->currentUrl(false, true)}
+  {$myurl = ($wa->myUrl()) }
+  {$urlArray = ['/login/', '/payment/', '/wishlist/', '/forgotpassword/', '/signup/']}
+  {if !in_array($cururl, $urlArray) && !strpos($cururl, 'personal')}
+
+  {/if}
+
+  {* @event frontend_header.%plugin_id% *}
+  {foreach $frontend_header as $_}{$_}{/foreach}
+
+  {$_use_store_schema = false}
+  {if !empty($action) && ($action === "default")}
+  {$_use_store_schema = true}
+  {/if}
+
+  {$content}

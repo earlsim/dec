@@ -1,0 +1,45 @@
+.v-h {
+  visibility: hidden;
+  position: absolute;
+}
+.login-form {
+  max-width: 500px;
+  margin: 0 auto;
+}
+.login-form__item {
+  margin-top: 36px;
+  text-align: center;
+
+  &--mrt48 {
+    margin-top: 48px;
+  }
+  &--mrt64 {
+    margin-top: 64px;
+  }
+}
+.login-form__submit {
+  text-align: center;
+}
+.login-form__item-span {
+  color: $c-text-secondary;
+}
+.form__link{
+  color: $c-main;
+}
+.js-field-wrap {
+}
+.has-error {
+  max-height: 120px;
+  opacity: 1;
+  transition: max-height .8s, opacity .8s;
+
+}
+.is-unconfirmed {
+  max-height: 120px;
+  opacity: 1;
+  transition: all .8s;
+}
+
+.is-active {
+
+}

@@ -1,0 +1,12 @@
+{include file="`$wa_active_theme_path`/homepage/slider.html" inline}
+{include file="`$wa_active_theme_path`/homepage/catalog.html" inline}
+{include file="`$wa_active_theme_path`/homepage/top-products.html" inline}
+{include file="`$wa_active_theme_path`/homepage/news.html" inline}
+{include file="`$wa_active_theme_path`/homepage/instagram.html" inline}
+{include file="`$wa_active_theme_path`/homepage/subsribe.html" inline}
+{if $smarty.get.mode == 'dev'}
+<pre>
+{$wa->isMobile()|@var_dump}
+{$wa->userAgent()|@var_dump}
+</pre>
+{/if}

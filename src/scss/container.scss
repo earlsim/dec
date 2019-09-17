@@ -1,0 +1,29 @@
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 24px;
+
+  &--w-100 {
+    width: 100%;
+  }
+  &--lg {
+    max-width: 1920px;
+    padding: 0 48px;
+  }
+  &--no-mw {
+    max-width: none;
+    margin: unset;
+  }
+  &--pd-0 {
+    padding: 0;
+  }
+  &--gray {
+    background-color: $c-block;
+  }
+
+  @media ($m-xxl) {
+    &-xxl--pd-0 {
+      padding: 0;
+    }
+  }
+}

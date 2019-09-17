@@ -1,0 +1,142 @@
+<div class="headline">
+  <div class="container">
+    <div class="headline__inner">
+      <div class="headline__left">
+        <div class="headline__links">
+          <div class="grid20">
+            {$topMenu = $wa->menu->get(1)}
+            {foreach $topMenu as $item}
+            <div class="grid20__item">
+              <a href="{$item.url}" class="headline__link">{$item.name}</a>
+            </div>
+            {/foreach}
+          </div>
+        </div>
+      </div>
+      <div class="headline__right">
+        {if $wa->userId()}
+          <a href="/my/" class="headline__link headline__link--login">Личный кабинет</a>
+          <span class="headline__link headline__link--separator"> </span>
+          <a href="?logout" class="headline__link headline__link--login">Выйти</a>
+        {else}
+          <a href="/login/" class="headline__link headline__link--login">Вход</a>
+          <span class="headline__link headline__link--separator"> / </span>
+          <a href="/signup/" class="headline__link headline__link--login">Регистрация</a>
+        {/if}
+      </div>
+    </div>
+  </div>
+</div>
+{$categories = $wa->shop->categories(0, 2, true)}
+{$curcat = $category.id}
+
+<header class="header">
+  <div class="container">
+    <div class="header__inner">
+      <div class="header__col header__col--left">
+        <div data-id="mobile-menu" class="header__menu-btn js-menu-btn js-m-menu-btn hide-s">
+          <div class="menu-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <div class="header__nav show-s">
+          <div class="grid30">
+            {if $categories}
+            {foreach $categories as $category}
+            {$activeCat = ($category.id == $root_category_id) ? 'is-parent' : 'nope'}
+            <div class="grid30__item">
+              <div data-id="parent-cat-{$category.id}" class="header__nav-link {$activeCat} js-menu-btn">{$category.name}</div>
+            </div>
+            {/foreach}
+            {/if}
+            
+          </div>
+        </div>
+      </div>
+      <div class="header__col header__col--center">
+        <a href="/" class="header__logo">
+          <svg class="svg-icon">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-logo"></use>
+          </svg>
+        </a>
+      </div>
+      <div class="header__col header__col--right">
+        <div class="header__search search-field__wrap show-m">
+          <form method="get" action="{$wa->getUrl('shop/frontend/search')}" class="search-field__input">
+            <input tid="search" name="query" type="text" class="search-field__input-control" {if !empty($query)}value="{$query}"{/if} placeholder="Поиск">
+            <div class="search-field__input-icon">
+              <svg class="svg-icon">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-search"></use>
+              </svg>
+            </div>
+          </form>
+        </div>
+        <div class="header__buttons">
+          <div class="grid30 grid30--mob15">
+            <div class="grid30__item grid30__item--mob15">
+              <div class="header__item">
+                <div class="header__item-icon header__item-icon--search show-s--hide-m js-search-btn">
+                  <svg class="svg-icon">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-search"></use>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            {if $wa->user()->isAuth()}
+              {if $wishArray = $wa->user()->get('wishlist', true, false)}
+                {$wish_count = (count(explode(',', $wishArray)))}
+              {else}
+                {$wish_count = 0}
+              {/if}
+            {else}
+              {if $wishArray = $wa->storage('wishlist')}
+                {$wish_count = (count(explode(',', $wishArray)))}
+              {else}
+                {$wish_count = 0}
+              {/if}
+            {/if}
+            <div class="grid30__item grid30__item--mob15">
+              <a href="/wishlist/" title="Избранное" class="header__item">
+                <div class="header__item-icon header__item-icon--wishlist js-header-wish-count {if $wish_count > 0}is-active{/if}">
+                  <svg class="svg-icon">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-fav-f"></use>
+                  </svg>
+                </div>
+              </a>
+            </div>
+            <div class="grid30__item grid30__item--mob15">
+              <a href="/cart/" title="Корзина" class="header__item">
+                <div class="header__item-icon">
+                  <svg class="svg-icon">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-bag"></use>
+                  </svg>
+                </div>
+                {if $wa->shop->cart->count() > 0}
+                <div class="header__baloon js-header-cart-baloon"></div>
+                {else}
+                <div class="header__baloon js-header-cart-baloon" style="display: none;"></div>
+                {/if}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="header__search-wrap js-search-wrap">
+    <div class="search-block">
+      <form method="get" action="/search/" class="search-block__input">
+        <input type="text" name="search" class="search-block__input-control" placeholder="Я ищу...">
+        <button class="search-block__input-btn">
+          <svg class="svg-icon">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-arrow"></use>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+  {include file="`$wa_theme_path`chunks/menu.html" inline}
+</header>
+{include file="`$wa_theme_path`chunks/m-menu.html" inline}

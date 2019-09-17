@@ -1,0 +1,9 @@
+{if $wa->currentUrl() == "/about/"}
+{include file="`$wa_active_theme_path`/pages/page-about.html" inline}
+{elseif $wa->currentUrl() == "/delivery/"}
+{include file="`$wa_active_theme_path`/pages/page-delivery.html" inline}
+{elseif $wa->currentUrl() == "/payments/"}
+{include file="`$wa_active_theme_path`/pages/page-payments.html" inline}
+{else}
+{include file="`$wa_active_theme_path`/pages/page-static.html" inline}
+{/if}

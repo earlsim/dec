@@ -1,0 +1,30 @@
+  <div class="container">
+    <div class="page__breadcrumbs">
+      <div class="breadcrumbs">
+        <div class="breadcrumbs__item">
+          <a href="/" class="breadcrumbs__link breadcrumbs__link--home">Главная</a>
+        </div>
+        <div class="breadcrumbs__separator">
+          <div class="breadcrumbs__icon">
+          </div>
+        </div>
+        <div class="breadcrumbs__item is-active">
+          <span class="breadcrumbs__current">Завершение оплаты</span>
+        </div>
+      </div>
+    </div>
+    <div class="page__head">
+      <h1 class="page__title">
+        {if $smarty.get.status == 'success' && $order}
+        Спасибо!
+        {else}
+        Что-то пошло не так...
+        {/if}
+      </h1>
+    </div>
+    
+      <div class="page__message page__message--gray">
+        <span>Произошла ошибка. Попробуйте снова или <a href="mailto:zakaz@monetmarket.ru">свяжитесь с нами</a>.</span>
+      </div>
+
+</div>

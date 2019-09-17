@@ -1,0 +1,198 @@
+<div class="container">
+  <div class="page__head page__head--hidemob">
+    <h1 class="page__title">
+      {$last = end($breadcrumbs)}
+      {$last.name}
+    </h1>
+  </div>
+</div>
+
+<div class="container container--pd0">
+  <div class="product js-item" data-id="{$product.id}">
+    <div class="product__pic-wrap">
+      <div class="product__pic-twrap">
+      <div class="product__pic-thumbs js-pic-thumbs">
+        {if count($product.images) > 1 || (count($product.images) === 1)}
+        {foreach $product.images as $image}
+        <div class="product__pic-thumb js-product-thumb {if $image.id == $product.image_id && empty($video)}selected{/if}">
+            {$wa->shop->imgHtml($image, '80x80')}
+        </div>
+        {/foreach}
+        {/if}
+      </div>
+      <div class="product__pic-more arrow-btn js-pic-thumbs-more"></div>
+      </div>
+      <div class="product__pic-viewbox">
+        <div class="product__tagline">
+          {if $product->features["novinka"]["value"] == 1}
+          <div class="product-tag product-tag--left product-tag--orange">Новинка</div>
+          {/if}
+          <div class="product-tag product-tag--right product-tag--gray product-tag--ttu">{$product->features["sokhrannost_monety"]}</div>
+        </div>
+
+
+
+          {if $product.images}
+
+          <div class="slider">
+            <div class="slider__inner">
+              <div id="product-image-slider" class="slider__container slider__container--product-img swiper-container">
+                <div class="swiper-wrapper">
+                  {foreach $product.images as $image}
+                  <div class="swiper-slide js-product-gallery-item">
+                    {$imgUrl = $wa->shop->imgUrl($image, '1500')}
+                    <div class="product__pic js-preview-image" data-src="{$imgUrl}">
+                      {$wa->shop->imgHtml($image, '450', ['title' => ''])}
+                      <div class="product__pic-overlay js-preview-overlay"></div>
+                    </div>
+                  </div>
+                  {/foreach}
+                </div>
+              </div>
+              <div class="slider__controls slider__controls--product-image">
+                <div class="container">
+                  <div class="slider__controls-inner">
+                    <div id="product-image-slider-pagination" class="slider__pagination"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/if}
+
+
+        <div class="product__zoom">
+          <div class="product__zoom-icon">
+            <svg class="svg-icon">
+              <use xlink:href="#i-zoom-in"></use>
+            </svg>
+          </div>
+          <div class="product__zoom-text">
+            Наведите курсор, чтобы увеличить
+          </div>
+        </div>
+        <div class="product__fav product__fav--mob">
+          <div class="product__tofav">
+            <svg class="svg-icon">
+              <use xlink:href="#i-user"></use>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="product__info">
+      <div class="product__preview-wrapper js-preview-wrapper">
+        <div class="product__preview js-preview"></div>
+      </div>
+      <h2 class="product__title">
+        {$product.name|escape}
+      </h2>
+      <div class="product__price">
+        <div class="product__costs">
+          <div class="product__cost product__cost--now">
+            {$product.price} руб
+          </div>
+          <div class="product__cost product__cost--old">
+            {if $product.compare_price > 0}{$product.compare_price} руб.{/if}
+          </div>
+        </div>
+        {if $wa->shop->product($p.id)->features["skidka"]}
+        <span class="product__discount product-tag product-tag--discount">
+          -{$wa->shop->product($p.id)->features["skidka"]}%
+        </span>
+        {/if}
+      </div>
+      <div class="product__desc">
+        <div class="p-desc">
+          <div class="p-desc__block p-desc__block--boxshadow">
+            <div class="p-desc__row p-desc__row--pd30 p-desc__row--qty">
+              <div class="p-desc__label">Количество</div>
+              <div class="p-desc__value p-desc__value--mobfsz">
+                {if !$product.count || $product.count > 1}
+                <div class="qty js-item-qty"> 
+                  <input type="hidden" class="js-item-qty-max" value="{if !$product.count}999{else}{$product.count}{/if}">
+                  <div class="qty__btn circle-btn circle-btn--qty circle-btn--minus js-item-qty-dec"></div>
+                  <input type="text" name="quantity" value="1" class="qty__input qty__input--cart js-item-qty-input">
+                  <div class="qty__btn circle-btn circle-btn--qty circle-btn--plus js-item-qty-inc"></div>  
+                </div>
+                {/if}
+                {if !$product.count || $product.count > 10}<span class="qty__span">(в наличии более 10 шт)</span>{elseif $product.count == 1}<span class="qty__span qty__span--nomg">в наличии 1 шт</span>{else}<span class="qty__span">(в наличии {$product.count} шт)</span>{/if}
+              </div>
+              <div class="p-desc__msg js-item-msg"></div>
+            </div>
+            <div class="p-desc__row p-desc__row--pd30 p-desc__row--tocart">
+              <div class="product__tocart">
+                <button class="btn btn--tocart js-item-tocart">
+                  <div class="btn__icon btn__icon--left">
+                    <svg class="svg-icon">
+                      <use xlink:href="#i-cart"></use>
+                    </svg>
+                  </div>
+                  Добавить в корзину
+                </button>
+                <div class="product__fav js-item-wish {if $inWish}is-active{/if}">
+                  <div class="product__tofav">
+                    <svg class="svg-icon">
+                      <use xlink:href="#i-star-new"></use>
+                    </svg>
+                  </div>
+                  <span class="js-item-wish-span" data-text="{if $inWish}В избранное{else}В избранном{/if}">{if $inWish}В избранном{else}В избранное{/if}</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-desc__row p-desc__row--pd30 p-desc__row--pays">
+              <div class="p-desc__label p-desc__label--pays">Оплата</div>
+              <div class="p-desc__value">
+                  <span class="product__paylink">Оплата картой,</span>
+                  <span class="product__paylink">Сбербанк,</span>
+                  <span class="product__paylink">QIWI</span>
+                <!-- <div class="product__payicon">
+                  <svg class="svg-icon">
+                    <use xlink:href="#i-user"></use>
+                  </svg>
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <div class="p-desc__block p-desc__block--mobibrbt">
+            {if $product.summary}
+            <div class="p-desc__row p-desc__row--pd30 p-desc__row--aligntop">
+              <div class="p-desc__label p-desc__label--gray">Описание:</div>
+              <div class="p-desc__value">{$product.summary}</div>
+            </div>
+            {/if}
+            {$params = []}
+            {foreach $product.features as $key => $item}
+              {if $features[$key].is_desc}
+                {$params[$key]=$item}
+              {/if}
+            {/foreach}
+            {foreach array_chunk($params, 2, true) as $row}
+            <div class="p-desc__row p-desc__row--pd15">
+              {foreach $row as $key => $item}
+              <div class="p-desc__col">
+                <div class="p-desc__row p-desc__row--aligntop">
+                  <div class="p-desc__label p-desc__label--gray">{$features[$key].name|escape}:</div>
+                  <div class="p-desc__value">{$item}</div>
+                </div>
+              </div>
+              {/foreach}
+            </div>
+            {/foreach}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{$upselling = $product->upSelling(12)}
+{if $upselling}
+{include file="`$wa_active_theme_path`/products/products-slider.html" inline upselling=$upselling}
+<div class="block block--pdt40">
+
+</div>
+{else}
+<div class="block block--pdt0">
+</div>
+{/if}

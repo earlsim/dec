@@ -1,0 +1,143 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  padding: 36px 0;
+
+  &--text {
+    align-items: flex-start;
+    width: 800px;
+    max-width: 100%;
+
+    & .page__title {
+      margin: 0;
+    }
+  }
+
+  @media ($m-m) {
+    padding: 96px 0;
+  }
+}
+
+.page__sub-title {
+  margin-bottom: 16px;
+  font-size: 12px;
+  line-height: 1.35em;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  color: $c-text-secondary;
+}
+
+.page__title {
+  display: inline-block;
+  margin: auto;
+  font-size: 36px;
+  line-height: 1.23em;
+  font-weight: 700;
+
+  &--data {
+    position: relative;
+
+    &:after {
+      content: attr(data-content);
+      position: absolute;
+      top: 0;
+      left: calc(100% + 15px);
+      font-family: $f-secondary;
+      font-size: 24px;
+      line-height: 1em;
+      font-weight: 700;
+      color: $c-text-secondary;
+      opacity: .5;
+    }
+  }
+
+  @media ($m-m) {
+    font-size: 48px;
+  }
+}
+
+.page__content {
+  &:not(:first-child) {
+    margin-top: 36px;
+  }
+
+  &--mrt-0 {
+    margin-top: 0;
+
+    &:not(:first-child) {
+      margin-top: 0;
+    }
+  }
+
+  @media ($m-m) {
+    &:not(:first-child) {
+      margin-top: 64px;
+    }
+
+    &--mrt-0 {
+      margin-top: 0;
+
+      &:not(:first-child) {
+        margin-top: 0;
+      }
+    }
+  }
+}
+
+.page__block {
+  margin-top: 24px;
+  font-size: 20px;
+  line-height: 1.85em;
+  color: $c-text-secondary;
+
+  &--bold {
+    font-size: 24px;
+    color: $c-text-primary;
+  }
+
+  & p:not(first-child) {
+    margin-top: 36px;
+  }
+}
+
+.page__list {
+  margin-top: 36px;
+  font-size: 20px;
+  line-height: 1.85em;
+  color: $c-text-secondary;
+
+  & li {
+    position: relative;
+    padding-left: 48px;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 18px;
+      left: 0;
+      width: 24px;
+      height: 1px;
+      background-color: $c-text-secondary;
+    }
+
+    &:not(:first-child) {
+      margin-top: 24px;
+    }
+  }
+}
+
+.page__empty {
+  margin-top: 24px;
+  font-size: 20px;
+  line-height: 1.75em;
+  color: $c-text-secondary;
+  text-align: center;
+}
+
+.page__pagination {
+  margin-top: 24px;
+
+  @media ($m-s) {
+    margin-top: 64px;
+  }
+}

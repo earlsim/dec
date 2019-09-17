@@ -1,0 +1,309 @@
+<div class="page">
+  <div class="container">
+    <div class="constructor">
+      <div class="block__inner">
+        <h2 class="block__title block__title--w100">Конструктор букетов</h2>
+        <div class="block__caption">Понравился букет?<br>Хотите подарить вашим близким приятные эмоции?</div>
+        <div class="block__content constructor__inner">
+          <div class="constructor__panel">
+            <div class="panel-step">
+              <div class="panel-step__header">
+                <div class="step-number">01</div>
+                <div class="step__header">Выбор цветка</div>
+              </div>
+              <div class="panel-step__body">
+                <div class="step-body__inner">
+                  <span class="step-flower__label">Цветы</span>
+                  <select class="step-flower" title="flower" name="flower" id="flower-select">
+                    <option data-fl="" value="">Голандская роза</option>
+                    <option data-fl="" value="">Лилия</option>
+                    <option data-fl="" value="">Гладиолус</option>
+                    <option data-fl="" value="">Ромашка</option>
+                    <option data-fl="" value="">Пион</option>
+                  </select>
+                </div>
+                <div class="product-card__qnt qnt-toggle js-product-qnt">
+                  <div class="qnt-toggle__min" data-action="min"></div>
+                  <input title="qnt" type="text" name="quantity" class="qnt-toggle__val" value="01">
+                  <div class="qnt-toggle__max" data-action="max"></div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-step">
+              <div class="panel-step__header">
+                <div class="step-number">02</div>
+                <div class="step__header">Длина</div>
+              </div>
+              <div class="panel-step__body">
+                <div class="pick-option">
+                  <div class="length-toggle" data-action="50"><span class="length-toggle__value">50</span></div>
+                  <div class="length-toggle" data-action="60"><span class="length-toggle__value">60</span></div>
+                  <div class="length-toggle" data-action="70"><span class="length-toggle__value">70</span></div>
+                  <div class="length-toggle" data-action="80"><span class="length-toggle__value">80</span></div>
+                  <div class="length-toggle" data-action="90"><span class="length-toggle__value">90</span></div>
+                  <div class="length-toggle" data-action="100"><span class="length-toggle__value">100</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-step">
+              <div class="panel-step__header">
+                <div class="step-number">03</div>
+                <div class="step__header">Цвет</div>
+              </div>
+              <div class="panel-step__body">
+                <div class="pick-option">
+                  <div class="color-toggle color-toggle--black" data-color="black"></div>
+                  <div class="color-toggle color-toggle--white" data-color="white"></div>
+                  <div class="color-toggle color-toggle--red" data-color="red"></div>
+                  <div class="color-toggle color-toggle--magenta" data-color="magenta"></div>
+                  <div class="color-toggle color-toggle--yellow" data-color="yellow"></div>
+                  <div class="color-toggle color-toggle--blue" data-color="blue"></div>
+                </div>
+              </div>
+            </div>
+            <div class="panel-step">
+              <div class="panel-step__header">
+                <div class="step-number">04</div>
+                <div class="step__header">Упаковка</div>
+              </div>
+              <div class="panel-step__body">
+                <div class="pick-option grid">
+                  <div class="packing-option grid__c grid__c--mr-0-24" data-packaging="craft">
+                    <div class="packing-option__inner">
+                      <div class="packing-option__pic">
+                        <img src="{$wa_theme_url}assets/img/packing/craft.png" alt="">
+                      </div>
+                      <div class="packing-option__info">
+                        <div class="pack-info__name">Крафт</div>
+                        <div class="pack-info__price">400 <span>₽</span></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="packing-option grid__c grid__c--mr-0-24" data-packaging="ribbon">
+                    <div class="packing-option__inner">
+                      <div class="packing-option__pic">
+                        <img src="{$wa_theme_url}assets/img/packing/ribbon.png" alt="">
+                      </div>
+                      <div class="packing-option__info">
+                        <div class="pack-info__name">Лента</div>
+                        <div class="pack-info__price">400 <span>₽</span></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="packing-option grid__c grid__c--mr-0-24" data-packaging="felt">
+                    <div class="packing-option__inner">
+                      <div class="packing-option__pic">
+                        <img src="{$wa_theme_url}assets/img/packing/felt.png" alt="">
+                      </div>
+                      <div class="packing-option__info">
+                        <div class="pack-info__name">Фетр</div>
+                        <div class="pack-info__price">400 <span>₽</span></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="packing-option grid__c grid__c--mr-0-24" data-packaging="sisal">
+                    <div class="packing-option__inner">
+                      <div class="packing-option__pic">
+                        <img src="{$wa_theme_url}assets/img/packing/sisal.png" alt="">
+                      </div>
+                      <div class="packing-option__info">
+                        <div class="pack-info__name">Сизаль</div>
+                        <div class="pack-info__price">400 <span>₽</span></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="packing-option grid__c grid__c--mr-0-24" data-packaging="netting">
+                    <div class="packing-option__inner">
+                      <div class="packing-option__pic">
+                        <img src="{$wa_theme_url}assets/img/packing/netting.png" alt="">
+                      </div>
+                      <div class="packing-option__info">
+                        <div class="pack-info__name">Сетка</div>
+                        <div class="pack-info__price">400 <span>₽</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="constructor__result">
+            <div class="result-card">
+              <div class="result-card__pic">
+                <img class="result-pic__img" src="{$wa_theme_url}assets/img/roses.png" alt="">
+              </div>
+              <div class="result-card__info">
+                <div class="result-info__small-name">Букет</div>
+                <div class="result-info__name">21 голандская роза красная  60 см</div>
+                <div class="result-info__price">4 500 <span>₽</span></div>
+              </div>
+              <button type="submit" class="btn">заказать букет</button>
+              <button type="submit" class="btn btn--white100">сохранить букет</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="users-bouquet">
+      <div class="block__inner">
+        <h2 class="block__title block__title--w100">Букеты других пользователей</h2>
+        <div class="block__caption">Посмотрите букеты других пользователей которые были собраны в нашем конструкторе букетов</div>
+        <div class="block__content">
+          <div class="users-bouquet__items">
+            <div class="grid grid--m-mr-64">
+              <div class="grid__c grid__c--s-1-2 grid__c--m-1-3 grid__c--m-pd-64  is-active" data-tab-bouquets="27">
+                <div class="product-card-toggle js-toggle">
+                <div class="product-card-toggle__front">
+                  <div class="product-card js-item" data-name="Дыхание любви" data-price="4000" data-sku="fBH" data-smallpic="/wa-data/public/shop/products/33/00/33/images/111/111.200x0.jpg" data-id="33">
+                    <a href="/in-cases/dykhanie-lyubvi/" class="product-card__pic">
+                      <img class="product-card__img js-item-image" data-original-src="/wa-data/public/shop/products/33/00/33/images/111/111.1500.jpg" alt="Дыхание любви" title="Дыхание любви" src="/wa-data/public/shop/products/33/00/33/images/111/111.500x0.jpg">
+                    </a>
+                    <small class="product-card__sub-title">В кейсе</small>
+                    <a href="/in-cases/dykhanie-lyubvi/" class="product-card__title">Дыхание любви</a>
+                    <div class="product-card__price"><span class="product-card__price__value">4000</span>₽</div>
+                    <div class="product-card__favorites js-product-to-favorites">
+                      <svg class="svg-icon">
+                        <use xlink:href="#i-heart"></use>
+                      </svg>
+                    </div>
+                    <div href="#" class="product-card__cart js-product-add" onclick="">
+                      <svg class="svg-icon">
+                        <use xlink:href="#i-shopping-cart"></use>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <div class="product-card-toggle__back">
+                  <div class="product-card product-card--back js-item" data-name="Дыхание любви" data-price="4000" data-sku="S0N0fB1tcH" data-smallpic="/wa-data/public/shop/products/33/00/33/images/111/111.200x0.jpg" data-id="33" data-summary="Короткое описание">
+                    <a href="/in-cases/dykhanie-lyubvi/" class="product-card__pic">
+                      <img class="product-card__img js-item-image" data-original-src="/wa-data/public/shop/products/33/00/33/images/111/111.1500.jpg" alt="Дыхание любви" title="Дыхание любви" src="/wa-data/public/shop/products/33/00/33/images/111/111.500x0.jpg">
+                    </a>
+                    <small class="product-card__sub-title">В кейсе</small>
+                    <a href="/in-cases/dykhanie-lyubvi/" class="product-card__title">Дыхание любви</a>
+                    <a href="#" id="modal-order-btn" class="product-card__buy-quick btn js-modal-order reqCall">Быстрый
+                      заказ</a>
+                    <a href="#" class="product-card__buy btn js-product-buy">Купить</a>
+                    <a href="/cart" class="product-card__to-cart btn">В корзину</a>
+                    <a href="#" class="product-card__continue btn js-product-close">Продолжить</a>
+                    <div class="product-card__manage">
+                      <div class="product-card__qnt qnt-toggle js-product-qnt">
+                        <div class="qnt-toggle__min" data-action="min"></div>
+                        <input type="text" class="qnt-toggle__val" value="01">
+                        <div class="qnt-toggle__max" data-action="max"></div>
+                      </div>
+                      <div class="product-card__price">от <span class="product-card__price__value">4000</span>₽</div>
+                    </div>
+                    <div class="product-card__close js-product-close">
+                      <div class="product-card__close-inner"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+              <div class="grid__c grid__c--s-1-2 grid__c--m-1-3 grid__c--m-pd-64  is-active" data-tab-bouquets="27">
+                <div class="product-card-toggle js-toggle">
+                  <div class="product-card-toggle__front">
+                    <div class="product-card js-item" data-name="Дыхание любви" data-price="4000" data-sku="fBH" data-smallpic="/wa-data/public/shop/products/33/00/33/images/111/111.200x0.jpg" data-id="33">
+                      <a href="/in-cases/dykhanie-lyubvi/" class="product-card__pic">
+                        <img class="product-card__img js-item-image" data-original-src="/wa-data/public/shop/products/33/00/33/images/111/111.1500.jpg" alt="Дыхание любви" title="Дыхание любви" src="/wa-data/public/shop/products/33/00/33/images/111/111.500x0.jpg">
+                      </a>
+                      <small class="product-card__sub-title">В кейсе</small>
+                      <a href="/in-cases/dykhanie-lyubvi/" class="product-card__title">Дыхание любви</a>
+                      <div class="product-card__price"><span class="product-card__price__value">4000</span>₽</div>
+                      <div class="product-card__favorites js-product-to-favorites">
+                        <svg class="svg-icon">
+                          <use xlink:href="#i-heart"></use>
+                        </svg>
+                      </div>
+                      <div href="#" class="product-card__cart js-product-add" onclick="">
+                        <svg class="svg-icon">
+                          <use xlink:href="#i-shopping-cart"></use>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="product-card-toggle__back">
+                    <div class="product-card product-card--back js-item" data-name="Дыхание любви" data-price="4000" data-sku="S0N0fB1tcH" data-smallpic="/wa-data/public/shop/products/33/00/33/images/111/111.200x0.jpg" data-id="33" data-summary="Короткое описание">
+                      <a href="/in-cases/dykhanie-lyubvi/" class="product-card__pic">
+                        <img class="product-card__img js-item-image" data-original-src="/wa-data/public/shop/products/33/00/33/images/111/111.1500.jpg" alt="Дыхание любви" title="Дыхание любви" src="/wa-data/public/shop/products/33/00/33/images/111/111.500x0.jpg">
+                      </a>
+                      <small class="product-card__sub-title">В кейсе</small>
+                      <a href="/in-cases/dykhanie-lyubvi/" class="product-card__title">Дыхание любви</a>
+                      <a href="#" id="modal-order-btn" class="product-card__buy-quick btn js-modal-order reqCall">Быстрый
+                        заказ</a>
+                      <a href="#" class="product-card__buy btn js-product-buy">Купить</a>
+                      <a href="/cart" class="product-card__to-cart btn">В корзину</a>
+                      <a href="#" class="product-card__continue btn js-product-close">Продолжить</a>
+                      <div class="product-card__manage">
+                        <div class="product-card__qnt qnt-toggle js-product-qnt">
+                          <div class="qnt-toggle__min" data-action="min"></div>
+                          <input type="text" class="qnt-toggle__val" value="01">
+                          <div class="qnt-toggle__max" data-action="max"></div>
+                        </div>
+                        <div class="product-card__price">от <span class="product-card__price__value">4000</span>₽</div>
+                      </div>
+                      <div class="product-card__close js-product-close">
+                        <div class="product-card__close-inner"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="grid__c grid__c--s-1-2 grid__c--m-1-3 grid__c--m-pd-64  is-active" data-tab-bouquets="27">
+                <div class="product-card-toggle js-toggle">
+                  <div class="product-card-toggle__front">
+                    <div class="product-card js-item" data-name="Дыхание любви" data-price="4000" data-sku="fBH" data-smallpic="/wa-data/public/shop/products/33/00/33/images/111/111.200x0.jpg" data-id="33">
+                      <a href="/in-cases/dykhanie-lyubvi/" class="product-card__pic">
+                        <img class="product-card__img js-item-image" data-original-src="/wa-data/public/shop/products/33/00/33/images/111/111.1500.jpg" alt="Дыхание любви" title="Дыхание любви" src="/wa-data/public/shop/products/33/00/33/images/111/111.500x0.jpg">
+                      </a>
+                      <small class="product-card__sub-title">В кейсе</small>
+                      <a href="/in-cases/dykhanie-lyubvi/" class="product-card__title">Дыхание любви</a>
+                      <div class="product-card__price"><span class="product-card__price__value">4000</span>₽</div>
+                      <div class="product-card__favorites js-product-to-favorites">
+                        <svg class="svg-icon">
+                          <use xlink:href="#i-heart"></use>
+                        </svg>
+                      </div>
+                      <div href="#" class="product-card__cart js-product-add" onclick="">
+                        <svg class="svg-icon">
+                          <use xlink:href="#i-shopping-cart"></use>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="product-card-toggle__back">
+                    <div class="product-card product-card--back js-item" data-name="Дыхание любви" data-price="4000" data-sku="S0N0fB1tcH" data-smallpic="/wa-data/public/shop/products/33/00/33/images/111/111.200x0.jpg" data-id="33" data-summary="Короткое описание">
+                      <a href="/in-cases/dykhanie-lyubvi/" class="product-card__pic">
+                        <img class="product-card__img js-item-image" data-original-src="/wa-data/public/shop/products/33/00/33/images/111/111.1500.jpg" alt="Дыхание любви" title="Дыхание любви" src="/wa-data/public/shop/products/33/00/33/images/111/111.500x0.jpg">
+                      </a>
+                      <small class="product-card__sub-title">В кейсе</small>
+                      <a href="/in-cases/dykhanie-lyubvi/" class="product-card__title">Дыхание любви</a>
+                      <a href="#" id="modal-order-btn" class="product-card__buy-quick btn js-modal-order reqCall">Быстрый
+                        заказ</a>
+                      <a href="#" class="product-card__buy btn js-product-buy">Купить</a>
+                      <a href="/cart" class="product-card__to-cart btn">В корзину</a>
+                      <a href="#" class="product-card__continue btn js-product-close">Продолжить</a>
+                      <div class="product-card__manage">
+                        <div class="product-card__qnt qnt-toggle js-product-qnt">
+                          <div class="qnt-toggle__min" data-action="min"></div>
+                          <input type="text" class="qnt-toggle__val" value="01">
+                          <div class="qnt-toggle__max" data-action="max"></div>
+                        </div>
+                        <div class="product-card__price">от <span class="product-card__price__value">4000</span>₽</div>
+                      </div>
+                      <div class="product-card__close js-product-close">
+                        <div class="product-card__close-inner"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a class="catalog-bouquets__more js-showmore">Показать еще</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+s

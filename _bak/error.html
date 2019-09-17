@@ -1,0 +1,21 @@
+{$wa->title('Ошибка - Frant Outlet')}
+
+<div class="page page--mpb">
+  <div class="container container--xxs-nopd">
+    <div class="errors">
+      <div class="error-inner">
+        <div class="error-content">
+          <h1 class="error__title">{$error_code}</h1>
+          <div class="error__comment">
+            {if $error_code = '404'}
+            Нам не удается найти страницу, которую вы ищете
+            {else}
+            Что-то пошло не так. Принсоми свои извинения.
+            {/if}
+          </div>
+          <a href="/" class="error__btn btn btn--40">На главную</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

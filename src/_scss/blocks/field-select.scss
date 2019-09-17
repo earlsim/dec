@@ -1,0 +1,134 @@
+.field-select {
+  position: relative;
+  z-index: 100;
+
+  &.is-active {
+    /*
+    & .field-select__label {
+      color: $c-text-secondary;
+      top: 0;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    */
+    & .field-select__bar {
+      width: 100%;
+    }
+
+    & .field-select__arrow {
+      transform: rotate(180deg);
+    }
+
+    & .field-select__body {
+      display: block;
+    }
+  }
+
+  &.has-error {
+    & .field-select__head {
+      border-bottom: 2px solid red;
+      color: red;
+    }
+  }
+}
+
+.field-select__head {
+  width: 100%;
+  height: 64px;
+  font-size: 18px;
+  line-height: 1.75em;
+  color: #202020;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #F3F4F5;
+  cursor: pointer;
+}
+
+.field-select__caption {
+  line-height: 64px;
+
+  &.is-selected {
+    & ~ .field-select__label {
+      color: $c-text-secondary;
+      top: 0;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.field-select__label {
+  position: absolute;
+  pointer-events: none;
+  top: 50%;
+  left: 0;
+  font-size: 18px;
+  line-height: 1.75em;
+  color: #202020;
+  transform: translateY(-50%);
+  transition: all .4s;
+}
+
+.field-select__bar {
+  position:absolute;
+  pointer-events:none;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: $c-main;
+  transition: all .4s;
+}
+
+.field-select__arrow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 100%;
+  transition: transform .4s;
+
+  &:hover {
+    background-color: $c-block;
+    cursor: pointer;
+  }
+
+  & .svg-icon {
+    width: 14px;
+    height: 8px;
+  }
+}
+
+.field-select__body {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  display: none;
+}
+
+.field-select__items {
+  max-height: 200px;
+  padding: 5px 0;
+  background-color: #FFF;
+  border-bottom: 2px solid #F3F4F5;
+  overflow-y: auto;
+}
+
+.field-select__item {
+  padding: 5px 0;
+  font-size: 18px;
+  line-height: 1.75em;
+
+  &:hover {
+    color: $c-main;
+    font-weight: 500;
+    cursor: pointer;
+  }
+}

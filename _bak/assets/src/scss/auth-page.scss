@@ -1,0 +1,381 @@
+.auth-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 580px;
+  padding: 20px 10px;
+  margin: 0 0 20px 0;
+  background-color: #fff;
+  border: 1px solid $c-middleGray;
+  
+  @media ($m-s) {
+    margin: 0 0 40px 0;
+    padding: 0 40px;
+  }
+
+  @media ($m-l) {
+    padding: 0;
+  }
+}
+
+.auth-page__form {
+  width: 100%;
+  max-width: 360px;
+
+  @media ($m-s) {
+    
+    &--signup {
+      max-width: 760px;
+    }
+
+    &--checkout {
+      padding-top: 20px;
+    }
+  }
+}
+
+.auth-page__title {
+  font-family: $f-oswald;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.5em;
+  margin-bottom: 20px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.auth-page__subtitle {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.322em;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.auth-page__form .wa-login-form-fields {
+  
+  & .wa-field {
+    position: relative;
+  }
+
+  & .wa-field.wa-field-login {
+    margin-bottom: 40px;
+  }
+
+  & .wa-value {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 50px;
+    max-width: 100%;
+  }
+
+  & .wa-name {
+    position: absolute;
+    z-index: 7;
+    top: -10px;
+    left: 16px;
+    padding: 0 5px;
+    margin: 0!important;
+    font-family: $f-oswald;
+    font-size: 14px!important;
+    font-weight: 300;
+    color: $c-gray!important;
+    background-color: #fff;
+  }
+
+  & .wa-error-msg {
+    order: 1;
+    display: block;
+    padding: 10px 20px 0 20px;
+    font-size: 14px;
+    color: $c-red;
+  }
+  
+  & .errormsg {
+    padding: 5px 0 0 20px;
+    font-family: $f-oswald;
+    font-size: 12px;
+    font-weight: 300;
+    font-style: normal;
+    color: $c-gray;
+  }
+
+  & input[type=text], & input[type=password] {
+    width: 100%;
+    height: 100%;
+    max-height: 50px;
+    padding: 20px;
+    font-family: $f-oswald;
+    font-size: 16px;
+    font-weight: 300;
+    border: 1px solid #000;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: .25s;
+
+    &.wa-error {
+      border-color: $c-red;
+    }
+
+    &:focus, &:active {
+      border-color: $c-red;
+    }
+  }
+
+  & .wa-login-forgotpassword-url {
+    order: 2;
+    display: block;
+    padding: 20px 0 30px 0;
+    font-weight: 300;
+    font-size: 14px;
+    text-align: center;
+    transition: .25s;
+
+    &:hover {
+      color: $c-red;
+    }
+  }
+
+  & .wa-field-remember-me {
+    display: none;
+  }
+
+  & select {
+    width: 100%;
+    height: 100%;
+    padding: 0 20px;
+    font-family: $f-oswald;
+    font-size: 16px;
+    font-weight: 300;
+    border: 1px solid #000;
+    transition: .25s;
+
+    &:focus, &:active {
+      border-color: $c-red;
+    }
+  }
+}
+
+.auth-page__form .wa-login-form-actions {
+
+  & .wa-buttons-wrapper input[type=submit] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    background-color: #000;
+    color: #fff;
+    font-family: $f-oswald;
+    font-size: 16px;
+    line-height: 1.5em;
+    text-transform: uppercase;
+    transition: .25s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $c-red;
+    }
+  }
+
+  & .wa-error-msg {
+    font-size: 14px;
+    color: $c-red;
+  }
+
+  & .wa-signup-url {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 20px 0;
+    font-size: 14px;
+
+    & > a {
+      padding: 0 0 0 5px;
+    }
+
+    & > a:hover {
+      color: $c-red;
+    }
+  }
+}
+
+.auth-page__form--checkout .wa-login-forgotpassword-url {
+  display: none!important;
+}
+
+.auth-page__form .wa-signup-form-fields {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: -40px 0 0 -40px!important;
+  
+  & .wa-field {
+    position: relative;
+    width: 100%;
+    padding: 40px 0 0 40px;
+
+    @media ($m-s) {
+      width: 50%;
+    }
+  }
+
+  & .wa-field.wa-field-terms-accepted {
+    width: 100%;
+    padding: 30px 0 0 40px;
+  }
+
+  & .wa-field-terms-accepted .wa-value {
+    min-height: 0;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  & .wa-value {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 50px;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  & .wa-name {
+    position: absolute;
+    z-index: 7;
+    top: 30px;
+    left: 55px;
+    padding: 0 5px;
+    margin: 0!important;
+    font-family: $f-oswald;
+    font-size: 14px!important;
+    font-weight: 300;
+    color: $c-gray!important;
+    background-color: #fff;
+  }
+
+  & .wa-error-msg {
+    order: 1;
+    display: block;
+    padding: 10px 20px 0 20px;
+    font-size: 14px;
+    color: $c-red;
+  }
+  
+  & .errormsg {
+    padding: 5px 0 0 20px;
+    font-family: $f-oswald;
+    font-size: 12px;
+    font-weight: 300;
+    font-style: normal;
+    color: $c-gray;
+  }
+
+  & input[type=text], & input[type=password] {
+    width: 100%;
+    height: 100%;
+    max-height: 50px;
+    padding: 20px;
+    font-family: $f-oswald;
+    font-size: 16px;
+    font-weight: 300;
+    border: 1px solid #000;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: .25s;
+
+    &.wa-error {
+      border-color: $c-red;
+    }
+
+    &:focus, &:active {
+      border-color: $c-red;
+    }
+  }
+
+  & .wa-login-forgotpassword-url {
+    order: 2;
+    display: block;
+    padding: 20px 0 30px 0;
+    font-weight: 300;
+    font-size: 14px;
+    text-align: center;
+    transition: .25s;
+
+    &:hover {
+      color: $c-red;
+    }
+  }
+
+  & .wa-field-remember-me {
+    display: none;
+  }
+
+  & select {
+    width: 100%;
+    height: 100%;
+    padding: 0 20px;
+    font-family: $f-oswald;
+    font-size: 16px;
+    font-weight: 300;
+    border: 1px solid #000;
+    transition: .25s;
+
+    &:focus, &:active {
+      border-color: $c-red;
+    }
+  }
+}
+
+.auth-page__form .wa-signup-form-actions {
+  margin-top: 40px;
+
+  & .wa-buttons-wrapper input[type=submit] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 360px;
+    height: 50px;
+    margin: 0 auto;
+    background-color: #000;
+    color: #fff;
+    font-family: $f-oswald;
+    font-size: 16px;
+    line-height: 1.5em;
+    text-transform: uppercase;
+    transition: .25s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $c-red;
+    }
+  }
+
+  & .wa-error-msg {
+    font-size: 14px;
+    color: $c-red;
+  }
+
+  & .wa-login-url {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 360px;
+    padding: 20px 0;
+    margin: 0 auto;
+    font-size: 14px;
+
+    & > a {
+      padding: 0 0 0 5px;
+    }
+
+    & > a:hover {
+      color: $c-red;
+    }
+  }
+}
+

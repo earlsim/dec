@@ -1,0 +1,52 @@
+.form {}
+
+.form__block {
+  &--w-660 {
+    width: 660px;
+    max-width: 100%;
+  }
+}
+
+.form__text {
+  font-size: 24px;
+  line-height: 1.25em;
+  font-weight: 500;
+
+  &:not(:first-child) {
+    margin-top: 24px;
+  }
+}
+
+.form__row {
+  &:not(:first-child) {
+    margin-top: 24px;
+  }
+
+  &--mrt-16 {
+    &:not(:first-child) {
+      margin-top: 16px;
+    }
+  }
+
+  &--mrt-36 {
+    &:not(:first-child) {
+      margin-top: 36px;
+    }
+  }
+
+  &--mrt-48 {
+    &:not(:first-child) {
+      margin-top: 48px;
+    }
+  }
+
+  &--mrt-64 {
+    &:not(:first-child) {
+      margin-top: 64px;
+    }
+  }
+
+  &--center {
+    text-align: center;
+  }
+}

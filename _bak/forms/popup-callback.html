@@ -1,0 +1,55 @@
+<div id="callback-popup" class="popup popup--maw500 mfp-hide">
+  <div class="popup__inner">
+    <div class="popup__info">
+      <div class="popup__heading">
+        <span>Свяжитесь с нами</span>
+        <div class="popup__heading-close mfp-close"></div>
+      </div>
+      <div class="popup__subheading">
+        <span>Заполните форму и наш специалист свяжется с вами в ближайшее время</span>
+      </div>
+      <form action="/callback/" method="POST" class="popup__form js-form">
+        <div class="popup__form-grid">
+          <div class="popup__form-item">
+            <div class="field__wrap js-field-wrap">
+              <div class="field__input">
+                <label for="call-name" class="field__input-label">Ваше Имя</label>
+                <input type="text" required name="contact[firstname]" id="call-name" placeholder="например Иван" class="field__input-control field__input-control--black">
+                <div class="field__wrap-msg js-field-msg"></div>
+              </div>
+            </div>
+          </div>
+          <div class="popup__form-item">
+            <div class="field__wrap js-field-wrap">
+              <div class="field__input">
+                <label for="call-phone" class="field__input-label">Телефон</label>
+                <input type="text" required name="contact[phone]" id="call-phone" placeholder="+7 (___) ___-__-__" class="field__input-control field__input-control--black js-phone">
+                <div class="field__wrap-msg js-field-msg"></div>
+              </div>
+            </div>
+          </div>
+          <div class="popup__form-item">
+            <div class="field__wrap js-field-wrap">
+              <div class="field__textarea">
+                <label for="call-text" class="field__input-label">Сообщение</label>
+                <textarea type="text" required name="contact[text]" id="call-text" class="field__textarea-control field__textarea-control--black"></textarea>
+                <div class="field__wrap-msg js-field-msg"></div>
+              </div>
+            </div>
+          </div>
+          <div class="popup__form-item">
+            <div class="field__wrap field__wrap--nofw js-field-wrap">
+              <div class="field__checkbox">
+                <label class="field__checkbox-label" for="call-agree">Нажимая кнопку отправить Вы соглашаетесь с условиями <a href="/policy.pdf" href="">политики конфидециальности</a></label>
+                <input type="checkbox" required name="contact[agree]" id="call-agree" checked class="field__checkbox-control">
+              </div>
+            </div>
+          </div>
+          <div class="popup__form-item">
+            <button type="submit" class="btn btn--w320 btn--center">Отправить</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

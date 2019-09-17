@@ -1,0 +1,31 @@
+.step {
+  position: relative;
+  max-width: 300px;
+  padding-top: 24px;
+  padding-left: 95px;
+  padding-bottom: 8px;
+  font-size: 20px;
+
+  &:before {
+    content: attr(data-id);
+    position: absolute;
+    left: 24px;
+    bottom: 0;
+    margin-bottom: 3px;
+    font-family: $f-secondary;
+    font-size: 56px;
+    font-weight: 700;
+    color: $c-main;
+  }
+
+  @media ($m-xs) {
+    padding-top: 50px;
+    padding-left: 125px;
+    padding-bottom: 20px;
+
+    &:before {
+      margin-bottom: 5px;
+      font-size: 96px;
+    }
+  }
+}

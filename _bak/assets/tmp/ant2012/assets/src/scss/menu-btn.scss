@@ -1,0 +1,138 @@
+.menu-btn {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  width: 22px;
+  height: 15px;
+  transition: background-color .4s;
+
+  & > span {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 22px;
+    height: 1px;
+    border-radius: 4px;
+    background-color: #000;
+    transform: translateZ(0);
+
+    &:nth-child(1) {
+      top: 0;
+      left: 0;
+      right: 0;
+      transition: top .2s .2s, transform .2s 0s, background-color .4s;
+    }
+
+    &:nth-child(2) {
+      top: 0;
+      bottom: 0;
+      margin: auto 0;
+      transition: background-color .4s;
+    }
+
+    &:nth-child(3) {
+      bottom: 0;
+      left: 0;
+      right: 0;
+      transition: bottom .2s .2s, transform .2s 0s, background-color .4s;
+    }
+  }
+
+  .is-active & > span {
+  
+    &:nth-child(1) {
+      top: 7px;
+      transform: translateZ(0) rotate(45deg);
+      transition: top .2s 0s, transform .2s .2s, background-color .4s;
+    }
+
+    &:nth-child(2) {
+      background-color: transparent;
+    }
+
+    &:nth-child(3) {
+      bottom: 7px;
+      transform: translateZ(0) rotate(-45deg);
+      transition: bottom .2s 0s, transform .2s .2s, background-color .4s;
+    }
+  }
+
+  .sidebar__item--btn:hover & > span {
+    background-color: #fff;
+  }
+
+  .is-light .sidebar__item--btn:hover & > span {
+    background-color: #000;
+  }
+
+  .is-active .sidebar__item--btn:hover & > span {
+
+    &:nth-child(2) {
+      transition: background-color .1s;
+      background-color: transparent;
+    }
+  }
+
+  &--mobile {
+    width: 27px;
+    height: 20px;
+
+    & > span {
+      position: absolute;
+      left: 0;
+      right: 0;
+      width: 22.73px;
+      height: 3.64px;
+      border-radius: 4px;
+      background-color: #000;
+      transform: translateZ(0);
+  
+      &:nth-child(1) {
+        top: 0;
+        left: auto;
+        right: 0;
+        transition: top .2s .2s, transform .2s 0s, background-color .4s;
+      }
+  
+      &:nth-child(2) {
+        top: 0;
+        bottom: 0;
+        margin: auto 0;
+        transition: background-color .4s;
+      }
+  
+      &:nth-child(3) {
+        bottom: 0;
+        left: auto;
+        right: 0;
+        transition: bottom .2s .2s, transform .2s 0s, background-color .4s;
+      }
+    }
+
+    .is-active & > span {
+  
+      &:nth-child(1) {
+        top: 8px;
+        transform: translateZ(0) rotate(45deg);
+        transition: top .2s 0s, transform .2s .2s, background-color .4s;
+      }
+  
+      &:nth-child(2) {
+        background-color: transparent;
+      }
+  
+      &:nth-child(3) {
+        bottom: 8px;
+      }
+    }
+  }
+}
+
+.menu-btn__label {
+  display: none;
+  padding-left: 20px;
+
+  .is-active & {
+    display: block;
+  }
+}

@@ -1,0 +1,169 @@
+.m-catalog__title {
+  padding: 20px 15px;
+  font-family: $f-oswald;
+  font-size: 20px;
+  line-height: 1.5em;
+  text-transform: uppercase;
+
+  &--bgLightGray {
+    background-color: $c-lightGray;
+  }
+
+  @media ($m-s) {
+    padding: 20px;
+    font-size: 30px;
+  }
+}
+
+.m-catalog__pic {
+  width: 100%;
+  height: 100px;
+  background-size: 100%;
+  background-repeat: no-repeat;
+
+  @media ($m-s) {
+    height: 150px;
+  }
+}
+
+.m-catalog__nav-item {
+  background-color: #fff;
+  border-bottom: 1px solid $c-middleGray;
+}
+
+.m-catalog__nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  padding: 0 15px;
+  transition: .2s;
+  cursor: pointer;
+
+  .m-catalog__nav-item.is-active &, &:hover {
+    background-color: $c-lightGray;
+  }
+
+  @media ($m-s) {
+    padding: 0 20px;
+    height: 60px;
+
+    &--smallpd {
+      padding: 0 10px;
+    }
+  }
+}
+
+.m-catalog__nav-label {
+  font-family: $f-oswald;
+  font-size: 14px;
+  line-height: 1.5em;
+  text-transform: uppercase;
+
+  &--fz16 {
+    font-size: 16px;
+  }
+
+  &--fw300 {
+    font-weight: 300;
+  }
+
+  &--red {
+    color: $c-red;
+  }
+
+  @media ($m-s) {
+    font-size: 18px;
+
+    &--fz16 {
+      font-size: 16px;
+    }
+  }
+}
+
+.m-catalog__nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 8px;
+  height: 8px;
+  transition: .2s;
+
+  .m-catalog__nav-item.is-active & {
+    transform: rotate(90deg);
+  }
+
+  @media ($m-s) {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.m-catalog__sub {
+  max-height: 0;
+  transition: max-height 1s cubic-bezier(0, 1, 0, 1);
+  overflow: hidden;
+
+  .m-catalog__nav-item.is-active & {
+    max-height: 600px;
+    transition: max-height 1s ease-in-out;
+  }
+}
+
+.m-catalog__sub-item {
+  margin: 0 0 0 15px;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid $c-middleGray;
+  }
+
+  @media ($m-s) {
+    margin: 0 0 0 20px;
+  }
+}
+
+.m-catalog__sub-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  transition: .4s;
+  cursor: pointer;
+
+  &:hover {
+
+    & .m-catalog__sub-label {
+      color: $c-red;
+    }
+  }
+
+  @media ($m-s) {
+    height: 60px;
+  }
+}
+
+.m-catalog__sub-label {
+  font-size: 14px;
+  line-height: 1.5em;
+  transition: .2s;
+
+  &--fz16 {
+    font-size: 16px;
+  }
+
+  @media ($m-s) {
+    font-size: 16px;
+  }
+}
+
+.m-catalog__sub-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 8px;
+  height: 8px;
+
+  .is-active & {
+    transform: rotate(90deg);
+  }
+}

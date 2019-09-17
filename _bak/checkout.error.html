@@ -1,0 +1,22 @@
+<style>    
+    .checkout-step { box-shadow: none; }
+    .checkout .checkout-result { background: transparent; }
+</style>
+
+<div class="checkout-result">
+    {if !empty($error)}
+        <p class="checkout-result__error">{$error}</p>
+    {else}
+        <p>[`An error occurred while processing your payment.`]</p>
+    {/if}
+    
+    <p class="checkout-result__back">
+        <a href="{$wa_app_url}" class="checkout-result__back-btn btn">[`Back to the store`]</a>
+    </p>
+    
+    <!-- plugin hook: 'frontend_checkout' -->
+    {* @event frontend_checkout.%plugin_id% *}
+    {foreach $frontend_checkout as $_}{$_}{/foreach}    
+    
+</div>
+

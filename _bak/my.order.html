@@ -1,0 +1,110 @@
+{assign var="title" value="Заказ `$order.id_str` - Frant Outlet"}
+{$wa->title($title)}
+
+{* @event frontend_my_orders.%plugin_id% *}
+{foreach $frontend_my_orders as $_}{$_}{/foreach}
+<div class="page__head show-l">
+  <div class="container">
+    <div class="page__head-row">
+      <div class="page__head-col">
+        <div class="page__title">Заказ {$order.id_str}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{$cururl = $wa->currentUrl(false, true)}
+<div data-type="profile" class="page__content js-page-content">
+  <div class="profile">
+    <div class="container container--xxs-nopd" data-notinuse="container--m-nopd">
+      <div class="profile__inner">
+        <div class="profile__tabs">
+          <a href="/my/orders/" class="profile__tab is-active">
+            Мои заказы
+          </a>
+          <a href="/my/profile/" class="profile__tab">
+            Информация профиля
+          </a>
+        </div>
+        <div class="profile__content">
+          <div class="profile__order">
+            <a href="/my/orders/" class="profile__order-back">Вернуться назад</a>
+            <div class="profile__order-list">
+              <div class="profile__order-row profile__order-row--jcsb">
+                <div class="profile__order-col">
+                  {$order.create_datetime|wa_date:'humandatetime'}
+                </div>
+                <div class="profile__order-col">
+                  <span class="profile__order-status" style="{$order.state->getStyle(1)}">
+                    {$order.state->getName()}
+                  </span>
+                </div>
+              </div>
+              <div class="profile__order-row profile__order-row--jcsb">
+                <div class="profile__order-col">
+                  <span>Доставка</span>: {$order.shipping_name}
+                </div>
+                <div class="profile__order-col">
+                  {if !empty($order.params.tracking_number)}
+                  [`Shipment tracking number`]: {$order.params.tracking_number}
+                  {/if}
+                  {if !empty($tracking) && $order.state->getId() != 'completed'}
+                  <div class="plugin">
+                    {$tracking}
+                  </div>
+                  {/if}
+                </div>
+              </div>
+              {if $order.payment_name}
+              <div class="profile__order-row">
+                <div class="profile__order-col">
+                  <span>Оплата</span>: {$order.payment_name}      
+                </div>
+                <div class="profile__order-col">
+                  {if !empty($payment)}
+                  <div class="plugin">
+                    {$payment}
+                  </div>
+                  {/if}
+                </div>
+              </div>
+              {/if}
+              <div class="profile__order-row profile__order-row--nobr">
+                <div class="profile__order-col">
+                  {$contact.name|escape}     
+                </div>
+              </div>
+              <div class="profile__order-row profile__order-row--nobr">
+                <div class="profile__order-col profile__order-col--pd10">
+                  {if $shipping_address}
+                  {$shipping_address}
+                  {/if}     
+                </div>
+              </div>
+              {foreach $order.items as $item}
+              <div class="profile__order-row profile__order-row--info profile__order-row--jcsb">
+                <div class="profile__order-col">
+                  <span>{$item.name}</span>
+                </div>
+                <div class="profile__order-col">
+                  {wa_currency_html($item.price, $order.currency)} x
+                  {$item.quantity}
+                </div>
+                <div class="profile__order-col">
+                  {wa_currency_html($item.price * $item.quantity, $order.currency)}
+                </div>
+              </div>
+              {/foreach}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{$wa->globals('isMyAccount', true)}
+
+<!-- plugin hook: 'frontend_my_order' -->
+{* @event frontend_my_order.%plugin_id% *}
+{foreach $frontend_my_order as $_}{$_}{/foreach}

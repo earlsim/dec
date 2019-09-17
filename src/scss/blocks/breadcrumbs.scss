@@ -1,0 +1,10 @@
+.breadcrumbs {
+  font-size: 12px;
+  line-height: 1.333em;
+  color: $c-text-secondary;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+}
+.breadcrumbs__grid-item {
+  display: inline-block;
+}

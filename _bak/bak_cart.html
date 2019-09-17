@@ -1,0 +1,275 @@
+<div class="container">
+  <div class="page__head">
+    <h1 class="page__title">
+      Корзина
+    </h1>
+    {if $cart.count}
+    <div class="page__head-count">
+      <div class="tag tag--count">{$cart.count}</div>
+      <span class="page__head-label">{_w('Product', 'Products', $cart.count)}</span>
+    </div>
+    {/if}
+    <div class="page__head-more">
+    </div>
+  </div>
+</div>
+
+{if !$cart.count}
+<div class="container container--pd0">
+    <h2 class="cart__h2">Ваша корзина пуста</h2>
+</div>
+{else}
+<div class="container container--pd0">
+  <div class="cart">
+    <div class="cart__list">
+      {foreach $cart.items as $item}
+      <div class="cart__item">
+        <div class="cart-card">
+          <div class="cart-card__delete-abs showm">
+            <div class="round-btn-wtext round-btn-wtext--delete">
+              <div class="round-btn"></div>
+              <span>Удалить</span>
+            </div>
+          </div>
+          <a href="{$wa->shop->productUrl($item.product)}" title="{$item.product.name}" class="cart-card__pic">
+            {$wa->shop->productImgHtml($item.product, '200', ['class' => 'product-card__img', 'itemprop' => 'image', 'alt' => $item.product.name, 'default' => "`$wa_theme_url`img/dummy200.png"])}
+          </a>
+          <div class="cart-card__wrapper">
+            <h2 class="cart-card__title">
+              <a href="{$wa->shop->productUrl($item.product)}">{$item.product.name|escape}</a>
+              {if $item.sku_name && $item.sku_name != $item.product.name}{$item.sku_name|escape}{/if}
+            </h2>
+            <div class="cart-card__price">
+              <div class="cart-card__costs">
+                <div class="cart-card__cost">{shop_currency($item.product.price, null, null, 0)} руб</div>
+                {if $item.product.compare_price > 0}
+                <div class="cart-card__cost--old">{shop_currency_html($item.product.compare_price)} руб
+                </div>
+                {/if}
+              </div>
+              <div class="cart-card__discount">
+                {if $item.product.compare_price > 0}
+                <div class="tag tag--discount">
+                  -{$wa->shop->product($item.product.id)->features["skidka"]}%
+                </div>
+                {/if}
+              </div>
+            </div>
+            <div class="cart-card__bottom">
+              <div class="cart-card__qty">
+                <span>Количество</span>
+                <div class="qty">
+                  <div class="qty__btn"><button class="circle-btn circle-btn--qty circle-btn--minus"></button></div>
+                  <input type="text" name="quantity[{$item.id}]" value="{$item.quantity}" class="qty__input qty__input--cart">
+                  <div class="qty__btn"><button class="circle-btn circle-btn--qty circle-btn--plus"></button></div>
+                </div>
+                <span>шт.</span>
+              </div>
+              <div class="cart-card__delete hidem">
+                <div class="round-btn-wtext round-btn-wtext--delete">
+                  <div class="round-btn"></div>
+                  <span>Удалить</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/foreach}
+      <a href="#" class="products-showmore">
+        <button class="circle-btn circle-btn--white circle-btn--plus"></button>
+        <span class="products-showmore__span">Показать ещё</span>
+      </a>
+    </div>
+
+    <div class="cart__bar">
+      <form class="cart-form" method="post" action="/checkout">
+        <h2 class="cart-form__title">Оформление заказа</h2>
+        <div class="cart-form__blocks">
+          <div class="cart-block">
+            <h2 class="cart-block__title">Получатель</h2>
+            <div class="cart-block__list">
+
+              <div class="cart-block__item">
+                <div class="c-field-text is-active">
+                  <label for="" class="c-field-text__label">E-Mail <i>*</i></label>
+                  <div class="c-field-text__input">
+                    <div class="c-field-text__input-icon">
+                      <svg class="svg-icon">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-mail"></use>
+                      </svg>
+                    </div>
+                    {$continfo = $checkout_contact_form->fields('email')->get($customer)}
+                    <input type="text" name="customer[email]" class="c-field-text__input-control c-field-text__input-control--wicon" placeholder="Введите Ваш e-mail" value="{$continfo[0].value}">
+                  </div>
+                </div>
+              </div>
+              <div class="cart-block__item">
+                <div class="c-field-text">
+                  <label for="" class="c-field-text__label">Телефон <i>*</i></label>
+                  <div class="c-field-text__input">
+                    <div class="c-field-text__input-icon">
+                      <svg class="svg-icon">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-phone"></use>
+                      </svg>
+                    </div>
+                    {$continfo = $checkout_contact_form->fields('phone')->get($customer)}
+                    <input type="text" name="customer[phone]" class="c-field-text__input-control c-field-text__input-control--wicon" placeholder="+7 (___) ___ __ __" value="+{$continfo[0].value}">
+                  </div>
+                </div>
+              </div>
+              <div class="cart-block__item">
+                <div class="c-field-text">
+                  <label for="" class="c-field-text__label">Имя <i>*</i></label>
+                  <div class="c-field-text__input">
+                    <div class="c-field-text__input-icon">
+                      <svg class="svg-icon">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-name"></use>
+                      </svg>
+                    </div>
+                    <input type="text" name="customer[firstname]" class="c-field-text__input-control c-field-text__input-control--wicon" placeholder="Введите Ваше Имя" value="{$checkout_contact_form->fields('firstname')->get($customer)}">
+                  </div>
+                </div>
+              </div>
+              {$continfo = $checkout_contact_form->fields('address.shipping')->get($customer)}
+              <div class="cart-block__item">
+                <div class="c-field-select">
+                  <label for="" class="c-field-select__label">Область / Регион <i>*</i></label>
+                  <div class="c-field-select__input">
+                    <select name="customer[address.shipping][region]" class="c-field-select__control">
+                      <option value="">Выберите регион</option>
+                      {foreach $regions as $region}
+                      <option {if $region.code eq $continfo[0].data.region}selected{/if} value="{$region.code}">{$region.name}</option>
+                      {/foreach}
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="cart-block">
+            <h2 class="cart-block__title">Способ Доставки</h2>
+            <div class="cart-block__list">
+              <div class="cart-block__item">
+              {foreach $checkout_shipping_methods as $m}
+                <div class="radiogroup__items radiogroup__items--mgb">
+                  <div class="radiogroup__item">
+                    <label class="field-radiobutton">
+                      <input type="radio" name="shipping_id" class="field-radiobutton__input" value="{$m.id}" {if $m.external || !empty($m.error)}disabled{/if} {if $m.id == $shipping.id}checked{/if}>
+                      <div class="field-radiobutton__elem"></div>
+                      <div class="field-radiobutton__text">{$m.name|escape}</div>
+                    </label>
+                  </div>
+                </div>
+                <input type="hidden" name="rate_id[{$m.id}]" value="delivery">
+                {/foreach}
+              </div>
+              <div class="cart-block__item">
+                <div class="cart-block__grid cart-block__grid--m15">
+                  <div class="cart-block__grid-item cart-block__grid-item--p15">
+                    <div class="c-field-text">
+                      <label for="" class="c-field-text__label">Город</label>
+                      <div class="c-field-text__input">
+                        <input type="text" name="customer[address.shipping][city]" class="c-field-text__input-control" placeholder="Квартира / офис" value="{$continfo[0].data.city}">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cart-block__grid-item cart-block__grid-item--p15">
+                    <div class="c-field-text">
+                      <label for="" class="c-field-text__label">Почтовый индекс</label>
+                      <div class="c-field-text__input">
+                        <input type="text" name="customer[address.shipping][zip]" class="c-field-text__input-control" placeholder="Например: 357500" value="{$continfo[0].data.zip}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="cart-block__item">
+                <div class="c-field-text">
+                  <label for="" class="c-field-text__label">Адрес</label>
+                  <div class="c-field-text__input">
+                    <input type="text" name="customer[address.shipping][street]" class="c-field-text__input-control" placeholder="Введите адрес" value="{$continfo[0].data.street}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cart-block">
+            <h2 class="cart-block__title">Способ оплаты</h2>
+            <div class="cart-block__list">
+              <div class="cart-block__item">
+                <div class="cart-block__grid cart-block__grid--static">
+                  <div class="cart-block__grid-item">
+                    <label class="radiopay">
+                      <input type="radio" name="delivery" class="radiopay__input" value="1" checked>
+                      <div class="radiopay__elem radiopay__elem--card"></div>
+                      <div class="radiopay__text">
+                      Банковской</br>картой</div>
+                    </label>
+                  </div>
+                  <div class="cart-block__grid-item">
+                    <label class="radiopay">
+                      <input type="radio" name="delivery" class="radiopay__input" value="2">
+                      <div class="radiopay__elem radiopay__elem--sbol"></div>
+                      <div class="radiopay__text">Сбербанк</br>Онлайн</div>
+                    </label>
+                  </div>
+                  <div class="cart-block__grid-item">
+                    <label class="radiopay">
+                      <input type="radio" name="delivery" class="radiopay__input" value="3">
+                      <div class="radiopay__elem radiopay__elem--yamo"></div>
+                      <div class="radiopay__text">Яндекс.</br>Деньги</div>
+                    </label>
+                  </div>
+                  <div class="cart-block__grid-item">
+                    <label class="radiopay">
+                      <input type="radio" name="delivery" class="radiopay__input" value="4">
+                      <div class="radiopay__elem radiopay__elem--qiwi"></div>
+                      <div class="radiopay__text">QIWI</br>Wallet</div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="cart-block cart-block--bottom">
+            <div class="cart-block__list">
+              <div class="cart-block__item">
+                <div class="cart-block__row">
+                  <div class="cart-block__col">
+                    <span class="text-span text-span--gray text-span--fw300 text-span--fz18">Доставка</span>
+                  </div>
+                  <div class="cart-block__col">
+                    <span class="text-span text-span--fz18 text-span--tar">588 р.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="cart-block__item">
+                <div class="cart-block__row">
+                  <div class="cart-block__col">
+                    <span class="text-span text-span--ttu text-span--fz18">Итого к оплате:</span>
+                  </div>
+                  <div class="cart-block__col">
+                    <span class="text-span text-span--fz30 text-span--fw700 text-span--tar">16000 р.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {$wa->csrf()}
+            <div class="cart-block__btn">
+              <button type="sumbmit" class="btn btn--bold btn--w100">
+                Оформить заказ
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </form>
+
+  </div>
+
+</div>
+{/if}

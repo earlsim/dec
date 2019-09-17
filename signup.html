@@ -1,0 +1,71 @@
+{$wa->title("Регистрация - Студия ярких событий Декораторъ")}
+<div class="page">
+  <div class="container">
+    <div class="page__head">
+      <h1 class="page__title">
+        Регистрация
+      </h1>
+    </div>
+  </div>
+  <div class="page__signup">
+    <div class="container">
+      <div>
+        <form method = "POST" action="/signup/" class="signup-form js-signup-form">
+          <input class="v-h" name ="wa_auth_login" value="1">
+          <input class="v-h" name ="wa_json_mode" value="1">
+          <input class="v-h" name ="need_redirects" value="1">
+          <div class="signup-form__item--mrt64">
+            <div class="login-form__mail field-text">
+              <input type="text" id="firstname" name="data[firstname]" class="field-text__input" autocomplete="off" placeholder="Ваше имя" required>
+              <span class="field-text__bar"></span>
+              <label for="firstname" class="field-text__label">Имя</label>
+            </div>
+          </div>
+          <div class="signup-form__item js-field-wrap">
+            <div class="login-form__mail field-text">
+              <input type="email" id="login" name="data[email]" class="field-text__input" autocomplete="off" placeholder="Example@yandex.ru" required>
+              <span class="field-text__bar"></span>
+              <label for="login" class="field-text__label">E-mail</label>
+            </div>
+            <div class="signup-form__msg js-field-msg"></div>
+          </div>
+<!--           <div class="signup-form__item js-field-wrap">
+            <div class="login-form__password field-text">
+              <input type="password"  class="field-text__input" id="password" name="data[password]" autocomplete="off" required>
+              <label for="password" class="field-text__label">Пароль</label>
+              <span class="field-text__bar"></span>
+            </div>
+            <div class="signup-form__msg"></div>
+          </div>
+          <div class="signup-form__item">
+            <div class="login-form__password field-text">
+              <input type="password"  class="field-text__input" id="password-confirm" name="data[password_confirm]" autocomplete="off" required>
+              <label for="password-confirm" class="field-text__label">Повтор пароля</label>
+              <span class="field-text__bar"></span>
+            </div>
+          </div> -->
+          <div class="signup-form__item">
+            <div class="field-checkbox field-checkbox--sm">
+              <input type="checkbox" name="data[terms_accepted]" id="policy" class="field-checkbox__input" checked required>
+              <label for="policy" class="field-checkbox__label">
+                  <span class="field-checkbox__icon">
+                    <span class="field-checkbox__icon-inner"></span>
+                  </span>
+                <span class="field-checkbox__caption">Нажимая кнопку отправить Вы соглашаетесь с условиями политики конфидециальности</span>
+              </label>
+            </div>
+          </div>
+          <div class="signup-form__item--mrt48">
+            <div class="signup-form__submit field-text">
+              <input type="hidden" name="wa_auth_login" value="1">
+              <input type="submit" class="btn btn--full signup-form-btn" value="Регистрация">
+            </div>
+          </div>
+          <div class="signup-form__item"><span class="signup-form__item-span">Уже есть аккаунт?</span>
+            <a class="form__link" href="/login/">Войти</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

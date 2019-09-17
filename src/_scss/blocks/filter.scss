@@ -1,0 +1,143 @@
+.filter {
+  position: relative;
+  user-select: none;
+  transition: all .4s;
+
+  &.is-active {
+    z-index: 10;
+    box-shadow: 0 0 24px rgba(72, 22, 93, 0.15);
+
+    & .filter__body {
+      // display: block;
+      opacity: 1;
+    }
+
+    & .filter__icon {
+
+      & .svg-icon {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  @media ($m-l) {
+    &--second {
+      & .filter__body {
+        width: calc(100% * 3);
+      }
+    }
+
+    &--third {
+      & .filter__body {
+        width: calc(100% * 2);
+      }
+    }
+
+    &--fourth {
+      & .filter__body {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.filter__head {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 38px 24px 16px 24px;
+  background-color: #FFF;
+  cursor: pointer;
+  // border-bottom: 1px solid $c-block;
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 24px;
+    bottom: 0;
+    width: calc(100% - 48px);
+    height: 1px;
+    background-color: $c-block;
+  }
+}
+
+.filter__title {
+  font-size: 18px;
+  line-height: 1.9em;
+}
+
+.filter__sub-title {
+  position: absolute;
+  top: 14px;
+  left: 24px;
+  font-size: 12px;
+  line-height: 1.9em;
+  color: $c-text-secondary;
+  text-transform: uppercase;
+}
+
+.filter__icon {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+
+  & .svg-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 14px;
+    height: 8px;
+    transition: all .4s;
+  }
+}
+
+.filter__body {
+  position: absolute;
+  top: calc(100% - 1px);
+  left: 0;
+  z-index: 1;
+  // display: none;
+  width: 100%;
+  padding: 24px;
+  background-color: #FFF;
+  box-shadow: 0 0 24px rgba(72, 22, 93, 0.15);
+  opacity: 0;
+  transition: all .4s;
+
+  @media ($m-l) {
+    width: calc(100% * 4);
+  }
+}
+
+/*
+.filter__bottom {
+  margin-top: 24px;
+
+  & .btn {
+    min-width: 192px;
+    height: 56px;
+    line-height: 56px;
+  }
+}
+ */
+
+.filter__apply {
+  min-width: 192px;
+  height: 56px;
+  line-height: 56px;
+}
+
+.filter__reset {
+  margin-left: 24px;
+  font-size: 14px;
+  line-height: 56px;
+  font-weight: 500;
+  color: #48165D;
+  text-transform: uppercase;
+}

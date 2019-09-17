@@ -1,0 +1,23 @@
+
+  {$cururl = $wa->currentUrl(false, true)}
+  {$myurl = ($wa->myUrl()) }
+  {$urlArray = ['/login/', '/payment/', '/wishlist/', '/forgotpassword/', '/signup/']}
+  {if strpos($cururl, $myurl) === 0 || in_array($cururl, $urlArray)}
+  {else}
+  {include file="`$wa_active_theme_path`/chunks/breadcrumbs.html" inline}
+
+  {/if}
+
+  
+  {* @event frontend_header.%plugin_id% *}
+  {foreach $frontend_header as $_}{$_}{/foreach}
+
+  {$_use_store_schema = false}
+  {if !empty($action) && ($action === "default")}
+  {$_use_store_schema = true}
+  {/if}
+
+  {$content}
+
+
+

@@ -1,0 +1,114 @@
+.hide-s {
+  display: block;
+
+  &--flex {
+    display: flex;
+  }
+
+  @media ($m-s) {
+    display: none;
+  }
+}
+
+.show-s {
+  display: none;
+
+  &--flex {
+    display: none;
+  }
+
+  &--hide-m {
+    display: none;
+  }
+
+  @media ($m-s) {
+    display: block;
+
+    &--flex {
+      display: flex;
+    }
+
+    &--hide-m {
+      display: block;
+    }
+  }
+
+  @media ($m-m) {
+    display: block;
+
+    &--hide-m {
+      display: none;
+    }
+  }
+}
+
+.hide-m {
+  display: block;
+
+  &--flex {
+    display: flex;
+  }
+
+  @media ($m-m) {
+    display: none;
+  }
+}
+
+.show-m {
+  display: none;
+
+  &--flex {
+    display: none;
+  }
+
+  @media ($m-m) {
+    display: block;
+
+    &--flex {
+      display: flex;
+    }
+  }
+}
+
+.hide-l {
+  display: block;
+
+  &--flex {
+    display: flex;
+  }
+
+  @media ($m-l) {
+    display: none;
+  }
+}
+
+.show-l {
+  display: none;
+
+  &--flex {
+    display: none;
+  }
+
+  @media ($m-l) {
+    display: block;
+
+    &--flex {
+      display: flex;
+    }
+  }
+}
+
+.rotate {
+
+  &--90 {
+    transform: rotate(90deg);
+  }
+
+  &--180 {
+    transform: rotate(180deg);
+  }
+
+  &--270 {
+    transform: rotate(270deg);
+  }
+}

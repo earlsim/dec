@@ -1,0 +1,22 @@
+<script src="{$wa_theme_url}assets/js/jquery.bxslider.min.js"></script>
+<div class="page">
+
+  {if !$errors}
+  <div class="page__breadcrubms">
+    {include file="`$wa_active_theme_path`/chunks/breadcrumbs.html" inline}
+  </div>
+  {/if}
+
+
+
+  
+  {* @event frontend_header.%plugin_id% *}
+  {foreach $frontend_header as $_}{$_}{/foreach}
+
+  {$_use_store_schema = false}
+  {if !empty($action) && ($action === "default")}
+  {$_use_store_schema = true}
+  {/if}
+
+  {$content}
+</div>

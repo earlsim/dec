@@ -1,0 +1,98 @@
+{$wa->title("Избранное - Студия ярких событий Декораторъ")}
+{$categories = $wa->shop->categories()}
+<div class="main">
+  <div class="container container-xxl--pd-0">
+    <div id="favorites-pages" class="page">
+      <h1 class="page__title page__title--data" data-content="{count($products)}">Избранное</h1>
+      <div class="page__content page__content--mrt-0">
+        <div class="catalog">
+          {if $wishes}
+          <div class="catalog__body">
+
+            <div class="grid grid--m-mr-64">
+              {$categories = $wa->shop->categories(0, null, false)}
+              {foreach $wishes as $product}
+              {$productUrl = $wa->shop->productUrl($product)}
+              {$prod = $wa->shop->product($product.id)}
+                  {$curSKU = $product.sku_id}
+                  {foreach $prod.skus as $sku}
+                  {if $sku.id == $curSKU}
+                  {$curSKUName = $sku.sku}
+                  {/if}
+                  {/foreach}
+              <div class="grid__c grid__c--m-1-3 grid__c--m-pd-64 js-item" data-id="{$product.id}">
+                <div class="product-card-toggle js-toggle">
+                  <div class="product-card-toggle__front">
+                    <div class="product-card js-item" data-name="{mb_strimwidth($product.name, 0, 55, '...')}" data-price="{shop_currency($product.price, null, null, 0)}" data-sku="{$curSKUName}" data-smallpic="{$wa->shop->productImgUrl($product, '200x0')}" data-id="{$product.id}">
+                      <div class="product-card__pic">
+                        {if $wa->shop->productImgHtml($product, '500x0')}
+                        {$imgUrl = $wa->shop->productImgUrl($product, '1500')}
+                        {$wa->shop->productImgHtml($product, '500x0', ['class' => 'product-card__img js-item-image', 'data-original-src'
+                        => $imgUrl, 'alt' => $product.name, 'default' => ""])}
+                        {else}
+                        <img class="product-card__img" alt="{$product.name}" title="{$product.name}"
+                          src="{$wa_theme_url}assets/img/dummy200.png">
+                        {/if}
+                      </div>
+                      <small class="product-card__sub-title">{$categories[$product.category_id].name}</small>
+                      <h3 class="product-card__title">{$product.name}</h3>
+                      <div class="product-card__price"><span>{shop_currency($product.price, null, null, 0)}</span> ₽</div>
+                      <div class="product-card__cart js-product-add" onClick="">
+                        <svg class="svg-icon">
+                          <use xlink:href="#i-shopping-cart"></use>
+                        </svg>
+                      </div>
+                      <div class="product-card__close product-card__close--front js-favorites-delete">
+                        <div class="product-card__close-inner" title="Удалить из избранного"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="product-card-toggle__back">
+                    <div class="product-card product-card--back js-item" data-name="{mb_strimwidth($product.name, 0, 55, '...')}" data-price="{shop_currency($product.price, null, null, 0)}" data-sku="{$curSKUName}" data-smallpic="{$wa->shop->productImgUrl($product, '200x0')}" data-id="{$product.id}">
+                      <div class="product-card__pic">
+                        {if $wa->shop->productImgHtml($product, '500x0')}
+                        {$imgUrl = $wa->shop->productImgUrl($product, '1500')}
+                        {$wa->shop->productImgHtml($product, '500x0', ['class' => 'product-card__img js-item-image', 'data-original-src'
+                        => $imgUrl, 'alt' => $product.name, 'default' => ""])}
+                        {else}
+                        <img class="product-card__img" alt="{$product.name}" title="{$product.name}"
+                          src="{$wa_theme_url}assets/img/dummy200.png">
+                        {/if}
+                      </div>
+                      <small class="product-card__sub-title">{$categories[$product.category_id].name}</small>
+                      <h3 class="product-card__title">{$product.name}</h3>
+                      <a href="#" id="modal-order-btn" class="product-card__buy-quick btn js-modal-order reqCall">Быстрый заказ</a>
+                      <a href="#" class="product-card__buy btn js-product-buy">Купить</a>
+                      <a href="#" class="product-card__to-cart btn">В корзину</a>
+                      <a href="#" class="product-card__continue btn js-product-close">Продолжить</a>
+                      <div class="product-card__manage">
+                        <div class="product-card__qnt qnt-toggle js-product-qnt">
+                          <div class="qnt-toggle__min" data-action="min"></div>
+                          <input type="text" class="qnt-toggle__val" value="01">
+                          <div class="qnt-toggle__max" data-action="max"></div>
+                        </div>
+                        <div class="product-card__price"><span class="js-product-price">{shop_currency($product.price, null, null, 0)}</span> ₽</div>
+                      </div>
+                      <div class="product-card__close js-product-close">
+                        <div class="product-card__close-inner"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/foreach}
+            </div>
+          </div>
+          {else}
+          <div class="page__empty">Нет товаров в избранном.</div>
+          {/if}
+        </div>
+      </div>
+      {if isset($pages_count) && $pages_count > 1}
+      <div class="page__pagination">
+        {wa_custom_pagination per_page=$per_page total=$pages_count attrs=['class' => "pagination"]}
+      </div>
+      {/if}
+    </div>
+  </div>
+</div>

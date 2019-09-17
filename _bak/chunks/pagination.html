@@ -1,0 +1,11 @@
+<div class="container">
+  {wa_custom_pagination total=$total attrs=['class' => "pagination"]}
+</div>
+
+{if $total > 1 && $hide_mobb != 1}
+<div class="showmore hide-l js-showmore">
+  <div class="showmore__label js-showmore-btn">
+    <span>Показать ещё</span>
+  </div>
+</div>
+{/if}

@@ -1,0 +1,61 @@
+{if $latest_posts = $wa->blog->posts(1)}
+<div class="block">
+  <div class="container">
+    <div class="block__head">
+      <div class="block__title">
+        Новости
+      </div>
+    </div>
+  </div>
+  <div class="block__content">
+    <div class="container">
+      <div class="h-news-slider">
+        <div id="h-news-slider" class="swiper-container h-news-slider__container">
+          <div class="swiper-wrapper">
+            {foreach $latest_posts as $post}
+            <div class="swiper-slide">
+              <div class="h-news-slider__card">
+                <div class="h-news-slider__card-bg" style="background-image: url({blogImgpostPlugin::getImgUrl($post.id)});"></div>
+                <div class="h-news-slider__card-content">
+                  <div class="h-news-slider__card-title">{$post.title}</div>
+                  <div class="h-news-slider__card-subtitle">{$post.datetime|wa_datetime:"humandate"}</div>
+                  <div class="h-news-slider__card-text">{$post.text|strip_tags|truncate:116}</div>
+                  <a href="{$post.link}" title="{$post.title}" class="h-news-slider__card-btn btn">Читать</a>
+                </div>
+              </div>
+            </div>
+            {/foreach}
+          </div>
+        </div>
+        <div class="h-news-slider__controls">
+          <div class="h-news-slider__controls-grid">
+            <div class="h-news-slider__controls-item">
+              <div id="h-news-slider-prev" class="h-news-slider__controls-btn rotate--180">
+                <svg class="svg-icon">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-arrow"></use>
+                </svg>
+              </div>
+            </div>
+            <div class="h-news-slider__controls-item">
+              <div id="h-news-slider-next" class="h-news-slider__controls-btn">
+                <svg class="svg-icon">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-arrow"></use>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="block__bottom">
+    <div class="container">
+      <div class="block__bottom-inner">
+        <div class="block__more-link">
+          <a href="/news/">Все новости</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/if}

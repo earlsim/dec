@@ -1,0 +1,35 @@
+{$wa->title('Регистрация - Декоратор')}
+<div class="page__head show-l">
+  <div class="container">
+    <div class="page__head-row">
+      <div class="page__head-col">
+        <div class="page__title">Регистрация</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="page" role="main" data-type="signup" class="page__content">
+  <div class="container container--xxs-nopd">
+    <div class="auth-page">
+      <div class="auth-page__form auth-page__form--signup">
+        {if !empty($confirmed_email)} 
+        <div class="auth-page__title">[s`Thank you!`]</div>
+        <div class="auth-page__subtitle">[s`You have successfully confirmed your email.`]</div>
+        {elseif !empty($contact)}
+        <div class="auth-page__title">[s`Thank you!`]</div>
+        <div class="auth-page__subtitle">[s`You have successfully signed up.`]</div>
+        {if !empty($email_confirmation_hash)}
+            <p><em>[s`A confirmation link has been sent to you by email. Please click this link to confirm your signup and to sign in.`]</em></p>
+        {/if}
+        {else}
+        <div class="auth-page__title">Зарегистрируйтесь</div>
+        <div class="auth-page__subtitle">указав свои контактные данные</div>
+        {$wa->signupForm($errors, [
+            "show_title"          => false,
+            "show_oauth_adapters" => false
+        ])}
+        {/if}
+      </div>
+    </div>
+  </div>
+</div>

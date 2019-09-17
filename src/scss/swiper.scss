@@ -1,0 +1,133 @@
+.swiper-container {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.swiper-wrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: 100%;
+  /* height: 100%; */
+  transition-property: transform;
+  /* box-sizing: content-box; */
+}
+
+.swiper-wrapper,
+.swiper-slide {
+  transform: translate3d(0px, 0, 0);
+}
+
+.swiper-slide {
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+  /* height: 100%; */
+  transition-property: transform;
+}
+
+/* pagination */
+.swiper-pagination-bullets {
+  display: flex;
+  justify-content: center;
+}
+
+.swiper-pagination-bullets-left {
+  justify-content: flex-start;
+}
+
+.swiper-pagination-bullet {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 2px solid $c-main;
+  border-radius: 100%;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color .6s, border .6s;
+
+  &:not(:last-child) {
+    margin-right: 14px;
+  }
+
+  &:hover {
+    opacity: .5;
+  }
+}
+
+.swiper-pagination-bullet-active {
+  background-color: $c-block;
+  border: none;
+}
+
+.swiper-navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+
+  @media ($m-s) {
+    margin-top: 50px;
+  }
+}
+
+.swiper-pagination {
+  margin: 0 50px;
+  order: 3;
+}
+
+.swiper-button-prev {
+  width: 17.4px;
+  height: 30px;
+  order: 1;
+  cursor: pointer;
+  color: $c-block;
+
+  &:hover {
+    opacity: .5;
+  }
+}
+
+.swiper-button-next {
+  width: 17.4px;
+  height: 30px;
+  transform: scale(-1, 1);
+  order: 3;
+  cursor: pointer;
+  color: $c-block;
+
+  &:hover {
+    opacity: .5;
+  }
+}
+
+.swiper-button-disabled {
+  color: $c-block;
+}
+
+/*
+.swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  background-color: var(--grayLightColor);
+  cursor: pointer;
+
+  &:not(:last-child) {
+    margin-right: 14px;
+  }
+}
+
+.swiper-pagination-bullet-active {
+  background-color: var(--brandColor);
+}
+
+.swiper-pagination-bullet {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 2px solid $c-main;
+  background-color: transparent;
+}
+ */

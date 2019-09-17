@@ -1,0 +1,146 @@
+{$categories = $wa->shop->categories(0, 2, true)}
+{$curcat = $category.id}
+
+<div id="mobile-menu" class="m-menu">
+  <div class="m-menu__search search-field__wrap hide-s">
+    <form method="get" action="{$wa->getUrl('shop/frontend/search')}" class="search-field__input">
+      <input tid="search" name="query" type="text" class="search-field__input-control" {if !empty($query)}value="{$query}"{/if} placeholder="Поиск">
+      <div class="search-field__input-icon">
+        <svg class="svg-icon">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-search"></use>
+        </svg>
+      </div>
+    </form>
+  </div>
+  <div class="m-menu__auth">
+    <div class="m-menu__auth-wrap">
+      {if $wa->userId()}
+      <a href="/my/" class="m-menu__auth-link">{$wa->user('firstname','')}</a>
+      <a href="/?logout" class="m-menu__auth-link">Выход</a>
+      {else}
+      <a href="/login/" class="m-menu__auth-link">Войти в личный кабинет</a>
+      {/if}
+    </div>
+  </div>
+  <div class="m-menu__nav">
+    <div class="m-menu__nav">
+      <div class="m-menu__nav-list js-m-menu-list">
+
+        {if $categories}
+        {foreach $categories as $category}
+
+        <div class="m-menu__nav-item js-m-deep-wrap">
+          <div id="parent-cat-{$category.id}" class="m-menu__nav-btn js-m-deep-btn">
+            <div class="m-menu__nav-label">{$category.name|escape}</div>
+            <div class="m-menu__nav-icon">
+              <svg class="svg-icon">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-chevron-m"></use>
+              </svg>
+            </div>
+          </div>
+          
+          <div class="m-menu__deep js-m-deep">
+            <div class="m-menu__deep-title">
+              <div class="m-menu__deep-icon js-m-deep-btn">
+                <svg class="svg-icon">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-arrow"></use>
+                </svg>
+              </div>
+              <div class="m-menu__deep-label">
+                {$category.name|escape}
+              </div>
+            </div>
+            <div class="m-menu__deep-catalog">
+              <div class="m-catalog__nav">
+                {if $category.childs}
+                <div class="m-catalog__nav-list js-m-catalog-list">
+                  {foreach $category.childs as $child}
+                  <div class="m-catalog__nav-item js-m-catalog-item">
+                    <div class="m-catalog__nav-btn js-m-catalog-btn">
+                      <div class="m-catalog__nav-label">{$child.name|escape}</div>
+                      <div class="m-catalog__nav-icon">
+                        <svg class="svg-icon">
+                          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-chevron-m"></use>
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="m-catalog__sub js-m-catalog-sub">
+                      {if $child.childs}
+                      <div class="m-catalog__sub-list">
+                        {foreach $child.childs as $schild}
+                        <div class="m-catalog__sub-item">
+                          <a href="/{$schild.full_url}" class="m-catalog__sub-btn">
+                            <div class="m-catalog__sub-label">{$schild.name}</div>
+                          </a>
+                        </div>
+                        {/foreach}
+                      </div>
+                      {/if}
+                    </div>
+                  </div>
+                  {/foreach}
+                </div>
+                {/if}
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        {/foreach}
+        {/if}
+        {foreach $topMenu as $item}
+        <div class="m-menu__nav-item js-m-menu-item">
+          <a href="{$item.url}" class="m-menu__nav-btn">
+            <div class="m-menu__nav-label">{$item.name}</div>
+          </a>
+        </div>
+        {/foreach}
+      </div>
+    </div>
+  </div>
+  <div class="m-menu__bottom">
+    <div class="container">
+      <div class="m-menu__bottom-wrap">
+        {$phone = str_replace(" ","",$wa->block('global.phone'))}
+        <a href="tel:{$phone}" class="m-menu__bottom-phone">
+          {$wa->block("global.phone")}
+        </a>
+        <div class="m-menu__bottom-social social">
+          <div class="social__grid">
+            <div class="social__item">
+              <a target="_blank" rel="nofollow noreferrer noopener" href="#" class="social__btn">
+                <svg class="svg-icon">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-fb"></use>
+                </svg>
+              </a>
+            </div>
+            <div class="social__item">
+              <a href="#" target="_blank" rel="nofollow noreferrer noopener" class="social__btn">
+                <svg class="svg-icon">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-vk"></use>
+                </svg>
+              </a>
+            </div>
+            <div class="social__item">
+              <a href="#" target="_blank" rel="nofollow noreferrer noopener" class="social__btn">
+                <svg class="svg-icon">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-twitter"></use>
+                </svg>
+              </a>
+            </div>
+            <div class="social__item">
+              <a href="#" target="_blank" rel="nofollow noreferrer noopener" class="social__btn">
+                <svg class="svg-icon">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-ok"></use>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div data-id="popup-callback" class="m-menu__bottom-btn btn js-popup">
+          Свяжитесь с нами
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

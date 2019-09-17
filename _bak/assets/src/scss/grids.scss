@@ -1,0 +1,25 @@
+.grid20 {
+  display: flex;
+  margin: -20px 0 0 -20px;
+}
+
+.grid20__item {
+  padding: 20px 0 0 20px;
+}
+
+.grid30 {
+  display: flex;
+  margin: -30px 0 0 -30px;
+
+  &--mob15 {
+    margin: -15px 0 0 -15px;
+  }
+}
+
+.grid30__item {
+  padding: 30px 0 0 30px;
+
+  &--mob15 {
+    padding: 15px 0 0 15px;
+  }
+}

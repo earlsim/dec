@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{$html_class_array = []}
+{if $wa->globals('isMyAccount')}{$html_class_array[] = 'my'}{/if}
+<html{if !empty($html_class_array)} class="{join(' ', $html_class_array)}"{/if}>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>{$wa->title()|escape}</title>
+  <meta name="keywords" content="{$wa->meta('keywords')|escape}" />
+  <meta name="description" content="{$wa->meta('description')|escape}" />
+  <meta http-equiv="x-ua-compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  {if !empty($canonical)}<link rel="canonical" href="{$canonical}"/>{/if}
+  <link href="{$wa_theme_url}assets/css/style.css?v{$wa_theme_version}" rel="stylesheet" type="text/css"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <script
+  src="https://code.jquery.com/jquery-1.12.4.min.js"
+  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script>
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  {$wa->head()}
+</head>
+<body>
+{include file="`$wa_theme_path`chunks/svg.html" inline}
+{include file="`$wa_theme_path`chunks/header.html" inline}
+<div id="body-wrapper" class="wrapper js-wrapper">
+{include file="`$wa_active_theme_path`/main.html" inline}
+{include file="`$wa_theme_path`chunks/footer.html" inline}
+</div>
+{include file="`$wa_theme_path`forms/popups.html" inline}
+<script type="text/javascript" src="{$wa_theme_url}assets/js/scripts.js?v{$wa_theme_version}"></script>
+</body>
+</html>

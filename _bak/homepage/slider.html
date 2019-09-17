@@ -1,0 +1,109 @@
+{if $promocards = $wa->shop->promos()}
+<div class="slider">
+  <div class="slider__inner">
+    <div class="slider__nav">
+      <div class="slider__nav-wrap">
+        <div id="main-slider-pagination" class="slider__pagination"></div>
+        <div class="slider__arrows">
+          <div class="slider__arrows-grid">
+            <div class="slider__arrows-item">
+              <div id="main-slider-prev" class="slider__arrow rotate--180">
+                <svg class="svg-icon">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-arrow"></use>
+                </svg>
+              </div>
+            </div>
+            <div class="slider__arrows-item">
+              <div id="main-slider-next" class="slider__arrow">
+                <svg class="svg-icon">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-arrow"></use>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="main-slider" class="swiper-container">
+      <div class="swiper-wrapper">
+        {foreach $promocards as $promo}
+          <div class="swiper-slide">
+            <div class="slider__slide" style="background-image: url({$promo.image})">
+              <div class="container">
+                <div class="slider__slide-inner">
+                  <div class="slider__slide-content">
+                    <div class="slider__slide-block">
+                      <div class="promo">
+                        <div class="promo__title">Pump</div>
+                        <div class="promo__subtitle">Valentino</div>
+                        <div class="promo__label">Garavani</div>
+                      </div>
+                      {if !empty($promo.second_image)}{$promo.second_image|escape}{/if}
+                    </div>
+                    <div class="promo__oldprice">
+                      <span>{if !empty($promo.oldprice)}{$promo.oldprice|escape}{/if}</span> ₽
+                    </div>
+                    <div class="promo__price">
+                      <span>{if !empty($promo.price)}{$promo.price|escape}{/if}</span> ₽
+                    </div>
+                    <div class="promo__btn">
+                      <a href=" {if !empty($promo.link)}{$promo.link|escape}{/if}" class="btn btn--ttu">Купить</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {/foreach}
+      </div>
+    </div>
+  </div>
+</div>
+{/if}
+
+{if false}
+<div class="slider">
+  <div class="slider__inner">
+    <div id="main-slider" class="slider__container swiper-container">
+      <div class="swiper-wrapper">
+        {foreach $promocards as $promo}
+        <div class="swiper-slide">
+          <div class="slider__slide" id="slider__slide-{$promo.id}" style="background-image: url({$promo.image})">
+            <div class="container">
+              <div class="slider__slide-block">
+                <div class="slider__slide-title">{if !empty($promo.title)}{$promo.title|escape}{/if}</div>
+                <div class="slider__slide-text text">
+                  <p>{if !empty($promo.body)}{$promo.body|escape}{/if}</p>
+                </div>
+                <div class="slider__slide-btn">
+                  <a href="{$promo.link|escape}" class="btn btn--bd btn--white">Купить сейчас</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/foreach}
+      </div>
+    </div>
+    <div class="slider__controls">
+      <div class="container">
+        <div class="slider__controls-inner">
+          <div class="slider__arrows">
+            <div id="main-slider-prev" class="slider__arrow slider__arrow--prev">
+              <div class="arrow-btn arrow-btn--left">
+
+              </div>
+            </div>
+            <div id="main-slider-next" class="slider__arrow">
+              <div class="arrow-btn arrow-btn--right">
+                
+              </div>
+            </div>
+          </div>
+          <div id="main-slider-pagination" class="slider__pagination"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{/if}

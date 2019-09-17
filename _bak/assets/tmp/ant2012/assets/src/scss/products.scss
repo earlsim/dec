@@ -1,0 +1,36 @@
+.products__grid {
+  display: flex;
+  flex-wrap: wrap;
+
+  @media ($m-m) {
+
+    &.big-mansory {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: auto auto;
+    }
+  }
+}
+
+.products__item {
+  width: 50%;
+  
+  @media ($m-m) {
+    width: 33.3333%;
+
+    .big-mansory & {
+      width: auto;
+      height: 100%;
+  
+      &:nth-child(1) {
+        grid-column: span 2;
+        grid-row: span 2;
+      }
+  
+      &:nth-child(11) {
+        grid-column: span 2;
+        grid-row: span 2;
+      }
+    }
+  }
+}

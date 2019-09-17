@@ -1,0 +1,117 @@
+<div class="page">
+  <div class="container">
+    <div class="page__breadcrumbs">
+      {include file="`$wa_active_theme_path`/blocks/breadcrumbs.html" inline}
+    </div>
+    <div class="page__head">
+      <h1 class="page__title">
+        О Monet Market
+      </h1>
+    </div>
+  </div>
+  <div class="container container--pd0">
+    <div class="page__about about">
+      <div class="about__content">
+        <div class="about__text text">
+          {$page.content}
+        </div>
+        <div class="about__counters">
+          <div class="about__counter">
+            <h3>8 лет</h3>
+            <span>На рынке</span>
+          </div>
+          <div class="about__counter">
+            <h3>2 года</h3>
+            <span>Онлайн</span>
+          </div>
+          <div class="about__counter">
+            <h3>250000</h3>
+            <span>Монет на складе</span>
+          </div>
+        </div>
+        <div class="about__text text">
+          <p>Возникло непонимание, проблема, пожелание - по любому из вопросов – напишите ответственному по решению проблемных вопросов <a href="mailto:mm@monetmarket.ru">mm@monetmarket.ru</a> или +7 909 76 555 56</p>
+        </div>
+      </div>
+      <div class="about__bar">
+        <form action="/contact/" class="about-form js-form">
+          <h2 class="about-form__title">Написать нам</h2>
+          <div class="about-form__list">
+            <div class="about-form__item">
+              <div class="c-field-text js-field-wrap">
+                <label for="contact-firstname" class="c-field-text__label">Имя <i>*</i></label>
+                <div class="c-field-text__input">
+                  <div class="c-field-text__input-icon">
+                    <svg class="svg-icon">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-name"></use>
+                    </svg>
+                  </div>
+                  <input id="contact-firstname" type="text" name="contact[firstname]" class="c-field-text__input-control c-field-text__input-control--wicon" placeholder="Введите Ваше имя" value="{$customer.name[0].value}" required>
+                </div>
+                <div class="c-field-text__msg js-field-msg"></div>
+              </div>
+            </div>
+            <div class="about-form__item">
+              <div class="c-field-text js-field-wrap">
+                <label for="contact-phone" class="c-field-text__label">Телефон <i>*</i></label>
+                <div class="c-field-text__input">
+                  <div class="c-field-text__input-icon">
+                    <svg class="svg-icon">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-phone"></use>
+                    </svg>
+                  </div>
+                  <input id="contact-phone" type="text" name="contact[phone]" class="c-field-text__input-control c-field-text__input-control--wicon" placeholder="+7 (___) ___ __ __" value="{$customer.phone[0].value}" required>
+                </div>
+                <div class="c-field-text__msg js-field-msg"></div>
+              </div>
+            </div>
+            <div class="about-form__item">
+              <div class="c-field-text js-field-wrap">
+                <label for="contact-email" class="c-field-text__label">E-Mail <i>*</i></label>
+                <div class="c-field-text__input">
+                  <div class="c-field-text__input-icon c-field-text__input-icon--email">
+                    <svg class="svg-icon">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-mail"></use>
+                    </svg>
+                  </div>
+                  <input id="contact-email" type="email" name="contact[email]" class="c-field-text__input-control c-field-text__input-control--wicon" placeholder="Введите Ваш e-mail" value="{$customer.email[0].value}" required>
+                </div>
+                <div class="c-field-text__msg js-field-msg"></div>
+              </div>
+            </div>
+            <div class="about-form__item">
+              <div class="c-field-textarea js-field-wrap">
+                <label for="contact-text" class="c-field-textarea__label">Сообщение <i>*</i></label>
+                <div class="c-field-textarea__input">
+                  <div class="c-field-textarea__input-icon">
+                    <svg class="svg-icon">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-edit"></use>
+                    </svg>
+                  </div>
+                  <textarea id="contact-text" name="contact[text]" class="c-field-textarea__input-control c-field-textarea__input-control--wicon" placeholder="Введите Ваше Сообщение" required></textarea>
+                </div>
+                <div class="c-field-text__msg js-field-msg"></div>
+              </div>
+            </div>
+            <div class="about-form__item">
+              <div class="about-form__checkbox js-field-wrap">
+                <label class="field-checkbox">
+                  <input type="checkbox" name="contact[agree]" checked class="field-checkbox__input" required>
+                  <div class="field-checkbox__elem"></div>
+                  <div class="field-checkbox__text">Даю согласие с условиями
+                    <a href="#" class="field-checkbox__link link link--tdu">политики конфиденциальности</a></div>
+                  </label>
+                  <div class="field-checkbox__msg js-field-msg"></div>
+                </div>
+              </div>
+              <div class="about-form__item">
+                <div class="about-form__btn">
+                  <button class="btn btn--bold">Отправить сообщение</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

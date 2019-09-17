@@ -1,0 +1,46 @@
+.btn {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  min-width: 216px;
+  height: 48px;
+  padding: 0 20px;
+  font-size: 12px;
+  line-height: 48px;
+  font-weight: 500;
+  text-align: center;
+  text-transform: uppercase;
+  vertical-align: middle;
+  color: $c-block;
+  background-color: $c-main;
+  box-sizing: border-box;
+  cursor: pointer;
+  overflow: hidden;
+  user-select: none;
+  transition: all .4s;
+
+  &:hover {
+    // opacity: .6;
+    background-color: #6F228F;
+  }
+
+  &--full {
+    width: 100%;
+  }
+
+  &--white {
+    background-color: #F3F4F5;
+    color: $c-main;
+
+    &:hover {
+      background-color: #F3F4F5;
+      opacity: .6;
+    }
+  }
+
+  @media ($m-s) {
+    height: 64px;
+    font-size: 14px;
+    line-height: 64px;
+  }
+}

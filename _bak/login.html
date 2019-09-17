@@ -1,0 +1,36 @@
+{$wa->title('Авторизация - Frant Outlet')}
+{$cururl = $wa->currentUrl(false, true)}
+{if strpos($cururl, 'login') == 1}
+<div class="page__head show-l">
+  <div class="container">
+    <div class="page__head-row">
+      <div class="page__head-col">
+        <div class="page__title">Вход</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="page" role="main" data-type="login" class="page__content">
+  <div class="container container--xxs-nopd">
+    <div class="auth-page">
+      <div class="auth-page__form">
+        <div class="auth-page__title">Авторизуйтесь</div>
+        <div class="auth-page__subtitle">указав свои контактные данные</div>
+        {$wa->loginForm($error, [
+        'show_title' => false,
+        'show_sub_title' => true,
+        'show_oauth_adapters' => false
+        ])}
+      </div>
+    </div>
+  </div>
+</div>
+{elseif strpos($cururl, 'checkout') == 1}
+<div class="auth-page__form auth-page__form--checkout">
+  {$wa->loginForm($error, [
+  'show_title' => false,
+  'show_sub_title' => true,
+  'show_oauth_adapters' => false
+  ])}
+</div>
+{/if}

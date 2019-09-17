@@ -1,0 +1,194 @@
+<div class="page__head show-l">
+  <div class="container">
+    <div class="page__head-row">
+      <div class="page__head-col">
+        <div class="page__title">Избранное</div>
+        {if $products_count > 0}
+        <div class="page__count">
+          {$productText = sprintf(_w('%d product', '%d products', count($products)))}
+          {$productText = mb_substr($productText, mb_strpos($productText, ' '))}
+          <div class="page__count-num js-wish-count">{count($products)}</div>
+          <div class="page__count-label">{$productText}</div>
+        </div>
+        {/if}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div data-type="wishlist" class="page__content js-page-content">
+  <div class="wishlist">
+    <div class="container container--xxs-nopd" data-notinuse="container--m-nopd">
+      {if $wishes}
+      <div class="wishlist__list js-wishlist-list js-wishes">
+        {foreach $wishes as $product}
+        {$productUrl = $wa->shop->productUrl($product)}
+        <div data-id="{$product->id}" class="wishlist__item js-item js-wishlist-item">
+          <div class="product-card">
+            <div class="product-card__headline">
+              {if $product->features["skidka"]}
+                <span class="product-card__headline-label">-{$product->features["skidka"]}%</span>
+              {else}
+              <div>
+            </div>
+            {/if}
+              <div class="product-card__headline-icon product-card__headline-icon--close js-item-wish">
+                <svg class="svg-icon">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-close"></use>
+                </svg>
+              </div>
+            </div>
+            <a href="{$productUrl}" title="{$product.name}" class="product-card__pic">
+              <div class="product-card__pic-lay" style="background-image: url({$wa->shop->productImgUrl($product, '300x0')});}"></div>
+            </a>
+            <div class="product-card__content">
+              <a href="{$productUrl}" title="{$product.name}" class="product-card__title">{$product.name}</a>
+              <div class="product-card__info">
+                <div class="product-card__price-wrap">
+                  <div class="product-card__price {if $product.compare_price > 0}product-card__price--red{/if}">
+                    {shop_currency($product.price, null, null, 0)} ₽
+                  </div>
+                  {if $product.compare_price > 0}
+                  <div class="product-card__oldprice">
+                    <span>{shop_currency($product.compare_price, null, null, 0)}</span> ₽
+                  </div>
+                  {/if}
+                </div>
+                <a href="{$productUrl}" title="{$product.name}" data-type="card" class="product-card__btn">
+                  <svg class="svg-icon">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-bag"></use>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/foreach}
+      </div>
+      {else}
+      <h2 class="page__msg">Нет товаров в избранном.</h2>
+      {/if}
+    </div>
+    {if $wa->isMobile()}
+    {$per_page = 8}
+    {else}
+    {$per_page = 8}
+    {/if}
+
+    <div class="page__bottom">
+      {include file="`$wa_active_theme_path`/chunks/pagination.html" inline per_page=$per_page total=$pages_count attrs=['class' => "pagination"]}
+    </div>
+  </div>
+</div>
+
+
+
+{if (false)}
+<div class="page">
+  <div class="container">
+    <div class="page__head page__head--hidemob">
+      <h1 class="page__title">
+        Избранное
+      </h1>
+      {if $products}
+      <div class="page__head-count ">
+        <div class="tag tag--count js-wish-count">
+          {count($products)}
+        </div>
+        <span class="page__head-label">Товар</span>
+      </div>
+      {/if}
+      <div class="page__head-more">
+      </div>
+    </div>
+  </div>
+  <div class="container container--pd0">
+    {if $products}
+    <div class="favorites js-wishes">
+      {foreach $products as $product}
+      <div class="product-line js-item js-wishlist-item" data-id="{$product.id}">
+        <div class="product-line__delete-abs product-line__showm">
+          <a href="#" class="round-btn-text js-cart-item-delete">
+            <div class="round-btn-text__circle round-btn-text__circle--gray">
+              <div class="round-btn-text__icon round-btn-text__icon--cross"></div>
+            </div>
+            <span class="round-btn-text__label round-btn-text__label--hoverbc">Удалить</span>
+          </a>
+        </div>
+        <a href="/{$product.url}" title="{$product.name}" class="product-line__pic">
+          {$wa->shop->productImgHtml($product, '750x0', ['itemprop' => 'image', 'alt' => $product.name, 'default' =>
+          "`$wa_theme_url`img/dummy200.png"])}
+        </a>
+        <div class="product-line__wrap">
+          <div class="product-line__desc">
+            <a href="/{$product.url}" class="product-line__title">
+              {$product.name}
+            </a>
+            <div class="product-line__tags">
+              {if $wa->shop->product($product.id)->features["novinka"]["value"] == 1}
+              <div class="product-line__tags-item">
+                <div class="tag tag--inline tag--h35 tag--brandb tag--pd15">Новинка</div>
+              </div>
+              {/if}
+              <div class="product-line__tags-item">
+                <div class="tag tag--inline tag--h35 tag--grayb tag--pd15">{$wa->shop->product($product.id)->features["sokhrannost_monety"]}</div>
+              </div>
+            </div>
+            <div class="product-line__delete product-line__hidem">
+              <a href="#" class="round-btn-text js-item-wish">
+                <div class="round-btn-text__circle round-btn-text__circle--gray">
+                  <div class="round-btn-text__icon round-btn-text__icon--cross"></div>
+                </div>
+                <span class="round-btn-text__label round-btn-text__label--hoverbc">Удалить</span>
+              </a>
+            </div>
+            <div class="product-line__msg js-item-msg"></div>
+          </div>
+          <div class="product-line__price">
+            <div class="product-line__price-wrap">
+              <div class="product-line__discount">
+                {if $wa->shop->product($product.id)->features["skidka"]}
+                <div class="product-line__tag--discount">
+                  -{$wa->shop->product($product.id)->features["skidka"]}%
+                </div>
+                {/if}
+              </div>
+              <div class="product-line__costs">
+                <div class="product-line__costs-item">
+                  <div class="product-line__cost">{shop_currency($product.price, null, null, 0)} руб</div>
+                </div>
+                <div class="product-line__costs-item">
+                  <div class="product-line__cost--old">{if $product.compare_price >
+                    0}{shop_currency($product.compare_price, null, null, 0)} руб{/if}</div>
+                </div>
+              </div>
+              <div class="product-line__tocart">
+                <button class="btn btn--tocart js-item-tocart">
+                  <div class="btn__icon btn__icon--left">
+                    <svg class="svg-icon">
+                      <use xlink:href="#i-cart"></use>
+                    </svg>
+                  </div>
+                  Добавить в корзину
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/foreach}
+
+    </div>
+    {else}
+    <h2 class="favorites__subtitle">Нет товаров в избранном.</h2>
+    {/if}
+
+    <a href="#" class="products-showmore">
+      <button class="circle-btn circle-btn--white circle-btn--plus"></button>
+      <span class="products-showmore__span">Показать ещё</span>
+    </a>
+
+  </div>
+</div>
+
+{/if}

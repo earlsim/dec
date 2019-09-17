@@ -1,0 +1,220 @@
+<div class="page">
+  <div class="container">
+    <div class="page__breadcrumbs">
+      <div class="breadcrumbs">
+        <div class="breadcrumbs__item">
+          <a href="/" class="breadcrumbs__link breadcrumbs__link--home">Главная</a>
+        </div>
+        <div class="breadcrumbs__separator">
+          <div class="breadcrumbs__icon">
+          </div>
+        </div>
+        <div class="breadcrumbs__item is-active">
+          <span class="breadcrumbs__current">Личный кабинет</span>
+        </div>
+      </div>
+    </div>
+    <div class="page__head">
+      <h1 class="page__title">
+        Личный кабинет
+      </h1>
+    </div>
+
+    {if $saved}
+    <div class="page__message">
+      <span>[s`Contact information successfully updated!`]</span>
+    </div>
+    {/if}
+    {if isset($smarty.get.emailconfirmed) && $smarty.get.emailconfirmed == 1}
+    <div class="page__message">
+      <span>[s`Contact information successfully updated!`]</span>
+    </div>
+    {/if}
+
+    <div class="page__cabinet cabinet">
+      <div class="cabinet__half cabinet__half--bg">
+        <h2 class="cabinet__title">
+          Личные данные
+        </h2>
+        <div class="cabinet__list">
+          <pre>
+            {print_r(get_class_methods($wa->user()))}
+          </pre>
+          {$user_info = $wa->user()}
+          {var_dump($user_info)}
+          {foreach $user_info as $id => $info}
+          <div class="cabinet__item">
+            <div class="cabinet__label">{$info.name}</div>
+            <div class="cabinet__value">{if $info.value}{$info.value}{else}<span>не указано</span>{/if}</div>
+          </div>
+          {/foreach}
+        </div>
+        <button class="btn" id="wa-my-info-edit">[s`Edit`]</button>
+      </div>
+      <div class="cabinet__half">2</div>
+    </div>
+
+    {if false}
+    <div id="wa-my-info-wrapper">
+      <div class="wa-form" id="wa-my-info-read-wrapper"{if !empty($form->errors)} style="display: none;"{/if}>
+
+        {foreach $user_info as $id => $info}
+        <div class="wa-field">
+          <div class="wa-name">{$info.name}</div>
+          <div class="wa-value">{$info.value}</div>
+        </div>
+        {/foreach}
+
+        <div class="wa-field">
+          <div class="wa-value">
+            <input type="button" class="button" id="wa-my-info-edit" value="[s`Edit`]"/>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="clear-both"></div>
+
+      <form action="" enctype="multipart/form-data" method="post"{if empty($form->errors)} style="display: none;"{/if} id="wa-my-info-edit-wrapper">
+        <div class="wa-form">
+
+          {$form->html()}
+
+          <div class="wa-field">
+            <div class="wa-value">
+              <input type="submit" value="[s`Save`]">
+              <a href="#" id="wa-my-info-cancel">[s`cancel`]</a>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <div class="clear-both"></div>
+    </div>
+
+    <script>
+      (function () {
+        var $wrapper = $('#wa-my-info-wrapper'),
+        $form = $wrapper.find('#wa-my-info-edit-wrapper'),
+        $info = $wrapper.find('#wa-my-info-read-wrapper'),
+        $password = $form.find('.wa-field-password'),
+        $photo = $form.find('.wa-field-photo');
+
+        if ($password.length) {
+          var $change_link = $('<span><a href="#">[s`Change password`]</a></span>'),
+          $password_inputs = $password.find('p');
+
+          $password.find('.wa-value').prepend($change_link);
+
+          $change_link.on('click', 'a', function(e) {
+            e.preventDefault();
+            $change_link.hide();
+            $password_inputs.slideDown();
+          });
+        }
+
+        if ($photo.length) {
+          var $delete_photo = $('<span><a href="#">[s`Delete photo`]</a></span>'),
+          $photo_input = $photo.find('[name="profile[photo]"]'),
+          $user_photo = $photo.find('img:first'),
+          $default_photo = $photo.find('img:last');
+
+          if ($user_photo[0] != $default_photo[0]) {
+            $default_photo
+            .hide()
+            .after($delete_photo);
+
+            $delete_photo.on('click', 'a', function(e) {
+              e.preventDefault();
+              $default_photo.show();
+              $user_photo.hide();
+              $delete_photo.hide();
+              $photo_input.val('');
+            });
+          } else {
+            $default_photo.show();
+          }
+        }
+
+        $wrapper
+        .on('click', '#wa-my-info-edit', function (e) {
+          e.preventDefault();
+          if ($password.length) {
+            $change_link.show();
+            $password_inputs.hide();
+          }
+          if ($photo.length) {
+            if ($user_photo[0] != $default_photo[0]) {
+              $delete_photo.show();
+              $default_photo.hide();
+            }
+          }
+          $form.show();
+          $info.hide();
+        })
+        .on('click', '#wa-my-info-cancel', function(e){
+          e.preventDefault();
+          $form.hide();
+          $info.show();
+        });
+      })();
+    </script>
+  {/if}
+
+  {$wa->globals('isMyAccount', true)}
+
+  </div>
+</div>
+
+<h1>[`My orders`]</h1>
+
+<table class="table">
+{foreach $orders as $o}
+    <tr id="order-{$o.id}">
+        <td class="nowrap">
+            <a href="{$o.url}" class="bold">
+                {$o.id_str}
+            </a>
+        </td>
+        <td class="nowrap">
+            <span class="nowrap order-status" style="{$o.state->getStyle(1)}">
+                {$o.state->getName()}
+            </span>
+        </td>
+        <td>
+            {if !empty($o.items)}
+                {foreach $o.items as $i}
+                    {$i.name|escape} <span class="gray">x {$i.quantity}</span><br />
+                {/foreach}
+            {/if}
+        </td>
+        <td>
+            {if $o.shipping_name}
+                {$o.shipping_name|escape}
+            {else}
+                &nbsp;
+            {/if}
+        </td>
+        <td>
+            {if $o.payment_name}
+                {$o.payment_name|escape}
+            {else}
+                &nbsp;
+            {/if}
+        </td>
+        <td>
+            <span class="gray">{$o.create_datetime|wa_date:'humandate'}</span>
+        </td>
+    </tr>
+{foreachelse}
+	<tr class="no-border">
+        <td>[`You have no order history yet.`]</td>
+  	</tr>
+{/foreach}
+</table>
+
+{$wa->globals('isMyAccount', true)}
+
+<!-- plugin hook: 'frontend_my_orders' -->
+{* @event frontend_my_orders.%plugin_id% *}
+{foreach $frontend_my_orders as $_}{$_}{/foreach}

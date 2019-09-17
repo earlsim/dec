@@ -1,0 +1,191 @@
+      <!-- Modal - begin -->
+      <div id="modal-feedback" class="s-modal s-modal--bg">
+        <div class="s-modal__overlay" data-modal-close>
+          <form
+              action="/callback/"
+              method="post"
+              id="feedback"
+              class="s-modal__container"
+              style="background-image: url('{$wa_theme_url}assets/img/modal-feedback.jpg');">
+            <header class="s-modal__header">
+              <h3 class="s-modal__title">Оставить заявку</h3>
+              <div class="s-modal__text">
+                <p>Заполните все поля и в ближайшее время наш специалист свяжемся с вами</p>
+              </div>
+              <div class="s-modal__close">
+                <div class="s-modal__close-inner" data-modal-close></div>
+              </div>
+            </header>
+            <div class="s-modal__main">
+              <div class="form__block">
+                <div class="form__row">
+                  <div class="field-text">
+                    <input
+                        type="text"
+                        name="firstname"
+                        id="feedback-name"
+                        class="field-text__input"
+                        placeholder="Введите имя"
+                        autocomplete="off"
+                        required>
+                    <span class="field-text__bar"></span>
+                    <label for="firstname" class="field-text__label">Имя</label>
+                  </div>
+                </div>
+                <div class="form__row">
+                  <div class="field-text">
+                    <input
+                        type="text"
+                        name="phone"
+                        id="feedback-phone"
+                        class="field-text__input"
+                        placeholder="+ 7 ( _ _ _ ) _ _ _  _ _  _ _"
+                        autocomplete="off"
+                        required>
+                    <span class="field-text__bar"></span>
+                    <label for="phone" class="field-text__label">Телефон</label>
+                  </div>
+                </div>
+                <div class="form__row">
+                  <div class="field-checkbox field-checkbox--sm">
+                    <input type="checkbox" name="feedback_policy" id="feedback-policy" class="field-checkbox__input" checked>
+                    <label for="feedback-policy" class="field-checkbox__label">
+                      <span class="field-checkbox__icon">
+                        <span class="field-checkbox__icon-inner"></span>
+                      </span>
+                      <span class="field-checkbox__caption">Нажимая кнопку отправить Вы соглашаетесь с условиями политики конфидециальности</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="form__row form__row--mrt-64">
+                  <button class="btn btn--full">Отправить</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div id="modal-wedding" class="s-modal s-modal--bg">
+        <div class="s-modal__overlay" data-modal-close>
+          <form
+              action="/wed/" 
+              method="post"
+              id="wedding"
+              class="s-modal__container"
+              style="background-image: url('{$wa_theme_url}assets/img/modal-feedback.jpg');">
+            <header class="s-modal__header">
+              <h3 class="s-modal__title">Оставить заявку</h3>
+              <div class="s-modal__text">
+                <p>Заполните все поля и в ближайшее время наш специалист свяжемся с вами</p>
+              </div>
+              <div class="s-modal__close">
+                <div class="s-modal__close-inner" data-modal-close></div>
+              </div>
+            </header>
+            <div class="s-modal__main">
+              <div class="form__block">
+                <div class="form__row">
+                  <div class="field-text">
+                    <input
+                        type="text"
+                        name="firstname"
+                        id="wedding-name"
+                        class="field-text__input"
+                        placeholder="Введите имя"
+                        autocomplete="off"
+                        required>
+                    <span class="field-text__bar"></span>
+                    <label for="firstname" class="field-text__label">Имя</label>
+                  </div>
+                </div>
+                <div class="form__row">
+                  <div class="field-text">
+                    <input
+                        type="text"
+                        name="phone"
+                        id="wedding-phone"
+                        class="field-text__input"
+                        placeholder="+ 7 ( _ _ _ ) _ _ _  _ _  _ _"
+                        autocomplete="off"
+                        required>
+                    <span class="field-text__bar"></span>
+                    <label for="phone" class="field-text__label">Телефон</label>
+                  </div>
+                </div>
+                <div class="form__row">
+                  <div class="field-checkbox field-checkbox--sm">
+                    <input type="checkbox" name="feedback_policy" id="wedding-policy" class="field-checkbox__input" checked>
+                    <label for="wedding-policy" class="field-checkbox__label">
+                      <span class="field-checkbox__icon">
+                        <span class="field-checkbox__icon-inner"></span>
+                      </span>
+                      <span class="field-checkbox__caption">Нажимая кнопку отправить Вы соглашаетесь с условиями политики конфидециальности</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="form__row form__row--mrt-64">
+                  <button class="btn btn--full">Отправить</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div id="modal-order" class="s-modal s-modal--bg">
+        <div class="s-modal__overlay" data-modal-close>
+          <form
+              action="/response.php?test=order"
+              method="post"
+              id="order-quick"
+              class="s-modal__container"
+              style="background-image: url('./dist/img/modal-order.jpg');">
+            <header class="s-modal__header">
+              <small class="s-modal__sub-title">быстрый заказ</small>
+              <h3 class="s-modal__title">Кейс любви</h3>
+              <div class="s-modal__text s-modal__text--dark">
+                <p>15 белых голандских роз в крафтовой бумаге</p>
+              </div>
+              <div class="s-modal__close">
+                <div class="s-modal__close-inner" data-modal-close></div>
+              </div>
+            </header>
+            <div class="s-modal__main">
+              <div class="form__block">
+                <div class="form__row">
+                  <div class="field-text">
+                    <input
+                        type="text"
+                        name="phone"
+                        id="phone"
+                        class="field-text__input"
+                        placeholder="+ 7 ( _ _ _ ) _ _ _  _ _  _ _"
+                        autocomplete="off"
+                        required>
+                    <span class="field-text__bar"></span>
+                    <label for="phone" class="field-text__label">Телефон</label>
+                  </div>
+                </div>
+                <div class="form__row form__row--mrt-16">
+                  <div class="s-message">Мы свяжемся с Вами в течение нескольких минут.</div>
+                </div>
+                <div class="form__row form__row--mrt-48">
+                  <button class="btn btn--full">Отправить</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div id="modal-message" class="s-modal" style="background: #FFF;">
+        <div class="s-modal__overlay" data-modal-close>
+          <div class="s-modal__container">
+            <header class="s-modal__header">
+              <div id="modal-message-text" class="s-modal__text"></div>
+              <div class="s-modal__close">
+                <div class="s-modal__close-inner" data-modal-close></div>
+              </div>
+            </header>
+          </div>
+        </div>
+      </div>
+      <!-- Modal - end -->

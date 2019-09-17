@@ -1,0 +1,232 @@
+{* @event frontend_category.%plugin_id% *}
+{$products = $wa->shop->productSet('bestsellers')}
+{foreach $frontend_category as $_}{$_}{/foreach}
+{$wa->title("Каталог букетов - Студия ярких событий Декораторъ")}
+
+<div class="main">
+  <div class="container container-xxl--pd-0">
+    <div class="page">
+      <h1 class="page__title">Каталог букетов</h1>
+      <div class="page__content">
+        <div class="catalog">
+          <!--<div class="catalog__head">
+            <div class="filters">
+              <div class="filters__header js-filters-btn">
+                <div class="filters__title">Фильтры</div>
+                <div class="filters__icon">
+                  <svg class="svg-icon">
+                    <use xlink:href="#i-filters"></use>
+                  </svg>
+                </div>
+              </div>
+              <div class="filters__items">
+                {if !empty($filters)}
+                {foreach $filters as $fid => $filter}
+                {if $filter['code'] == 'flowers'}
+                <div id="{$fid}" class="filters__item filters__item--first">
+                  <div class="filter filter--first">
+                    <div class="filter__head js-filter-btn">
+                      <div class="filter__title">Голандская роза</div>
+                      <div class="filter__sub-title">{$filter.name|escape}</div>
+                      <div class="filter__icon">
+                        <svg class="svg-icon">
+                          <use xlink:href="#i-chevron"></use>
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="filter__body" style="display: none;">
+                      <div class="form__block form__block--w-660">
+                        <div class="grid grid--mr-0">
+                          {foreach $filter.values as $v_id => $value}
+                          <div class="grid__c grid__c--s-1-2 grid__c--pd-0">
+                            <div class="filter-checkbox" data-filter-flower>
+                              <input type="checkbox" name="{$filter.code}[]"  id="{$filter.code}-{$v_id}"
+                                class="filter-checkbox__input" {if $wa->get($filter.code, array()) && in_array($v_id, explode(',', $wa->get($filter.code, array())))}checked{/if} value="{$v_id}">
+                              <label for="{$filter.code}-{$v_id}" class="filter-checkbox__label">
+                                <span class="filter-checkbox__icon">
+                                  <span class="filter-checkbox__icon-inner"></span>
+                                </span>
+                                <span class="filter-checkbox__caption">{$value}</span>
+                              </label>
+                            </div>
+                          </div>
+                          {/foreach}
+                        </div>
+                      </div>
+                      <div class="form__row">
+                        <a href="#" class="btn filter__apply js-filter-apply">Применить</a>
+                        <a href="#" class="filter__reset js-filter-reset">Очистить</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {elseif $fid == 'price'}
+                {$c = $wa->shop->currency(true)}
+                <div id="{$fid}" class="filters__item filters__item--third">
+                  <div class="filter filter--third">
+                    <div class="filter__head js-filter-btn">
+                      <div class="filter__title">Выбор цены</div>
+                      <div class="filter__sub-title">Цена</div>
+                      <div class="filter__icon">
+                        <svg class="svg-icon">
+                          <use xlink:href="#i-chevron"></use>
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="filter__body" style="display: none;">
+                      <div class="form__block form__block--w-660">
+                        <div class="form__row">
+                          <div class="grid grid--mr-0">
+                            <div class="grid__c grid__c--m-1-2 grid__c--pd-0">
+                              <div class="grid grid--m-pdr-24">
+                                <div class="grid__c grid__c--m-1-2">
+                                  <div class="field-text" data-filter-price-min>
+                                    <input type="text" name="price_min" id="price-max" class="field-text__input"
+                                    {if $wa->get('price_min')}value="{(int)$wa->get('price_min')}"{/if} placeholder="{floor($filter.min)} руб" required>
+                                    <span class="field-text__bar"></span>
+                                    <label for="price-max" class="field-text__label">От</label>
+                                  </div>
+                                </div>
+                                <div class="grid__c grid__c--m-1-2">
+                                  <div class="field-text" data-filter-price-max>
+                                    <input type="text" name="price_max" id="price-min" class="field-text__input"
+                                    {if $wa->get('price_max')}value="{(int)$wa->get('price_max')}"{/if} placeholder="{ceil($filter.max)} руб" required>
+                                    <span class="field-text__bar"></span>
+                                    <label for="price-min" class="field-text__label">До</label>
+                                  </div>
+                                </div>
+                                <div class="grid__c">
+                                  <!1--
+                                        <div class="field-range js-field-range">
+                                          <div class="field-range__inner">
+                                            <div class="field-range__tracker"></div>
+                                            <div class="field-range__tracker-between js-field-range-tracker-between"></div>
+                                            <input type="range" max="86500" value="0" name="field-range-lower">
+                                            <input type="range" max="86500" value="86500" name="field-range-upper">
+                                          </div>
+                                        </div>
+                                        --1>
+                                  <div id="field-range" class="field-range">
+                                    <div class="field-range__inner">
+                                      <div class="field-range__tracker" data-tracker></div>
+                                      <div class="field-range__tracker-between" data-tracker-between></div>
+                                      <input type="range" min="1000" max="{floor($filter.max)}" value="1000" name="field-range-lower"
+                                        data-lower>
+                                      <input type="range" min="1000" max="{floor($filter.max)}" value="{floor($filter.max)}" name="field-range-upper"
+                                        data-upper>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form__row">
+                          <a href="#" class="btn filter__apply js-filter-apply">Применить</a>
+                          <a href="#" class="filter__reset js-filter-reset">Очистить</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {elseif $filter['code'] == 'colors'}
+                <div id="{$fid}" class="filters__item filters__item--second">
+                  <div class="filter filter--second">
+                    <div class="filter__head js-filter-btn">
+                      <div class="filter__title">Выбор цвета</div>
+                      <div class="filter__sub-title">{$filter.name|escape}</div>
+                      <div class="filter__icon">
+                        <svg class="svg-icon">
+                          <use xlink:href="#i-chevron"></use>
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="filter__body" style="display: none;">
+                      <div class="form__block form__block--w-660">
+                        <div class="form__row">
+                          <div class="grid grid--mr-0">
+                            {foreach $filter.values as $color}
+                            <div class="grid__c grid__c--s-1-2 grid__c--pd-0">
+                              <div class="filter-checkbox" data-filter-color>
+                                <input type="checkbox" name="{$filter['code']}[]"  id="colors-{$color.id}" class="filter-checkbox__input"
+                                {if $wa->get($filter.code, array()) && in_array($color.id, explode(',', $wa->get($filter.code, array())))}checked{/if} value="{$color.id}">
+                                <label for="colors-{$color.id}" class="filter-checkbox__label">
+                                  <span class="filter-checkbox__icon">
+                                    <span class="filter-checkbox__icon-inner"></span>
+                                  </span>
+                                  <span class="filter-checkbox__caption">{$color.value}</span>
+                                </label>
+                              </div>
+                            </div>
+                            {/foreach}
+                          </div>
+                        </div>
+                        <div class="form__row">
+                          <a href="#" class="btn filter__apply js-filter-apply">Применить</a>
+                          <a href="#" class="filter__reset js-filter-reset">Очистить</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {elseif $filter.code == 'packages'}
+                <div id="{$fid}" class="filters__item filters__item--fourth">
+                  <div class="filter filter--fourth">
+                    <div class="filter__head js-filter-btn">
+                      <div class="filter__title">Голандская роза</div>
+                      <div class="filter__sub-title">{$filter.name|escape}</div>
+                      <div class="filter__icon">
+                        <svg class="svg-icon">
+                          <use xlink:href="#i-chevron"></use>
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="filter__body" style="display: none;">
+                      <div class="form__block form__block--w-660">
+                        <div class="grid grid--mr-0">
+                          {foreach $filter.values as $v_id => $value}
+                          <div class="grid__c grid__c--s-1-2 grid__c--pd-0">
+                            <div class="filter-checkbox" data-filter-box>
+                              <input type="checkbox" name="{$filter.code}[]"  id="{$filter.code}-{$v_id}"
+                                class="filter-checkbox__input" {if $wa->get($filter.code, array()) && in_array($v_id, explode(',', $wa->get($filter.code, array())))}checked{/if} value="{$v_id}">
+                              <label for="{$filter.code}-{$v_id}" class="filter-checkbox__label">
+                                <span class="filter-checkbox__icon">
+                                  <span class="filter-checkbox__icon-inner"></span>
+                                </span>
+                                <span class="filter-checkbox__caption">{$value}</span>
+                              </label>
+                            </div>
+                          </div>
+                          {/foreach}
+                        </div>
+                      </div>
+                      <div class="form__row">
+                        <a href="#" class="btn filter__apply js-filter-apply">Применить</a>
+                        <a href="#" class="filter__reset js-filter-reset">Очистить</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/if}
+                {/foreach}
+                {/if}
+              </div>
+            </div>
+          </div> -->
+          {if count($products) > 0}
+          {include file='products/product-cards.html' sorting=!empty($category.params.enable_sorting)}
+          {else}
+          <div class="page__msg">К сожалению, нет товаров, удовлетворяющих выбранным условиям.
+          Попробуйте изменить критерии поиска.</div>
+          {/if}
+        </div>
+      </div>
+      {if isset($pages_count) && $pages_count > 1}
+      <div class="page__pagination">
+        {wa_custom_pagination total=$pages_count attrs=['class' => "pagination"]}
+      </div>
+      {/if}
+      
+    </div>
+  </div>
+</div>

@@ -1,0 +1,145 @@
+  <div class="container">
+    <div class="page__breadcrumbs">
+      <div class="breadcrumbs">
+        <div class="breadcrumbs__item">
+          <a href="/" class="breadcrumbs__link breadcrumbs__link--home">Главная</a>
+        </div>
+        <div class="breadcrumbs__separator">
+          <div class="breadcrumbs__icon">
+          </div>
+        </div>
+        <div class="breadcrumbs__item is-active">
+          <a href="/my/" class="breadcrumbs__link">Личный кабинет</a>
+        </div>
+        <div class="breadcrumbs__separator">
+          <div class="breadcrumbs__icon">
+          </div>
+        </div>
+        <div class="breadcrumbs__item is-active">
+          <span class="breadcrumbs__current">Изменение личных данных</span>
+        </div>
+      </div>
+    </div>
+    <div class="page__head">
+      <h1 class="page__title">
+        Изменение личных данных
+      </h1>
+    </div>
+
+    {if $saved}
+    <div class="page__message">
+      <span>[s`Contact information successfully updated!`]</span>
+    </div>
+    {/if}
+    {if isset($smarty.get.emailconfirmed) && $smarty.get.emailconfirmed == 1}
+    <div class="page__message">
+      <span>[s`Contact information successfully updated!`]</span>
+    </div>
+    {/if}
+  </div>
+  <div class="container container--mpd0">
+    <div class="page__cabinet cabinet">
+
+      <form class="cabinet-grid cabinet-grid--pd" enctype="multipart/form-data" method="post" id="wa-my-info-edit-wrapper">
+        <div class="cabinet-grid__c cabinet-grid__c--sm-1-2 cabinet-grid__c--name">
+          <div class="c-field-text">
+            <label for="" class="c-field-text__label">Имя <i>*</i></label>
+            <div class="c-field-text__input">
+              <input type="text" name="profile[firstname]" class="c-field-text__input-control" placeholder="Введите Ваше имя" value="{$user_info['firstname']['value']}">
+            </div>
+          </div>
+        </div>
+        {$wa->csrf()}
+        {$address = $wa->user('address','')}
+        {$address = $address[0]}
+        {if false}
+        <input type="hidden" name="profile[address][country]" value="rus">
+        <div class="cabinet-grid__c cabinet-grid__c--sm-1-2 cabinet-grid__c--region">
+          <div class="d-field-select">
+            <label for="" class="d-field-select__label">Область / Регион</label>
+            <div class="d-field-select__input">
+              <select name="profile[address][region]" class="d-field-select__control">
+                <option value="">Выберите регион</option>
+                {foreach $regions as $region}
+                <option {if $region.code eq $address['data']['region']}selected{/if} value="{$region.code}">{$region.name}</option>
+                {/foreach}
+              </select>
+            </div>
+          </div>
+        </div>
+        {/if}
+        <div class="cabinet-grid__c cabinet-grid__c--sm-1-2 cabinet-grid__c--city">
+          <div class="c-field-text">
+            <label for="" class="c-field-text__label">Город</label>
+            <div class="c-field-text__input js-cdek-city-wrap">
+              <input type="text" name="profile[address][city]" class="c-field-text__input-control c-field-text__input-control--dropdown js-cdek-city" placeholder="Укажите город" value="{$address['data']['city']}">
+              <input type="hidden" name="profile[address][lat]" value="{$address['data']['lat']}">
+            </div>
+          </div>
+        </div>
+        <div class="cabinet-grid__c cabinet-grid__c--sm-1-2 cabinet-grid__c--secondname">
+          <div class="c-field-text">
+            <label for="" class="c-field-text__label">Фамилия <i>*</i></label>
+            <div class="c-field-text__input">
+              <input type="text" name="profile[lastname]" class="c-field-text__input-control" placeholder="Укажите вашу фамилию" value="{$user_info['lastname']['value']}">
+            </div>
+          </div>
+        </div>
+        <div class="cabinet-grid__c cabinet-grid__c--sm-1-2 cabinet-grid__c--phone">
+          <div class="c-field-text">
+            <label for="" class="c-field-text__label">Телефон <i>*</i></label>
+            <div class="c-field-text__input">
+              <input type="text" name="profile[phone]" class="c-field-text__input-control" placeholder="+7 (___) ___-__-__" value="{$user_info['phone']['value']}">
+            </div>
+          </div>
+        </div>
+        <div class="cabinet-grid__c cabinet-grid__c--sm-1-2 cabinet-grid__c--adress">
+          <div class="c-field-text">
+            <label for="" class="c-field-text__label">Улица, дом, квартира</label>
+            <div class="c-field-text__input">
+              <input type="text" name="profile[address][street]" class="c-field-text__input-control" placeholder="Укажите улицу, номер дома, квартиру" value="{$address['data']['street']}">
+            </div>
+          </div>
+        </div>
+        <div class="cabinet-grid__c cabinet-grid__c--sm-1-2 cabinet-grid__c--email">
+          <div class="c-field-text">
+            <label for="" class="c-field-text__label">E-mail <i>*</i></label>
+            <div class="c-field-text__input">
+              <input type="text" name="profile[email]" class="c-field-text__input-control" placeholder="Введите ваш e-mail" value="{$wa->user(email,'default')}">
+            </div>
+          </div>
+        </div>
+        <div class="cabinet-grid__c cabinet-grid__c--sm-1-2 cabinet-grid__c--pass">
+          <div class="cabinet-grid">
+            <div class="cabinet-grid__c cabinet-grid__c--sm-1-2 cabinet-grid__c--fpass">
+             <div class="c-field-text">
+              <label for="" class="c-field-text__label">Введите новый пароль</label>
+              <div class="c-field-text__input">
+                <input type="password" name="profile[password]" class="c-field-text__input-control" placeholder="*******">
+              </div>
+            </div>
+          </div>
+          <div class="cabinet-grid__c cabinet-grid__c--sm-1-2 cabinet-grid__c--cpass">
+            <div class="c-field-text">
+              <label for="" class="c-field-text__label">Повторите пароль</label>
+              <div class="c-field-text__input">
+                <input type="text" name="profile[password_confirm]" class="c-field-text__input-control" placeholder="*******" value="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cabinet-grid__c cabinet-grid__c--sm-1-2 cabinet-grid__c--submit">
+        <button class="btn btn--bold cabinet-form__button" type="submit">Сохранить</button>
+          <a href="/my/" class="round-btn-text">
+            <div class="round-btn-text__circle round-btn-text__circle--40">
+              <div class="round-btn-text__icon round-btn-text__icon--cross-40"></div>
+            </div>
+            <span class="round-btn-text__label">Отмена</span>
+          </a>
+      </div>
+    </form>
+  {$wa->globals('isMyAccount', true)}
+
+</div>
+</div>

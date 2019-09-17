@@ -1,0 +1,83 @@
+<div class="catalog__content js-catalog">
+  <div class="products">
+    {$isMobile = $wa->isMobile()}
+    {$bigCount = 0}
+    {if $products}
+    <div class="products__grid js-product-list {if count($products) >= 15}big-mansory{/if}">
+      {$bigCount = 1}
+      {$smallCount = 2}
+      {foreach $products as $product}
+      {$prod = $wa->shop->product($product.id)}
+      <div class="products__item js-item" data-id="{$product.id}" style='order: {if $prod->features["bolshaya_kartochka"]}{if $bigCount == 1}1{elseif $bigCount == 2}11{/if}{else}{if $smallCount >= 12}{$smallCount+1}{else}{$smallCount}{/if}{/if};'>
+        <div class="product-card {if $prod->features['bolshaya_kartochka']}is-big{/if}">
+          {if $prod->features["bolshaya_kartochka"]}
+          {$bigCount = $bigCount+1}
+          {else}
+          {$smallCount = $smallCount+1}
+          {/if}
+          <div class="product-card__headline">
+            {if $prod->features["skidka"]}
+            <span class="product-card__headline-label">-{$prod->features["skidka"]}% {if ($prod->features["bolshaya_kartochka"] && $productTotal >= 15 && $isMobile == false) || ($prod->features["bolshaya_kartochka"] && $productTotal >= 15 && $isMobile == false)}скидки{/if}</span>
+            {else}
+            <div></div>
+            {/if}
+            {if $wa->user()->isAuth()}
+              {if $wishArray = $wa->user()->get('wishlist', true, false)}
+                {if in_array($product.id, explode(',', $wishArray))}
+                  {$itemInWish = true}
+                {else}
+                  {$itemInWish = false}
+                {/if}
+              {/if}
+            {else}
+              {if $wishArray = $wa->storage('wishlist')}
+                {if in_array($product.id, explode(',', $wishArray))}
+                  {$itemInWish = true}
+                {else}
+                  {$itemInWish = false}
+                {/if}
+              {/if}
+            {/if}
+            <div class="product-card__headline-icon js-item-wish {if $itemInWish}is-active{/if}">
+              <svg class="svg-icon">
+                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-fav-f"></use>
+              </svg>
+            </div>
+          </div>
+          <a href="{$product.frontend_url}" title="{$product.name}" class="product-card__pic">
+            <div class="product-card__pic-lay" style="background-image: url({if $prod->features['bolshaya_kartochka']}{$wa->shop->productImgUrl($product, '500x0')}{else}{$wa->shop->productImgUrl($product, '300x0')}{/if});"></div>
+          </a>
+          <div class="products-card__content">
+            <a href="{$product.frontend_url}" title="{$product.name}" class="product-card__title">{$product.name}</a>
+            <div class="product-card__info">
+              <div class="product-card__price-wrap">
+                <div class="product-card__price {if $product.compare_price > 0}product-card__price--red{/if}">
+                  <span>{shop_currency($product.price, null, null, 0)}</span> ₽
+                </div>
+                {if $product.compare_price > 0}
+                <div class="product-card__oldprice">
+                  <span>{shop_currency($product.compare_price, null, null, 0)}</span> ₽
+                </div>
+                {/if}
+              </div>
+              <a href="{$product.frontend_url}" title="{$product.name}" data-type="card" class="product-card__btn">
+                <svg class="svg-icon">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-bag"></use>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {$productCount = $productCount + 1}
+      {/foreach}
+    </div>
+    {else}
+    {if !empty($filters)}
+    <div class="page__msg">Не найдено товаров по заданным условиям фильтрации. Попробуйте <a class="link" href="{$wa->currentUrl(0,1)}">очистить фильтр</a></div>
+    {else}
+    <h2 class="page__msg">В этой категории нет товаров</h2>
+    {/if}
+    {/if}
+  </div>
+</div>

@@ -1,0 +1,99 @@
+<div class="container">
+
+
+  <div class="page__head">
+    <h1 class="page__title">
+      Личный кабинет
+    </h1>
+  </div>
+
+  {if !empty($payment_success)}
+  <div class="page__message">
+    <span>[`Your payment has been successfully accepted. We will process your order and contact you shortly.`]</span>
+  </div>
+  {/if}
+
+  {if $saved}
+  <div class="page__message">
+    <span>[s`Contact information successfully updated!`]</span>
+  </div>
+  {/if}
+  {if isset($smarty.get.emailconfirmed) && $smarty.get.emailconfirmed == 1}
+  <div class="page__message">
+    <span>[s`Contact information successfully updated!`]</span>
+  </div>
+  {/if}
+
+</div>
+<div class="container container--mpd0">
+
+  <div class="page__cabinet cabinet">
+    <div class="cabinet__half cabinet__half--bg">
+      <h2 class="cabinet__title">
+        Личные данные
+      </h2>
+      <div class="cabinet__list">
+        {$address = $wa->user('address','')}
+        {$address = $address[0]['data']}
+        {foreach $user_info as $id => $info}
+        {if $id != 'address'}
+        <div class="cabinet__item">
+          <div class="cabinet__label">{$info.name}</div>
+          <div class="cabinet__value">{if $info.value}{$info.value}{else}<span>не указано</span>{/if}</div>
+        </div>
+        {else}
+        <div class="cabinet__item">
+          <div class="cabinet__label">{$info.name}</div>
+          <div class="cabinet__value">{if $address}{$address['street']}, {$address['city']}{else}<span>не
+              указано</span>{/if}</div>
+        </div>
+        {/if}
+        {/foreach}
+      </div>
+      <a href="/personal/edit/" class="btn" id="wa-my-info-edit">[s`Edit`]</a>
+    </div>
+    <div class="cabinet__half">
+      <h2 class="cabinet__title">
+        Заказы
+      </h2>
+      <div class="cabinet__orders">
+        <div class="orders">
+          {foreach $orders as $o}
+
+          <a href="{$o.url}" id="order-{$o.id}" class="orders__item">
+            <div class="orders__row order">
+              <div class="orders__title">
+                <div class="orders__number">{$o.id_str}</div>
+                <div class="orders__date"> от {$o.create_datetime|wa_date}</div>
+              </div>
+              <div class="orders__price">{$o.total_formatted} руб</div>
+            </div>
+            <div class="orders__info">
+              <div class="orders__info-item">
+                <div class="orders__label">Статус:</div>
+                <div class="orders__status">{$o.state->getName()}</div>
+              </div>
+              {if $o.shipping_name}
+              <div class="orders__info-item">
+                <div class="orders__label">Способ доставки:</div>
+                <div class="orders__value">{$o.shipping_name|escape}</div>
+              </div>
+              {/if}
+            </div>
+          </a>
+          {foreachelse}
+          [`You have no order history yet.`]
+          {/foreach}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- plugin hook: 'frontend_my_nav' -->
+{* @event frontend_my_nav.%plugin_id% *}
+{foreach $frontend_my_nav as $_plugin => $_}
+<div class="shop {if waRequest::param('plugin') == str_replace('-plugin', '', $_plugin)}selected{/if}">{$_}</div>
+{/foreach}
+
+{$wa->globals('isMyAccount', true)}

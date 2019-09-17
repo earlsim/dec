@@ -1,0 +1,134 @@
+{$query = $smarty.get.query}
+<div class="page__head show-l">
+  <div class="container">
+    <div class="page__head-row">
+      <div class="page__head-col">
+        <div class="page__title">Результаты поиска</div>
+        {if count($products) > 1}
+        <div class="page__count">
+          <div class="page__count-num">{count($products)}</div>
+          <div class="page__count-label">{_w('Товар', 'Товаров', 'Товара', count($products))} {_w('найден', 'найдено', count($products))} по запросу «{$query}»</div>
+        </div>
+        {/if}
+      </div>
+      {if count($products) > 1}
+      {$sorting = !empty($category.params.enable_sorting)}
+      <div class="page__head-col">
+        <div class="page__head-action">
+          <div class="sorting">
+            <div class="sorting__wrap">
+              <div class="sorting__label">
+                Сортировать:
+              </div>
+              <div class="sorting__select js-select">
+                <label for="sortby" class="sorting__icon js-select-btn">
+                  <svg class="svg-icon">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-chevron"></use>
+                  </svg>
+                </label>
+                {$active_sort = $smarty.get.sort}
+                {$active_order = $smarty.get.order}
+                <select name="sortby" id="sortby" class="sorting__select-control js-select-control-url">
+                  <option {if !$active_sort} selected{/if} value="{$wa->currentUrl(0, 1)}?{http_build_query($smarty.get)}">По популярности</option>
+                  <option {if $active_sort eq 'name'}selected{/if} value="?{http_build_query(array_merge($smarty.get, ['sort' => 'name', 'order' => 'asc']))}">По названию</option>
+                  <option {if $active_sort eq 'price' and $active_order eq 'asc'}selected{/if} value="?{http_build_query(array_merge($smarty.get, ['sort' => 'price', 'order' => 'asc']))}">По возрастанию цены</option>
+                  <option {if $active_sort eq 'price' and $active_order eq 'desc'}selected{/if} value="?{http_build_query(array_merge($smarty.get, ['sort' => 'price', 'order' => 'desc']))}">По убыванию цены</option>
+                  <option {if $active_sort eq 'create_datetime'}selected{/if} value="?{http_build_query(array_merge($smarty.get, ['sort' => 'create_datetime', 'order' => 'desc']))}">По новинкам</option>
+                  <option {if $active_sort eq 'stock'}selected{/if} value="?{http_build_query(array_merge($smarty.get, ['sort' => 'stock', 'order' => 'desc']))}">В наличии</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/if}
+    </div>
+  </div>
+</div>
+
+{* @event frontend_search.%plugin_id% *}
+{foreach $frontend_search as $_}{$_}{/foreach}
+<div data-type="search-results" class="page__content js-page-content">
+  <div class="search-results">
+    <div class="container container--xxs-nopd" data-notinuse="container--m-nopd">
+      <div class="search-results__inner">
+        {if !$products}
+        {if !empty($filters)}
+        <h2 class="page__msg">Не найдено товаров по заданным условиям</h2>
+        {else}
+        <h2 class="page__msg">По запросу &laquo;{$smarty.get.query}&raquo; ничего не найдено</h2>
+        {/if}
+        {else}
+
+        {if !empty($theme_settings.list_features)}
+        {$features = $wa->shop->features($products)}
+        {/if}
+        <div class="search-results__grid js-product-list">
+          {foreach $products as $product}
+          {$prod = $wa->shop->product($product.id)}
+          <div class="search-results__grid-item js-item" data-id="{$product.id}">
+            <div class="product-card">
+              <div class="product-card__headline">
+                {if $prod->features["skidka"]}
+                <span class="product-card__headline-label">-{$prod->features["skidka"]}% {if ($prod->features["bolshaya_kartochka"] && $productTotal >= 15 && $isMobile == false) || ($prod->features["bolshaya_kartochka"] && $productTotal >= 15 && $isMobile == false)}скидки{/if}</span>
+                {else}
+                <div></div>
+                {/if}
+                {if $wa->user()->isAuth()}
+                  {if $wishArray = $wa->user()->get('wishlist', true, false)}
+                    {if in_array($product.id, explode(',', $wishArray))}
+                      {$itemInWish = true}
+                    {else}
+                      {$itemInWish = false}
+                    {/if}
+                  {/if}
+                {else}
+                  {if $wishArray = $wa->storage('wishlist')}
+                    {if in_array($product.id, explode(',', $wishArray))}
+                      {$itemInWish = true}
+                    {else}
+                      {$itemInWish = false}
+                    {/if}
+                  {/if}
+                {/if}
+                <div class="product-card__headline-icon js-item-wish {if $itemInWish}is-active{/if}">
+                  <svg class="svg-icon">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-fav-f"></use>
+                  </svg>
+                </div>
+              </div>
+              <a href="{$product.frontend_url}" title="{$product.name}" class="product-card__pic">
+                <div class="product-card__pic-lay" style="background-image: url({if $prod->features['bolshaya_kartochka']}{$wa->shop->productImgUrl($product, '500x0')}{else}{$wa->shop->productImgUrl($product, '300x0')}{/if});"></div>
+              </a>
+              <div class="products-card__content">
+                <a href="{$product.frontend_url}" title="{$product.name}" class="product-card__title">{$product.name}</a>
+                <div class="product-card__info">
+                  <div class="product-card__price-wrap">
+                    <div class="product-card__price {if $product.compare_price > 0}product-card__price--red{/if}">
+                      <span>{shop_currency($product.price, null, null, 0)}</span> ₽
+                    </div>
+                    {if $product.compare_price > 0}
+                    <div class="product-card__oldprice">
+                      <span>{shop_currency($product.compare_price, null, null, 0)}</span> ₽
+                    </div>
+                    {/if}
+                  </div>
+                  <a href="{$product.frontend_url}" title="{$product.name}" data-type="card" class="product-card__btn">
+                    <svg class="svg-icon">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-bag"></use>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/foreach}
+        </div>
+        {/if}
+      </div>
+      <div class="page__bottom">
+        {include file="`$wa_active_theme_path`/chunks/pagination.html" products_count=$products_count inline per_page=$per_page total=$pages_count attrs=['class' => "pagination"]}
+      </div>
+    </div>
+  </div>
+</div>

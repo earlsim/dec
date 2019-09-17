@@ -1,0 +1,182 @@
+// System
+@import './system/_fonts.scss';
+@import './system/_vars.scss';
+@import './system/_mixins.scss';
+@import './system/_start.scss';
+
+// Base
+@import './base.scss';
+@import './container.scss';
+@import './grid.scss';
+
+@import '../../node_modules/swiper/dist/css/swiper.css';
+@import '../../node_modules/flatpickr/dist/flatpickr.min.css';
+
+// Modules
+// @import './swiper.scss';
+
+// Blocks
+@import './blocks/advantage.scss';
+@import './blocks/block.scss';
+@import './blocks/btn.scss';
+@import './blocks/catalog.scss';
+@import './blocks/catalog-bouquets.scss';
+@import './blocks/checkout.scss';
+@import './blocks/checkout-product.scss';
+@import './blocks/checkout-step.scss';
+@import './blocks/checkout-step-finish.scss';
+// @import './blocks/checkout-step-message.scss';
+@import './blocks/delivery-method.scss';
+@import './blocks/error.scss';
+@import './blocks/field-checkbox.scss';
+@import './blocks/field-radio.scss';
+@import './blocks/field-range.scss';
+@import './blocks/field-select.scss';
+@import './blocks/field-text.scss';
+@import './blocks/filter.scss';
+@import './blocks/filter-checkbox.scss';
+@import './blocks/filters.scss';
+@import './blocks/flower-card.scss';
+@import './blocks/flowers-list.scss';
+@import './blocks/footer.scss';
+@import './blocks/footer-bottom.scss';
+@import './blocks/footer-nav.scss';
+@import './blocks/footer-top.scss';
+@import './blocks/form.scss';
+@import './blocks/head-slide.scss';
+@import './blocks/head-slide-flower.scss';
+@import './blocks/head-slider.scss';
+@import './blocks/head-social.scss';
+@import './blocks/header.scss';
+@import './blocks/header-cart.scss';
+@import './blocks/header-cart-container.scss';
+@import './blocks/header-cart-product.scss';
+@import './blocks/header-flowers.scss';
+@import './blocks/header-flowers-container.scss';
+@import './blocks/header-menu.scss';
+@import './blocks/inst-slide.scss';
+@import './blocks/menu-btn.scss';
+// @import './blocks/modal.scss';
+@import './blocks/page.scss';
+@import './blocks/pagination.scss';
+@import './blocks/product.scss';
+@import './blocks/product-card.scss';
+@import './blocks/product-card-toggle.scss';
+@import './blocks/qnt-toggle.scss';
+@import './blocks/quick-order.scss';
+@import './blocks/s-modal.scss';
+@import './blocks/shopping-cart.scss';
+@import './blocks/shopping-cart-product.scss';
+@import './blocks/social.scss';
+@import './blocks/step.scss';
+@import './blocks/tooltip.scss';
+@import './blocks/wedding-application.scss';
+@import './blocks/wedding-head.scss';
+@import './blocks/wedding-order.scss';
+@import './blocks/wedding-pack.scss';
+@import './blocks/wedding-service.scss';
+
+/*
+.inst-slide {
+  // background-color: $c-block;
+}
+
+.head-slide {
+  width: 100%;
+  min-height: 100vh;
+  background-color: $c-main;
+}
+*/
+[data-user] {
+  // max-height: 1000px;
+  // overflow: hidden;
+  // transition: max-height .6s ease-out, margin .6s ease-out, padding .6s ease-out;
+
+  &.b-hidden {
+    // max-height: 0;
+    // margin: 0;
+    // padding: 0;
+    // transition: max-height .6s ease-in, margin .6s ease-in, padding .6s ease-in;
+    display: none;
+  }
+}
+
+[data-tab-bouquets] {
+  display: none;
+
+  &.is-active {
+    display: block;
+  }
+}
+
+.s-message {
+  font-size: 16px;
+  line-height: 1.25em;
+}
+
+.pre-loader {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: $c-main;
+  color: #FFF;
+  user-select: none;
+  user-focus: none;
+  user-input: none;
+  transition: all 1.5s ease-in;
+
+  &.is-hidden {
+    opacity: 0;
+  }
+}
+
+.pre-loader__inner {
+  width: 280px;
+  height: 290px;
+  transition: all .4s;
+
+  @media ($m-s) {
+    width: 380px;
+    height: 400px;
+  }
+
+  @media ($m-l) {
+    width: 720px;
+    height: 700px;
+  }
+}
+
+#svg-pre-loader path {
+  fill: none;
+  stroke-width: 3;
+  stroke: #FFF;
+}
+
+/*
+.tr {
+  transform: translateX(400px);
+}
+*/
+
+.animate {
+  animation: rotating 1s infinite;
+}
+
+@keyframes rotating {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+   transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+

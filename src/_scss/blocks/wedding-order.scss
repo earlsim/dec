@@ -1,0 +1,48 @@
+.wedding-order {
+  padding: 36px 0;
+  background-color: $c-main;
+  color: #F3F4F5;
+
+  @media ($m-s) {
+    padding: 72px 0;
+  }
+
+  @media (min-width: 1200px) {
+    background-image: url('../img/wedding/flower.png');
+    background-repeat: no-repeat;
+    background-position: 0 50%;
+  }
+}
+
+.wedding-order__title {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.23em;
+  text-align: center;
+
+  @media ($m-s) {
+    font-size: 48px;
+  }
+}
+
+.wedding-order__caption {
+  margin-top: 16px;
+  font-size: 18px;
+  line-height: 1.85em;
+  text-align: center;
+
+  @media ($m-s) {
+    margin-top: 24px;
+    font-size: 20px;
+  }
+}
+
+.wedding-order__form {
+  width: 680px;
+  max-width: 100%;
+  margin: 24px auto 0 auto;
+
+  @media ($m-s) {
+    margin: 48px auto 0 auto;
+  }
+}

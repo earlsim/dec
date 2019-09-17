@@ -1,0 +1,141 @@
+.cabinet {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 48px 0 0 0;
+
+  @media ($m-m) {
+    margin: 48px 0 0 0;
+  }
+}
+.cabinet__block {
+  width: 100%;
+
+  @media ($m-m) {
+    padding: 0 24px;
+    max-width: 672px;
+    width: 50%;
+  }
+}
+.cabinet__block__btn {
+  margin-bottom: 24px;
+  padding: 0 24px;
+
+  @media ($m-m) {
+    margin-bottom: 0;
+  }
+}
+.cabinet__block__inner {
+  padding: 48px 0 48px 0;
+  background-color: $c-white;
+
+}
+.cabinet__block__header {
+  padding: 17px 24px 13px 0;
+  box-shadow: 0 0 24px rgba(72, 22, 93, 0.15);
+}
+.cabinet__block__header__title {
+  display: flex;
+  align-items: baseline;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: normal;
+  vertical-align: baseline;
+
+  &:before {
+    content: attr(data-id);
+    margin-left: 24px;
+    margin-right: 32px;
+    font-family: "Bebas Neue", Arial, sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: normal;
+    color: $c-black;
+  }
+}
+.cabinet__block__body {
+  background-color: $c-white;
+}
+.cabinet__block__body__row{
+  margin: 0 24px;
+  margin-bottom: 26px;
+  border-bottom: 2px solid $c-block;
+
+  &:first-child {
+
+  }
+  &__label {
+  text-transform: uppercase;
+  font-size: 12px;
+  line-height: 22px;
+    color: $c-text-secondary;
+  }
+  &__value {
+    margin: 5px 0 18px 0;
+    font-size: 18px;
+    line-height: 1.833em;
+  }
+}
+.orders__item {
+  display: block;
+  border-bottom: 2px solid #F3F4F5;
+  padding-bottom: 24px;
+  margin: 0px 24px 0 24px;
+
+  &:not(:first-child) {
+    margin-top: 16px;
+  }
+}
+.orders__number {
+  display: inline-block;
+
+
+}
+.orders__title {
+  margin-bottom: 8px;
+  font-size: 20px;
+  line-height: 24px;
+  color: $c-text-primary;
+}
+.orders__date {
+  display: inline-block;
+}
+.orders__info {
+  font-size: 16px;
+  line-height: 1.250em;
+}
+.orders__info-item {
+  display: inline-block;
+  padding-right: 16px;
+}
+.orders__label {
+  display: inline-block;
+  color: $c-text-secondary;
+}
+.orders__value {
+  display: inline-block;
+}
+.orders__price {
+  margin-top: 12px;
+  font-family: $f-secondary;
+  font-size: 18px;
+  line-height: 1em;
+  color: $c-text-secondary;
+}
+.cabinet__edit-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  @media ($m-xs) {
+    flex-direction: row;
+  }
+
+}
+.cabinet__bottom {
+  margin-left: 24px;
+
+  @media ($m-m) {
+    margin: 40px auto 0;
+  }
+}

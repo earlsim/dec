@@ -1,0 +1,47 @@
+.payment__inner {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #FFFFFF;
+}
+
+.payment__steps {
+    width: 1080px;
+    // background-color: #fff;
+    // border: 1px solid #F5F5F5;
+}
+
+.payment__steps-form {
+    max-height: 0;
+    transition: max-height 1s cubic-bezier(0, 1, 0, 1);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+      
+    .is-active & {
+      max-height: 1200px;
+      transition: max-height 1s ease-in-out;
+    }
+}
+
+.payment__steps-item {
+
+    min-height: 72px;
+    background: #FFFFFF;
+    border: 1px solid #F5F5F5;
+    overflow: hidden;
+  }
+
+.payment__steps-check-item {
+
+    &:not(:last-child) {
+        margin-bottom: 10px;
+    }
+}
+
+
+.payment__sidebar {
+    width: 360px;
+    height: 710px;
+    background-color: #fff;
+    border: 1px solid #F5F5F5;
+}

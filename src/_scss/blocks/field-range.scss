@@ -1,0 +1,149 @@
+$input-range-thumb-height: 24px;
+$input-range-tracker-height: 2px;
+$input-range-lower-thumb-color: $c-main;
+$input-range-upper-thumb-color: $c-main;
+
+.field-range {
+  position: relative;
+  padding: 20px 0;
+}
+
+.field-range__inner {
+  position: relative;
+  height: $input-range-thumb-height;
+}
+
+.field-range__tracker {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: $input-range-tracker-height;
+  margin-top: -$input-range-tracker-height / 2;
+  border-radius: 10px;
+  background: LightGray;
+  pointer-events: none;
+}
+
+.field-range__tracker-between {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: $input-range-tracker-height;
+  margin-top: -$input-range-tracker-height / 2;
+  border-radius: 10px;
+  background: $c-main;
+  pointer-events: none;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  position: absolute;
+  display: block;
+  width: 100%;
+  background: transparent;
+
+  &.display-upper {
+    z-index: 1;
+  }
+}
+
+// Webkit
+input[type="range"]:not(*:root) {
+  pointer-events: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  background: transparent;
+}
+
+input[type="range"] {
+  &::-webkit-slider-thumb,
+  &::-webkit-media-slider-thumb {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border: 0;
+    border-radius: 50%;
+    pointer-events: auto;
+  }
+}
+
+input[name="field-range-lower"] {
+  &::-webkit-slider-thumb,
+  &::-webkit-media-slider-thumb {
+    background: $input-range-lower-thumb-color;
+  }
+}
+
+input[name="field-range-upper"] {
+  &::-webkit-slider-thumb,
+  &::-webkit-media-slider-thumb {
+    background: $input-range-upper-thumb-color;
+  }
+}
+
+// Firefox
+input[type="range"]::-moz-range-track {
+  background: transparent;
+}
+
+input[type="range"]::-moz-range-thumb {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 50%;
+  pointer-events: auto;
+}
+
+input[name="field-range-lower"]::-moz-range-thumb {
+  background: $input-range-lower-thumb-color;
+}
+
+input[name="field-range-upper"]::-moz-range-thumb {
+  background: $input-range-upper-thumb-color;
+}
+
+// Edge
+input[type="range"]::-ms-track {
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+  z-index: 1;
+}
+
+input[type="range"]::-ms-thumb {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 50%;
+}
+
+input[name="field-range-lower"]::-ms-thumb {
+  background: $input-range-lower-thumb-color;
+}
+
+input[name="field-range-upper"]::-ms-thumb {
+  background: $input-range-upper-thumb-color;
+}
+
+

@@ -1,0 +1,116 @@
+{$upselling|@var_dump}
+<div class="block block--nopd">
+  <div class="container container--pd0">
+    <div class="block__head block__head--slider">
+      <h2 class="block__subtitle">Сопутствующие товары</h2>
+    </div>
+    <div class="slider">
+      <div class="slider__inner slider__inner--product">
+        <div id="product-slider" class="slider__container slider__container--product swiper-container">
+          <div class="swiper-wrapper">
+            {foreach $upselling as $item}
+            {$available = $wa->shop->settings('ignore_stock_count') || $item.count === null || $item.count > 0}
+            <div class="swiper-slide">
+              <div class="product-card js-item" data-id="{$item.id}">
+                <div class="product-card__inner">
+                  {if $wa->shop->product($item.id)->features["novinka"]["value"] == 1}
+                  <div class="product-card__tag product-card__tag--new">Новинка</div>
+                  {/if}
+                  <div class="product-card__tag product-card__tag--unc">{$wa->shop->product($item.id)->features["sokhrannost_monety"]}</div>
+                  <div class="product-card__picture">
+                    <a href="{$item.frontend_url}" title="{$item.name}" class="product-card__picwrap">
+                      {$wa->shop->productImgHtml($item, '750x0', ['class' => 'product-card__img', 'itemprop' => 'image', 'alt' => $item.name, 'default' => "`$wa_theme_url`img/dummy200.png"])}
+                    </a>
+                    <div class="product-card__zoom js-product-img" data-src="{$wa->shop->productImgUrl($item, '')}">
+                      <svg class="svg-icon">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-zoom-in"></use>
+                      </svg>
+                    </div>
+                  </div>
+                  <a href="{$item.frontend_url}" title="{$item.name}" class="product-card__title">
+                    {$item.name}
+                  </a>
+                  <div class="product-card__cost">
+                    <div class="product-card__price">
+                      <div class="product-card__price-value">
+                        {shop_currency($item.price, null, null, 0)} руб
+                      </div>
+                      <div class="product-card__price-value--old">
+                        {if $item.compare_price > 0}{shop_currency_html($item.compare_price)}{/if}
+                      </div>
+                    </div>
+                    {if $wa->shop->product($item.id)->features["skidka"]}
+                    <div class="product-card__tag--discount">
+                      -{$wa->shop->product($item.id)->features["skidka"]}%
+                    </div>
+                    {/if}
+                  </div>
+                </div>
+                <div class="product-card__wrapper">
+                  {if $available}
+                  <div class="product-card__more">
+                    <button class="product-slider-btn js-item-tocart">В корзину</button>
+                    <div class="product-card__qty">
+                    <input type="hidden" class="js-item-qty-max" value="{if !$p.count}999{else}{$p.count}{/if}">
+                      {if !$p.count || $p.count > 1}
+                      <div class="qty js-item-qty">
+                        <div class="qty__btn circle-btn circle-btn--qty circle-btn--minus js-item-qty-dec"></div>
+                        <input type="text" name="quantity" value="1" class="qty__input qty__input--cart js-item-qty-input">
+                        <div class="qty__btn circle-btn circle-btn--qty circle-btn--plus js-item-qty-inc"></div>
+                      </div>
+                      {/if}
+                    </div>
+                    {if $wa->user()->isAuth()}
+                    {if $wishArray = $wa->user()->get('wishlist', true, false)}
+                    {if in_array($item.id, explode(',', $wishArray))}
+                    {$itemInWish = true}
+                    {else}
+                    {$itemInWish = false}
+                    {/if}
+                    {/if}
+                    {else}
+                    {if $wishArray = $wa->storage('wishlist')}
+                    {if in_array($item.id, explode(',', $wishArray))}
+                    {$itemInWish = true}
+                    {else}
+                    {$itemInWish = false}
+                    {/if}
+                    {else}
+                    {$itemInWish = false}
+                    {/if}
+                    {/if}
+                    <div class="product-card__tofav product-card__tofav--slider js-item-wish {if $itemInWish}is-active{/if}"">
+                      <svg class="svg-icon">
+                        <use xm
+                        reloading settings Packages/User/Preferences.sublime-settingslns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-star-new"></use>
+                      </svg>
+                    </div>
+                  </div>
+                  {/if}
+                </div>
+              </div>
+            </div>
+            {/foreach}
+          </div>
+        </div>
+        <div class="slider__controls slider__controls--product">
+          <div class="container">
+            <div class="slider__controls-inner">
+              <div class="slider__arrows">
+                <div id="product-slider-prev" class="slider__arrow slider__arrow--prev">
+                  <div class="arrow-btn arrow-btn--left"></div>
+                </div>
+                <div id="product-slider-next" class="slider__arrow">
+                  <div class="arrow-btn arrow-btn--right"></div>
+                </div>
+              </div>
+              <div id="product-slider-pagination" class="slider__pagination"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

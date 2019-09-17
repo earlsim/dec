@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE theme PUBLIC "wa-app-theme" "http://www.webasyst.com/wa-content/xml/wa-app-theme.dtd">
+<theme id="default" system="0" vendor="aleskeroff" author="Aleskeroff | @hackaveli" app="shop" parent_theme_id="" version="1.0.0">
+  <name locale="en_US">Decorator - Shop</name>
+  <name locale="ru_RU">Decorator - Магазин</name>
+  <files>
+    <file path="index.html"></file>
+    <file path="main.html"></file>
+    <file path="category.html"></file>
+    <file path="assets/css/styles.css"></file>
+    <file path="assets/js/scripts.js"></file>
+    <file path="error.html"></file>
+    <file path="profile/my.nav.html"></file>
+    <file path="profile/login.html"></file>
+    <file path="profile/signup.html"></file>
+    <file path="profile/forgotpassword.html"></file>
+  </files>
+  <about locale="en_US">
+&lt;p&gt;&lt;b&gt;Decorator&lt;/b&gt; - site template.&lt;/p&gt;
+
+    </about>
+  <about locale="ru_RU">
+&lt;p&gt;&lt;b&gt;Decorator&lt;/b&gt; — основной шаблон сайта.&lt;/p&gt;
+
+    </about>
+</theme>

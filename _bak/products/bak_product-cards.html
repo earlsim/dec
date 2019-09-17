@@ -1,0 +1,112 @@
+{if $wa->shop->cart->total() > 0}{$add2cart_label = '[`Add to cart`]'}{else}{$add2cart_label = '[`Buy`]'}{/if}
+
+{if !empty($theme_settings.list_features)}
+{$features = $wa->shop->features($products)}
+{/if}
+
+{foreach $products as $p}
+{$available = $wa->shop->settings('ignore_stock_count') || $p.count === null || $p.count > 0}
+
+<div class="products__item">
+  <div class="product-card">
+    <div class="product-card__inner">
+      {if $wa->shop->product($p.id)->features["novinka"]["value"] == 1}
+      <div class="product-card__tag product-card__tag--new">Новинка</div>
+      {/if}
+      <div class="product-card__tag product-card__tag--unc">{$wa->shop->product($p.id)->features["sokhrannost_monety"]}</div>
+      <div class="product-card__picture">
+        <a href="{$p.frontend_url}" title="{$p.name}" class="product-card__picwrap">
+          {$wa->shop->productImgHtml($p, '200', ['class' => 'product-card__img', 'itemprop' => 'image', 'alt' => $p.name, 'default' => "`$wa_theme_url`img/dummy200.png"])}
+        </a>
+        <a href="#" class="product-card__zoom">+</a>
+      </div>
+      <a href="{$p.frontend_url}" title="{$p.name}" class="product-card__title">
+        {$p.name}
+      </a>
+      {if !empty($p.features)}
+      <table class="features">
+        {foreach $p.features as $f_code => $f_value}
+        {var_dump($p.features)}
+        <tr{if $features[$f_code].type == 'divider'} class="divider"{/if}>
+        <td class="name">
+          {$features[$f_code].name|escape}
+        </td>
+        <td class="value" itemprop="{$f_code|escape}">
+          {if is_array($f_value)}
+          {if $features[$f_code].type == 'color'}
+          {implode('<br /> ', $f_value)}
+          {else}
+          {implode(', ', $f_value)}
+          {/if}
+          {else}
+          {$f_value}
+          {/if}
+        </td>
+      </tr>
+      {/foreach}
+    </table>
+    {/if}
+
+    <div class="product-card__cost">
+      <div class="product-card__price">
+        <div class="product-card__price-value">
+          {shop_currency($p.price, null, null, 0)} руб
+        </div>
+        <div class="product-card__price-value--old">
+          {if $p.compare_price > 0}{shop_currency_html($p.compare_price)}{/if}
+        </div>
+      </div>
+      {if $wa->shop->product($p.id)->features["skidka"]}
+      <div class="product-card__tag--discount">
+        -{$wa->shop->product($p.id)->features["skidka"]}%
+      </div>
+      {/if}
+    </div>
+  </div>
+  <div class="product-card__wrapper">
+
+    {if $available}
+    <form class="purchase addtocart" {if $p.sku_count > 1}data-url="{$p.frontend_url}{if strpos($p.frontend_url, '?')}&{else}?{/if}cart=1"{/if} method="post" action="{$wa->getUrl('shop/frontendCart/add')}">
+      <input type="hidden" name="product_id" value="{$p.id}">
+      <div class="product-card__more">
+        <div class="product-card__button">
+          <input type="submit" value="В козину" class="btn btn--product">
+        </div>
+        <div class="product-card__qty">
+          <div class="qty">
+            <div class="qty__btn"><button class="circle-btn circle-btn--qty circle-btn--minus"></button></div>
+            <div class="qty__input">12</div>
+            <div class="qty__btn"><button class="circle-btn circle-btn--qty circle-btn--plus"></button></div>
+          </div>
+        </div>
+        <div class="product-card__tofav">
+          <svg class="svg-icon">
+            <use xml reloading settings Packages/User/Preferences.sublime-settingslns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-calendar"></use>
+          </svg>
+        </div>
+      </div>
+
+      <i class="adding2cart"></i>
+      {if !empty($theme_settings.compare_products)}<a data-product="{$p.id}" class="compare" href="#" title="[`Compare`]"><i class="icon16 compare compare-from-list{if $wa->shop->inComparison($p.id)} active{/if}"></i></a>{/if}
+      <span class="added2cart" style="display: none;">{sprintf('[`%s is now <a href="%s"><strong>in your shopping cart</strong></a>`]', $p.name, $wa->getUrl('shop/frontend/cart'))}</span>
+    </form>
+    <link itemprop="availability" href="http://schema.org/InStock" />
+    {else}
+    <span class="price nowrap">{shop_currency_html($p.price)}</span>
+    <meta itemprop="price" content="{shop_currency($p.price, null, null, 0)}">
+    <meta itemprop="priceCurrency" content="{$wa->shop->currency()}">
+    <div class="out-of-stock"><strong>{if $wa->shop->settings('ignore_stock_count')}[`Pre-order only`]{else}[`Out of stock`]{/if}</strong></div>
+    <link itemprop="availability" href="http://schema.org/OutOfStock" />
+    {/if}
+
+
+  </div>
+</div>
+</div>
+{/foreach}
+
+{if isset($pages_count) && $pages_count > 1}
+<div class="block {if $theme_settings.pagination == 'lazyloading'}lazyloading-paging{else}paging-nav{/if}"  data-times="2" data-link-text="[`Load more`]" data-loading-str="[`Loading...`]">
+  {wa_pagination total=$pages_count attrs=['class' => "menu-h"]}
+</div>
+{/if}

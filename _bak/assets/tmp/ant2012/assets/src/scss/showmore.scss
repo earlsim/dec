@@ -1,0 +1,31 @@
+.showmore {
+  display: flex;
+  justify-content: center;
+  height: 40px;
+  
+  @media ($m-s) {
+    height: 50px;
+  }
+}
+
+.showmore__label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 420px;
+  height: 40px;
+  margin: 0 auto;
+  max-width: 100%;
+  background-color: #000;
+  font-family: $f-oswald;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: center;
+  text-transform: uppercase;
+
+  @media ($m-s) {
+    height: 50px;
+    font-size: 18px;
+  }
+}

@@ -1,0 +1,91 @@
+{if $wa->shop->cart->total() > 0}{$add2cart_label = '[`Add to cart`]'}{else}{$add2cart_label = '[`Buy`]'}{/if}
+
+{if !empty($theme_settings.list_features)}
+{$features = $wa->shop->features($products)}
+{/if}
+<div class="products__list js-product-list">
+{foreach $products as $p}
+{$available = $wa->shop->settings('ignore_stock_count') || $p.count === null || $p.count > 0}
+  <div class="products__item js-item" data-id="{$p.id}">
+  <div class="product-card">
+    <div class="product-card__inner">
+      {if $wa->shop->product($p.id)->features["novinka"]["value"] == 1}
+      <div class="product-card__tag product-card__tag--new">Новинка</div>
+      {/if}
+      <div class="product-card__tag product-card__tag--unc">{$wa->shop->product($p.id)->features["sokhrannost_monety"]}</div>
+      <div class="product-card__picture">
+        <a href="{$p.frontend_url}" title="{$p.name}" class="product-card__picwrap">
+          {$wa->shop->productImgHtml($p, '300x0', ['class' => 'product-card__img', 'alt' => $p.name, 'default' => "`$wa_theme_url`img/dummy200.png"])}
+        </a>
+        <div class="product-card__zoom js-product-img" data-src="{$wa->shop->productImgUrl($p, '')}">
+          <svg class="svg-icon">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-zoom-in"></use>
+          </svg>
+        </div>
+      </div>
+      <a href="{$p.frontend_url}" title="{$p.name}" class="product-card__title">
+        {$p.name}
+      </a>
+
+      <div class="product-card__cost">
+        <div class="product-card__price">
+          <div class="product-card__price-value">
+            {shop_currency($p.price, null, null, 0)} руб
+          </div>
+          <div class="product-card__price-value--old">
+            {if $p.compare_price > 0}{shop_currency($p.compare_price, null, null, 0)} руб{/if}
+          </div>
+        </div>
+        {if $wa->shop->product($p.id)->features["skidka"]}
+        <div class="product-card__tag--discount">
+          -{$wa->shop->product($p.id)->features["skidka"]}%
+        </div>
+        {/if}
+      </div>
+    </div>
+    <div class="product-card__wrapper">
+
+      {if $available}
+      <div class="product-card__more">
+        <button class="btn btn--product js-item-tocart">В корзину</button>
+        <div class="product-card__qty">
+        <input type="hidden" class="js-item-qty-max" value="{if !$p.count}999{else}{$p.count}{/if}">
+          {if !$p.count || $p.count > 1}
+          <div class="qty js-item-qty">
+            <div class="qty__btn circle-btn circle-btn--qty circle-btn--minus js-item-qty-dec"></div>
+            <input type="text" name="quantity" value="1" class="qty__input qty__input--card js-item-qty-input">
+            <div class="qty__btn circle-btn circle-btn--qty circle-btn--plus js-item-qty-inc"></div>
+          </div>
+          {/if}
+        </div>
+        {if $wa->user()->isAuth()}
+          {if $wishArray = $wa->user()->get('wishlist', true, false)}
+            {if in_array($p.id, explode(',', $wishArray))}
+              {$itemInWish = true}
+            {else}
+              {$itemInWish = false}
+            {/if}
+          {/if}
+        {else}
+          {if $wishArray = $wa->storage('wishlist')}
+            {if in_array($p.id, explode(',', $wishArray))}
+              {$itemInWish = true}
+            {else}
+              {$itemInWish = false}
+            {/if}
+          {/if}
+        {/if}
+        <div class="product-card__tofav js-item-wish {if $itemInWish}is-active{/if}">
+          <svg class="svg-icon">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-star-new"></use>
+          </svg>
+        </div>
+      </div>
+
+      {/if}
+
+
+    </div>
+  </div>
+</div>
+{/foreach}

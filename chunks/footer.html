@@ -1,0 +1,64 @@
+      <!-- Footer - begin -->
+      <footer class="footer">
+        <div class="footer__top footer-top">
+          <div class="footer-top__inner">
+            <div class="footer-top__about">
+              <div class="footer-top__logo">
+                <svg class="svg-icon">
+                  <use xlink:href="#i-logo"></use>
+                </svg>
+              </div>
+              <div class="footer-top__address">
+                <p>357600, Ставропольский край, г.&nbsp;Пятигорск, ул. Мира, 248</p>
+              </div>
+            </div>
+            <div class="footer-top__nav footer-nav">
+              <!-- <div class="footer-nav__col">
+                <div class="footer-nav__title"><a href="/catalog/">Каталог</a></div>
+                <div class="footer-nav__items footer-nav__items--mh300 grid">
+                {$menuItems = $wa->menu->get(6)}
+                {foreach $menuItems as $item}
+                  <a href="{$item.url}" class="footer-nav__item grid__c grid__c--pd-0-24 grid__c--1-2">{$item.name}</a>
+                  	{/foreach}
+                </div>
+              </div> -->
+              <div class="footer-nav__col">
+                <div class="footer-nav__title">Интернет-магазин</div>
+                <div class="footer-nav__items">
+                  {$items = $wa->menu->get(27)}
+                  {foreach $items as $item}
+                  <a href="{$item.url}" class="footer-nav__item">{$item.name}</a>
+                  {/foreach}
+                </div>
+              </div>
+             
+            </div>
+            <div class="footer-top__contact">
+              {$phone = str_replace(" ","",$wa->block('global.phone'))}
+              <a href="tel:{$phone}" class="footer-top__phone">{$wa->block("global.phone")}</a>
+              <div class="footer-top__social social">
+                <a href="{$wa->block("global.inst")}" target="_blank" class="social__item">
+                  <svg class="svg-icon">
+                    <use xlink:href="#i-inst"></use>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer__bottom footer-bottom">
+          <div class="footer-bottom__inner">
+            <div class="footer-bottom__info">
+              <div class="footer-bottom-item">© 2019 Все права защищены</div>
+              <a href="/files/privacy.pdf" target="_blank" class="footer-bottom__item">Согласие на обработку данных</a>
+              <a href="/files/agreement.pdf" target="_blank" class="footer-bottom__item">Политика конфидециальности</a>
+            </div>
+            <a href="https://aleskeroff.ru" target="_blank" class="footer-bottom__logo">
+              <svg class="svg-icon">
+                <use xlink:href="#i-studio"></use>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </footer>
+      <!-- Footer - end -->

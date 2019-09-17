@@ -1,0 +1,38 @@
+.header-cart {
+  position: relative;
+  
+  &--empty {
+    & .header-cart__indicator {
+      display: none;
+    }
+  }
+}
+
+.header-cart__icon {
+  width: 20.09px;
+  height: 22px;
+  transition: color .4s;
+}
+
+.header-cart__qnt {
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  margin: auto;
+  font-family: $f-secondary;
+  font-size: 13px;
+  line-height: 1em;
+  font-weight: 700;
+  color: #B400FF;
+  transform: translateX(-25%);
+}
+
+.header-cart__indicator {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  background-color: #B400FF;
+}

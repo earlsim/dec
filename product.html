@@ -1,0 +1,64 @@
+{$available = $wa->shop->settings('ignore_stock_count') || $product.count === null || $product.count > 0}
+{$wa->title("`$product.name` - Студия ярких событий Декораторъ")}
+<main class="main">
+  <div class="container">
+    <div class="page">
+      <div class="page__content">
+            {$curSKU = $product.sku_id}
+            {foreach $product.skus as $sku}
+              {if $sku.id == $curSKU}
+                {$curSKUName = $sku.sku}
+              {/if}
+            {/foreach}
+        <div class="product js-item" data-id="{$product.id}" data-name="{mb_strimwidth($product.name, 0, 55, '...')}" data-sku="{$curSKUName}" data-price="{shop_currency($product.price, null, null, 0)}" data-smallpic="{$wa->shop->productImgUrl($product, '200x0')}" data-summary="{$product.summary}">
+          <div class="product__pic">
+            {$imgUrl =  $wa->shop->productImgUrl($product, '1000')}
+            {if $wa->shop->productImgHtml($product, '500x0')}
+            {$imgUrl =  $wa->shop->productImgUrl($p, '1500')}
+            {$wa->shop->productImgHtml($product, '1000x0', ['class' => 'product__img js-img', 'data-original-src' => $imgUrl, 'alt' => $product.name, 'default' => "`$wa_theme_url`img/dummy600.png"])}
+            {else}
+            <img class="product__img js-img" alt="{$p.name}" title="{$p.name}" src="{$wa_theme_url}assets/img/dummy600.png">
+            {/if}
+          </div>
+          <div class="product__info">
+
+            <small class="product__code">{$curSKUName}</small>
+            <h1 class="product__title js-p-title">{$product.name}</h1>
+            <div class="product__caption">
+              <p>{$product.summary}</p>
+            </div>
+            <div class="product__desc">
+              <p>{$product.description}</p>
+            </div>
+            <div class="product__prices">
+              <div class="product__price">
+                <span class="js-product-price">{shop_currency($product.price, null, null, 0)}</span>
+                <span>₽</span>
+              </div>
+              {if $product.compare_price}
+              <div class="product__price-old">
+                <span>{shop_currency($product.compare_price, null, null, 0)}</span>
+                <span>₽</span>
+              </div>
+              {/if}
+            </div>
+            <div class="product__bottom">
+              <div class="product__qnt qnt-toggle js-product-qnt">
+                <div class="qnt-toggle__min" data-action="min"></div>
+                <input type="text" class="qnt-toggle__val" value="01">
+                <div class="qnt-toggle__max" data-action="max"></div>
+              </div>
+              <a href="#" id="modal-order-btn2" class="product__order btn js-product-page-buy">Заказать</a>
+              <a href="#" id="modal-order-btn" class="product__order-quick js-modal-order reqCall">Быстрый заказ</a>
+            </div>
+          </div>
+          <div class="product__like js-product-like">
+            <svg class="svg-icon">
+              <use xlink:href="#i-heart"></use>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

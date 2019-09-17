@@ -1,0 +1,165 @@
+.head-slide {
+  width: 100%;
+  min-height: 100vh;
+  background-color: $c-main;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position-x: 90%;
+  background-position-y: 0;
+}
+
+.head-slide__container {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100vh;
+  max-height: 100vh;
+}
+
+.head-slide__content {
+  position: relative;
+  z-index: 15;
+
+  @media ($m-m) {
+    padding-left: 24px;
+  }
+
+  @media ($m-xxl) {
+    padding-left: 0;
+  }
+}
+
+.head-slide__sub-title {
+  font-size: 12px;
+  line-height: 1.35em;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+}
+
+.head-slide__title {
+  width: 100%;
+  max-width: 660px;
+  margin-top: 8px;
+  font-size: 42px;
+  line-height: 1.1em;
+  font-weight: 700;
+
+  @media ($m-s) {
+    font-size: 48px;
+  }
+
+  @media ($m-m) {
+    margin-top: 16px;
+    font-size: 72px;
+  }
+}
+
+.head-slide__desc {
+  width: 100%;
+  max-width: 560px;
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.85em;
+
+  @media ($m-s) {
+    font-size: 18px;
+  }
+
+  @media ($m-m) {
+    margin-top: 36px;
+    font-size: 20px;
+  }
+}
+
+.head-slide__btn {
+  margin-top: 24px;
+  background-color: $c-block;
+  color: $c-main;
+
+  @media ($m-m) {
+    margin-top: 36px;
+  }
+}
+
+.head-slide__picture {
+  position: absolute;
+  top: 0;
+  right: -13%;
+  height: 100%;
+  display: none;
+
+  @media ($m-m) {
+    display: block;
+  }
+}
+
+.head-slide__picture-inner {
+  position: relative;
+
+  &:hover {
+    & .head-slide__flower {
+      transform: scale(1.05);
+    }
+
+    & .head-slide__sheet {
+      position: absolute;
+      z-index: 9;
+
+      &--first {
+        top: 15%;
+        left: 15%;
+        transform: rotate(-15deg);
+      }
+
+      &--second {
+        top: 10%;
+        left: 63%;
+        transform: rotate(40deg);
+      }
+
+      &--third {
+        top: 65%;
+        left: 61%;
+      }
+    }
+  }
+}
+
+.head-slide__flower {
+  position: relative;
+  z-index: 10;
+  max-width: 100%;
+  transition: all .6s;
+}
+
+.head-slide__sheet {
+  position: absolute;
+  z-index: 9;
+  transition: all .6s;
+
+  &--first {
+    top: 20%;
+    left: 20%;
+  }
+
+  &--second {
+    top: 15%;
+    left: 58%;
+    transform: rotate(30deg);
+  }
+
+  &--third {
+    top: 60%;
+    left: 56%;
+    transform: rotate(160deg) scale(-1, 1);
+  }
+}
+
+.head-slide__ribbon {
+  position: absolute;
+  z-index: 8;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}

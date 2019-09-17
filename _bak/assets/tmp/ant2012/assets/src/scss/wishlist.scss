@@ -1,0 +1,17 @@
+.wishlist__list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 0 20px 0;
+
+  @media ($m-s) {
+    margin: 0 0 40px 0;
+  }
+}
+
+.wishlist__item {
+  width: 50%;
+
+  @media ($m-s) {
+    width: 25%;
+  }
+}

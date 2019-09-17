@@ -1,0 +1,120 @@
+{if $wa->shop->cart->total() > 0}{$add2cart_label = '[`Add to cart`]'}{else}{$add2cart_label = '[`Buy`]'}{/if}
+
+{if !empty($theme_settings.list_features)}
+{$features = $wa->shop->features($products)}
+{/if}
+
+
+<div class="catalog__body">
+  <div class="grid grid--m-mr-64">
+
+    {$categories = $wa->shop->categories(0, null, false)}
+    {foreach $products as $p}
+    {$available = $wa->shop->settings('ignore_stock_count') || $p.count === null || $p.count > 0}
+
+    {if $wa->user()->isAuth()}
+      {if $wishArray = $wa->user()->get('wishlist', true, false)}
+        {if in_array($p.id, explode(',', $wishArray))}
+          {$itemInWish = true}
+        {else}
+          {$itemInWish = false}
+        {/if}
+      {/if}
+    {else}
+      {if $wishArray = $wa->storage('wishlist')}
+        {if in_array($p.id, explode(',', $wishArray))}
+          {$itemInWish = true}
+        {else}
+          {$itemInWish = false}
+        {/if}
+      {/if}
+    {/if}
+
+    {$curSKU = $p.sku_id}
+    {foreach $p.skus as $sku}
+      {if $sku.id == $curSKU}
+        {$curSKUName = $sku.sku}
+      {/if}
+    {/foreach}
+    <form action="{$wa->getUrl('shop/frontendCart/add')}" method="post" data-name="{mb_strimwidth($p.name, 0, 55, '...')}" data-price="{shop_currency($p.price, null, null, 0)}" data-sku="{$curSKUName}" data-smallpic="{$wa->shop->productImgUrl($p, '200x0')}" {if $p.sku_count > 1}data-url="{$p.frontend_url}{if strpos($p.frontend_url, '?')}&{else}?{/if}cart=1"{/if} class="grid__c grid__c--s-1-2 grid__c--m-1-3 grid__c--m-pd-64 js-item" data-id="{$p.id}">
+     
+      <div class="product-card-toggle js-toggle">
+        <div class="product-card-toggle__front">
+          <div class="product-card js-item {if $itemInWish}is-infav{/if}" data-id="{$p.id}">
+            <a href="{$p.frontend_url}" class="product-card__pic">
+              {$imgUrl = $wa->shop->productImgUrl($p, '1500')}
+              {$wa->shop->productImgHtml($p, '500x0', ['class' => 'product-card__img js-item-image', 'data-original-src'
+              => $imgUrl, 'alt' => $p.name, 'default' => "`$wa_theme_url`assets/img/dummy200.png"])}
+            </a>
+            <small class="product-card__sub-title">{$categories[$p.category_id].name}</small>
+            <meta itemprop="price" content="{shop_currency($p.price, null, null, 0)}">
+            <meta itemprop="priceCurrency" content="{$wa->shop->currency()}">
+            <input type="hidden" name="product_id" value="{$p.id}">
+            <a href="{$p.frontend_url}" class="product-card__title">{mb_strimwidth($p.name, 0, 55, "...")}</a>
+            <div class="product-card__price"><span class="product-card__price__value">{shop_currency($p.price, null, null, 0)}</span> ₽</div>
+            <div class="product-card__favorites js-product-to-favorites" onClick="">
+              <svg class="svg-icon">
+                <use xlink:href="#i-heart"></use>
+              </svg>
+            </div>
+            <div class="product-card__cart js-product-add" onClick="">
+              <svg class="svg-icon">
+                <use xlink:href="#i-shopping-cart"></use>
+              </svg>
+            </div>
+            {if $wa->shop->product($p.id)->features["icon"]}
+            <div class="product-card__info">
+              <div class="product-card__info-icon">
+                <svg class="svg-icon">
+                  <use xlink:href="#{$wa->shop->product($p.id)->features['icon']}"></use>
+                </svg>
+              </div>
+              <div class="product-card__info-tooltip">
+                <div class="tooltip">
+                  <h4 class="tooltip__title">{$wa->shop->product($p.id)->features['icontitle']}</h4>
+                  <div class="tooltip__text">{$wa->shop->product($p.id)->features['icontext']}</div>
+                </div>
+              </div>
+            </div>
+            {/if}
+          </div>
+        </div>
+        <div class="product-card-toggle__back">
+          <div class="product-card product-card--back js-item js-product-card-back" data-price="{shop_currency($p.price, null, null, 0)}" data-summary="{$p.summary}">
+            <a href="{$p.frontend_url}" class="product-card__pic">
+              {if $wa->shop->productImgHtml($p, '500x0')}
+              {$imgUrl = $wa->shop->productImgUrl($p, '1500')}
+              {$wa->shop->productImgHtml($p, '500x0', ['class' => 'product-card__img js-item-image', 'data-original-src'
+              => $imgUrl, 'alt' => $p.name, 'default' => ""])}
+              {else}
+              <img class="product-card__img" alt="{$p.name}" title="{$p.name}"
+                src="{$wa_theme_url}assets/img/dummy200.png">
+              {/if}
+            </a>
+            <small class="product-card__sub-title">{$categories[$p.category_id].name}</small>
+            <a href="{$p.frontend_url}" class="product-card__title">{mb_strimwidth($p.name, 0, 55, "...")}</a>
+            {if $available}
+            <a href="#" id="modal-order-btn" class="product-card__buy-quick btn js-modal-order reqCall">Быстрый
+              заказ</a>
+            <button type="submit" class="product-card__buy btn">Купить</button>
+            <a href="/cart" class="product-card__to-cart btn">В корзину</a>
+            {/if}
+            <a href="#" class="product-card__continue btn js-product-close">Продолжить</a>
+            <div class="product-card__manage">
+              <div class="product-card__qnt qnt-toggle js-product-qnt">
+                <div class="qnt-toggle__min" data-action="min"></div>
+                <input type="text" name="quantity" class="qnt-toggle__val" value="01">
+                <div class="qnt-toggle__max" data-action="max"></div>
+              </div>
+              <div class="product-card__price"><span class="product-card__price__value">{shop_currency($p.price, null, null, 0)}</span> ₽</div>
+            </div>
+            <div class="product-card__close js-product-close">
+              <div class="product-card__close-inner"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    {/foreach}
+  </div>
+</div>

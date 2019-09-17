@@ -1,0 +1,9 @@
+.m-line-products__grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.m-line-products__grid-item {
+  width: 50%;
+  min-height: 160px;
+}

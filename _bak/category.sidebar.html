@@ -1,0 +1,186 @@
+<div data-opened="false" class="catalog__sidebar js-sticky">
+  <div class="js-sticky-anchor"></div>
+  <form id="mobile-filters" class="catalog-sidebar catalog-sidebar--whiteBg js-sticky-content js-filter-form" method="get" action="{$wa->currentUrl(0,1)}">
+    <div class="catalog-sidebar__block is-active">
+      <div class="catalog-sidebar__block-head hide-l">
+        <div data-id="mobile-filters" class="catalog-sidebar__block-title js-m-filter-btn">
+          <span>Фильтры</span>
+          <div class="catalog-sidebar__block-icon catalog-sidebar__block-icon--big">
+            <svg class="svg-icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-settings"></use>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="catalog-sidebar__block-content catalog-sidebar__block-content--nopd">
+        <div class="catalog-sidebar__block-head">
+          <div class="catalog-sidebar__block-title">{$parent.name}</div>
+        </div>
+        <div class="m-catalog__nav">
+          {if $parent.subcategories}
+          <div class="m-catalog__nav-list js-m-catalog-list">
+            {foreach $parent.subcategories as $child}
+            {$childCat = $wa->shop->category($child.id)}
+
+            <div class="m-catalog__nav-item js-m-catalog-item">
+              <div class="m-catalog__nav-btn m-catalog__nav-btn--smallpd js-m-catalog-btn">
+                <div class="m-catalog__nav-label m-catalog__nav-label--fw300 m-catalog__nav-label--fz16">{$child.name|escape}</div>
+                <div class="m-catalog__nav-icon">
+                  <svg class="svg-icon">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-chevron-m"></use>
+                  </svg>
+                </div>
+              </div>
+              <div class="m-catalog__sub js-m-catalog-sub">
+                {if $childCat.subcategories}
+                <div class="m-catalog__sub-list">
+                  {foreach $childCat.subcategories as $schild}
+                  <div class="m-catalog__sub-item">
+                    <a href="/{$schild.full_url}" class="m-catalog__sub-btn">
+                      <div class="m-catalog__sub-label">{$schild.name}</div>
+                    </a>
+                  </div>
+                  {/foreach}
+                </div>
+                {/if}
+              </div>
+            </div>
+            {/foreach}
+          </div>
+          {/if}
+        </div>
+      </div>
+    </div>
+    {if !empty($filters)}
+    {foreach $filters as $fid => $filter}
+    {if $fid == 'price'}
+    {$c = $wa->shop->currency(true)}
+    <div id="{$fid}" class="catalog-sidebar__block js-product-filter is-active">
+      <div class="catalog-sidebar__block-head catalog-sidebar__block-head--nobr">
+        <div data-id="filter-{$fid}" class="catalog-sidebar__block-title">Цена</div>
+      </div>
+      <div class="catalog-sidebar__block-content catalog-sidebar__block-content--nopd">
+        <div class="catalog-sidebar__price js-filter-slider">
+          <div class="catalog-sidebar__price-fields grid20">
+            <div class="catalog-sidebar__price-field grid20__item">
+              <div class="field__wrap">
+                <div class="field__input field__input--h40">
+                  <input placeholder="0 руб" class="field__input-control field__input-control--tar field__input-control--black js-filter-min"  id="price-min" name="price_min" {if $wa->get('price_min')}value="{(int)$wa->get('price_min')}"{/if} placeholder="{floor($filter.min)} руб">
+                </div>
+              </div>
+            </div>
+            <div class="catalog-sidebar__price-field grid20__item">
+              <div class="field__wrap">
+                <div class="field__input field__input--h40">
+                  <input type="text" class="field__input-control field__input-control--tar field__input-control--black js-filter-max" id="price-max" name="price_max" {if $wa->get('price_max')}value="{(int)$wa->get('price_max')}"{/if} placeholder="{ceil($filter.max)} руб">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="price-range" class="catalog-sidebar__price-range js-filter-slider-range"></div>
+        </div>
+      </div>
+    </div>
+    {elseif $filter['code'] == 'color'}
+    <div class="catalog-sidebar__block js-filter-block is-active">
+      <div class="catalog-sidebar__block-head js-filter-block-btn">
+        <div class="catalog-sidebar__block-title">{$filter.name|escape}</div>
+        <div class="catalog-sidebar__block-icon">
+          <svg class="svg-icon">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-chevron"></use>
+          </svg>
+        </div>
+      </div>
+      <div class="catalog-sidebar__block-content js-filter-block-content">
+        <div class="catalog-colors">
+          <div class="catalog-colors__grid">
+            {foreach $filter.values as $color}
+            <div class="catalog-colors__item">
+              <div class="catalog-colors__card-wrap js-colors-item">
+                <input id="colors-{$color.id}" type="checkbox" name="{$filter['code']}[]" class="catalog-colors__card-checkbox" {if in_array($color.id, (array)$wa->get($filter.code, array()))}checked{/if} value="{$color.id}">
+                <label for="colors-{$color.id}" class="catalog-colors__card">
+                  {if $color.hex == '#FFFFFF'}
+                  <div class="catalog-colors__color-block" style="background-color: {$color.hex};border:1px solid #000000;"></div>
+                  {else}
+                  <div class="catalog-colors__color-block" style="background-color: {$color.hex};"></div>
+                  {/if}
+                </label>
+              </div>
+            </div>
+            {/foreach}
+          </div>
+        </div>
+      </div>
+    </div>
+    {elseif $filter['code'] == 'size' || $filter['code'] == 'size1'}
+    <div class="catalog-sidebar__block js-filter-block is-active">
+      <div class="catalog-sidebar__block-head js-filter-block-btn">
+        <div class="catalog-sidebar__block-title">{$filter.name|escape}</div>
+        <div class="catalog-sidebar__block-icon">
+          <svg class="svg-icon">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-chevron"></use>
+          </svg>
+        </div>
+      </div>
+      <div class="catalog-sidebar__block-content js-filter-block-content">
+        <div class="catalog-sizes">
+          <div class="catalog-sizes__grid">
+            {foreach $filter.values as $sid => $size}
+            <div class="catalog-sizes__item">
+              <div class="catalog-sizes__card-wrap js-sizes-item">
+                <input id="sizes-{$sid}" type="checkbox" name="{$filter['code']}[]" class="catalog-sizes__card-checkbox" {if in_array($sid, (array)$wa->get($filter.code, array()))}checked{/if} value="{$sid}">
+                <label for="sizes-{$sid}" class="catalog-sizes__card">
+                  <div class="catalog-sizes__card-title">{$size}</div>
+                </label>
+              </div>
+            </div>
+            {/foreach}
+          </div>
+        </div>
+      </div>
+    </div>
+    {else}
+    <div id="{$fid}" class="catalog-sidebar__block js-filter-block is-active">
+      <div class="catalog-sidebar__block-head js-product-filter js-filter-block-btn">
+        <div class="catalog-sidebar__block-title">{$filter.name|escape}</div>
+        <div class="catalog-sidebar__block-icon">
+          <svg class="svg-icon">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-chevron"></use>
+          </svg>
+        </div>
+      </div>
+      <div class="catalog-sidebar__block-content js-filter-block-content">
+        <div class="catalog-sidebar__check-list">
+          {foreach $filter.values as $v_id => $value}
+          <div class="catalog-sidebar__check-item">
+            <input id="{$filter.code}-{$v_id}" type="checkbox" name="{$filter.code}[]" class="catalog-sidebar__check-control js-filter-selectable-item" {if in_array($v_id, (array)$wa->get($filter.code, array()))}checked{/if} value="{$v_id}">
+            <label for="{$filter.code}-{$v_id}" class="catalog-sidebar__check-input">
+              <div class="catalog-sidebar__check-elem">
+                <div class="catalog-sidebar__check-icon">
+                  <svg class="svg-icon">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-check"></use>
+                  </svg>
+                </div>
+              </div>
+              <div class="catalog-sidebar__check-label">{$value}</div>
+            </label>
+          </div>
+          {/foreach}
+        </div>
+      </div>
+    </div>
+    {/if}
+    {/foreach}
+    <div class="catalog-sidebar__block catalog-sidebar__block--df">
+      <div class="catalog-sidebar__wrap js-sticky-btn">
+        <button type="submit" class="catalog-sidebar__btn btn">Применить фильтр</button>
+      </div>
+      <div class="catalog-sidebar__clear-btn btn btn--bd js-filter-form-clear">Очистить фильтр</div>
+    </div>
+    {/if}
+
+    {if $wa->get('sort')}<input type="hidden" name="sort" value="{$wa->get('sort')|escape}">{/if}
+    {if $wa->get('order')}<input type="hidden" name="order" value="{$wa->get('order')|escape}">{/if}
+  </form>
+  <div class="js-sticky-bottom"></div>
+</div>

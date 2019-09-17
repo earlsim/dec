@@ -1,0 +1,64 @@
+.wedding-head {
+  background-color: $c-main;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #F3F4F5;
+}
+
+.wedding-head__inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  max-height: 1080px;
+  padding: 70px 0;
+
+  @media ($m-s) {
+    padding: 136px 0;
+  }
+}
+
+.wedding-head__sub-title {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+}
+
+.wedding-head__title {
+  width: 800px;
+  max-width: 100%;
+  margin-top: 16px;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.1em;
+
+  @media ($m-s) {
+    font-size: 72px;
+  }
+}
+
+.wedding-head__caption {
+  width: 560px;
+  max-width: 100%;
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.85em;
+
+  @media ($m-s) {
+    margin-top: 36px;
+    font-size: 20px;
+  }
+}
+
+.wedding-head__btn {
+  height: 56px;
+  line-height: 56px;
+  margin-top: 24px;
+
+  @media ($m-s) {
+    margin-top: 36px;
+  }
+}

@@ -1,0 +1,161 @@
+{$cururl = $wa->currentUrl(false, true)}
+<!-- Header - begin -->
+<header id="header" class="header {if $cururl == '/' or $error_code == 404 or $cururl == '/wedding-decor/'}header--absolute header--light header--delay{/if}">
+  <div class="header__inner">
+    <div class="header__container">
+      <div class="header__logo">
+        <a href="/" class="header-logo">
+          <svg class="svg-icon">
+            <use xlink:href="#i-logo"></use>
+          </svg>
+        </a>
+      </div>
+      <div class="header__menu">
+        <div class="menu-btn js-menu-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="header-menu js-menu-container">
+          <div class="header-menu__item">
+            <a href="/catalog/" class="header-menu__link jjs-header-menu-flowers-btn">
+              <span>Каталог</span>
+<!--               <div class="header-menu__icon ">
+                <svg class="svg-icon">
+                  <use xlink:href="#i-chevron"></use>
+                </svg>
+              </div> -->
+            </a>
+          </div>
+          {$menuItems = $wa->menu->get(1)}
+          {foreach $menuItems as $item}
+          <div class="header-menu__item">
+            <a href="{$item.url}" class="header-menu__link">{$item.name}</a>
+          </div>
+          {/foreach}
+        </div>
+      </div>
+      <div class="header__bar">
+        {$phone = str_replace(" ","",$wa->block('global.phone'))}
+        {if $wa->user()->isAuth()}
+          {if $wishArray = $wa->user()->get('wishlist', true, false)}
+            {$wish_count = (count(explode(',', $wishArray)))}
+          {else}
+            {$wish_count = 0}
+          {/if}
+        {else}
+          {if $wishArray = $wa->storage('wishlist')}
+            {$wish_count = (count(explode(',', $wishArray)))}
+          {else}
+            {$wish_count = 0}
+          {/if}
+        {/if}
+        <a href="tel:{$phone}" class="header__phone">{$wa->block("global.phone")}</a>
+        {if $wa->userId()}
+        <a href="/my/" class="header__login">
+        {else}
+        <a href="/login/" class="header__login">
+        {/if}
+          <svg class="svg-icon">
+            <use xlink:href="#i-user"></use>
+          </svg>
+        </a>
+        <a href="/wishlist/" class="header__like">
+          <svg class="svg-icon">
+            <use xlink:href="#i-heart"></use>
+          </svg>
+          {if $wish_count > 0}
+          <div class="header__like-indicator"></div>
+          {/if}
+        </a>
+        <a href="#" class="header__cart header-cart js-header-cart">
+          <div class="header-cart__icon">
+            <svg class="svg-icon">
+              <use xlink:href="#i-shopping-cart"></use>
+            </svg>
+          </div>
+          <div class="header-cart__qnt js-header-cart-count">{$wa->shop->cart->count()}</div>
+          <div class="header-cart__indicator js-header-cart-balloon" {if $wa->shop->cart->count() == 0}style="display: none;"{/if}></div>
+        </a>
+      </div>
+    </div>
+    {$cartItems = $wa->shop->cart->items()}
+    
+
+    <div class="header-cart-container js-header-cart-container">
+      <div class="header-cart-container__items js-header-cart-items">
+        {if (false)}
+        {get_class_methods($wa->shop->cart)|@var_dump}
+        <pre>
+          </pre>
+        {/if}
+        {foreach $cartItems as $item => $value}
+        {$product = $wa->shop->product($value.product_id)}
+        <div data-id="{$value.id}" class="header-cart-container__item js-header-cart-product">
+          <div class="header-cart-product">
+            <div class="header-cart-product__pic">
+              <img src="{$wa->shop->productImgUrl($product, '200x0')}" alt="{$value.name}" class="header-cart-product__img">
+            </div>
+            <div class="header-cart-product__content">
+              <small class="header-cart-product__code">{$value.sku_code}</small>
+              <h4 class="header-cart-product__name">{$value.name}</h4>
+              <div class="header-cart-product__qnt">Количество: <span class="js-header-cart-product-qty">{$value.quantity}</span></div>
+              <div class="header-cart-product__price">
+                <span class="js-header-cart-product-price">{number_format($value.price * $value.quantity, 0, ',', ' ' )}</span>
+                <span>₽</span>
+              </div>
+            </div>
+            <div class="header-cart-product__close js-header-cart-product-delete">
+              <div class="header-cart-product__close-inner"></div>
+            </div>
+          </div>
+        </div>
+        {/foreach}
+      </div>
+      <div class="header-cart-container__bottom {if $wa->shop->cart->count() == 0}header-cart-container__bottom--p0{/if} js-header-cart-bottom">
+        <!--
+          <div class="header-cart-container__delivery">
+            <span>Доставка</span>
+            <span>500</span>
+            <span>₽</span>
+          </div>
+        -->
+        <div class="header-cart-container__result {if $wa->shop->cart->count() == 0}header-cart-container__result--is-hidden{/if} js-header-cart-result" >
+          <span>Итого</span>
+          <span class="js-header-cart-total">{number_format($wa->shop->cart->total(), 0, ',', ' ' )}</span>
+          <span>₽</span>
+        </div>
+      </div>
+      <a href="/cart/" class="header-cart-container__btn btn js-header-cart-bottom-btn" {if $wa->shop->cart->count() == 0}style="display: none;"{/if}>Перейти в корзину</a>
+        <div class="header-cart-container__empty js-header-cart-message"{if $wa->shop->cart->count() !== 0}style="display: none;"{/if}>Корзина пуста</div>
+    </div>
+   
+    <div id="header-flowers-container" class="header-flowers-container">
+      <div class="header-flowers">
+        <div class="header-flowers__inner">
+          <div class="header-flowers__list">
+            <div class="header-flowers__items">
+              {if false}
+              {foreach $wa->shop->categories('28', null, true) as $id => $item}
+              {/foreach}
+              {/if}
+              {$menuItems = $wa->menu->get(6)}
+              {foreach $menuItems as $item}
+              <div class="header-flowers__item">
+                <a href="{$item.url}" class="header-flowers__link js-header-flowers-link {if $id === 0} is-active {/if}" data-img="{$wa_url}wa-data/public/shop/categories/menu/{$item.id}.jpg">{$item.name}</a>
+              </div>
+              {/foreach}
+            </div>
+          </div>
+          <div id="header-flowers-pic" class="header-flowers__pic">
+            <img src="{$wa_theme_url}assets/img/flowers/3.jpg" alt="" class="header-flowers__img">
+          </div>
+        </div>
+        <div class="header-flowers__close js-header-flowers-close">
+          <div class="header-flowers__close-inner"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Header - end -->

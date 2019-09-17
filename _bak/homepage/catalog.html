@@ -1,0 +1,126 @@
+{$categories = $wa->shop->categories(0, 2, true)}
+<div class="block block--pdt100 block--xxs-nopdt">
+  <div class="h-catalog show-m">
+    <div class="container">
+      {if $categories}
+      {$first = key($categories)}
+      {foreach array_reverse($categories) as $key => $category}
+      
+      {if $key === $first}
+      <div data-catid="{$category.id}" class="h-catalog__row">
+        <div class="h-catalog__col">
+          <div class="h-catalog__col-wrap h-catalog__col-wrap--left">
+            <div class="h-catalog__col-title">{$category.name}</div>
+            {if $category.childs}
+            <div class="h-catalog__list">
+            {foreach $category.childs as $child}
+              <div class="h-catalog__nav">
+                <a data-catid="{$child.id}" href="/{$child.full_url}" class="h-catalog__nav-title">{$child.name}</a>
+                <div class="h-catalog__nav-wrap">
+                  {if $child.childs}
+                  <div class="h-catalog__nav-grid">
+                    {foreach $child.childs as $schild}
+                    <div class="h-catalog__nav-item">
+                      <a data-catid="{$schild.id}" href="/{$schild.full_url}" class="h-catalog__nav-link">{$schild.name}</a>
+                    </div>
+                    {/foreach}
+                  </div>
+                  {/if}
+                </div>
+              </div>
+              {/foreach}
+            </div>
+            {/if}
+          </div>
+        </div>
+        <div class="h-catalog__col">
+          <div class="h-catalog__col-picwrap">
+            <div class="h-catalog__col-pic h-catalog__col-pic--right" style="background-image: url({$category.cat_image});"></div>
+          </div>
+        </div>
+      </div>
+      {else}
+      <div class="h-catalog__row">
+        <div class="h-catalog__col">
+          <div class="h-catalog__col-picwrap">
+            <div class="h-catalog__col-pic h-catalog__col-pic--left" style="background-image: url({$category.cat_image});"></div>
+          </div>
+        </div>
+        <div class="h-catalog__col">
+            <div class="h-catalog__col-wrap h-catalog__col-wrap--left">
+              <div data-catid="{$category.id}" class="h-catalog__col-title">{$category.name}</div>
+              {if $category.childs}
+              <div class="h-catalog__list">
+              {foreach $category.childs as $child}
+                <div class="h-catalog__nav">
+                  <a data-catid="{$child.id}" href="/{$child.full_url}" class="h-catalog__nav-title">{$child.name}</a>
+                  <div class="h-catalog__nav-wrap">
+                    {if $child.childs}
+                    <div class="h-catalog__nav-grid">
+                      {foreach $child.childs as $schild}
+                      <div class="h-catalog__nav-item">
+                        <a data-catid="{$schild.id}" href="/{$schild.full_url}" class="h-catalog__nav-link">{$schild.name}</a>
+                      </div>
+                      {/foreach}
+                    </div>
+                    {/if}
+                  </div>
+                </div>
+                {/foreach}
+              </div>
+              {/if}
+            </div>
+        </div>
+      </div>
+      {/if}
+      
+
+      {/foreach}
+      {/if}
+      
+    </div>
+  </div>
+  <div class="m-catalog hide-m">
+    {if $categories}
+    {foreach array_reverse($categories) as $key => $category}
+    <div data-catid="{$category.id}" class="m-catalog__block">
+      <div class="m-catalog__title">
+        {$category.name}
+      </div>
+      <div class="m-catalog__pic" style="background-image: url({$category.cat_image}"></div>
+      {if $category.childs}
+      <div class="m-catalog__nav">
+        <div class="m-catalog__nav-list js-m-catalog-list">
+          {foreach $category.childs as $child}
+          <div class="m-catalog__nav-item js-m-catalog-item">
+            <div class="m-catalog__nav-btn js-m-catalog-btn">
+              <div class="m-catalog__nav-label">{$child.name}</div>
+              <div class="m-catalog__nav-icon">
+                <svg class="svg-icon">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-chevron-m"></use>
+                </svg>
+              </div>
+            </div>
+            {if $child.childs}
+            <div class="m-catalog__sub js-m-catalog-sub">
+              <div class="m-catalog__sub-list">
+                {foreach $child.childs as $schild}
+                <div class="m-catalog__sub-item">
+                  <a href="/{$schild.full_url}" class="m-catalog__sub-btn">
+                    <div class="m-catalog__sub-label">{$schild.name}</div>
+                  </a>
+                </div>
+                {/foreach}
+              </div>
+            </div>
+            {/if}
+          </div>
+          {/foreach}
+        </div>
+      </div>
+      {/if}
+    </div>
+    {/foreach}
+    {/if}
+  </div>
+</div>

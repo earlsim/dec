@@ -1,0 +1,33 @@
+.head-social {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  @media ($m-xl) {
+    flex-direction: column;
+  }
+}
+
+.head-social__link {
+  display: block;
+  width: 24px;
+  height: 24px;
+  color: $c-block;
+  opacity: .5;
+  transition: all .4s;
+
+  &:not(:first-child) {
+    margin-left: 24px;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+
+  @media ($m-xl) {
+    &:not(:first-child) {
+      margin-left: 0;
+      margin-top: 36px;
+    }
+  }
+}

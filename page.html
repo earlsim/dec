@@ -1,0 +1,15 @@
+{if $wa->currentUrl() == "/about/"}
+{include file="`$wa_active_theme_path`/pages/page-about.html" inline}
+{elseif $wa->currentUrl() == "/delivery-and-payment/"}
+{include file="`$wa_active_theme_path`/pages/page-delivery.html" inline}
+{elseif $wa->currentUrl() == "/payment/"}
+{include file="`$wa_active_theme_path`/pages/page-payments.html" inline}
+{elseif $wa->currentUrl() == "/wedding-decor/"}
+{include file="`$wa_active_theme_path`/pages/page-wedding.html" inline}
+{elseif $wa->currentUrl() == "/constructor/"}
+{include file="`$wa_active_theme_path`/pages/page-constructor.html" inline}
+{elseif $wa->currentUrl() == "/contact/"}
+{include file="`$wa_active_theme_path`/pages/page-contact.html" inline}
+{else}
+{include file="`$wa_active_theme_path`/pages/page-static.html" inline}
+{/if}

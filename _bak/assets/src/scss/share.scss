@@ -1,0 +1,11 @@
+.share {
+  display: flex;
+  align-items: center;
+}
+
+.share__title {
+  margin-right: 20px;
+  font-family: $f-oswald;
+  font-size: 14px;
+  text-transform: uppercase;
+}

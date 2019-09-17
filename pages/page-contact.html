@@ -1,0 +1,84 @@
+<div class="page--nopb">
+  <div class="container">
+    <div class="page__head">
+      <h1 class="page__title">
+        Контакты
+      </h1>
+    </div>
+  </div>
+  <div class="page__contacts contacts">
+    <div class="container container--pd0">
+      <div class="contacts__inner">
+        <div class="contacts__left">
+          <div class="contacts__info">
+            <div class="contacts__row">
+              <div class="contacts__info__item">Телефон</div>
+              <a href="tel:89624334557" class="contacts__info__item__value">+7 962 433 45 57</a>
+            </div>
+            <div class="contacts__row">
+              <div class="contacts__info__item">Адрес</div>
+              <a class="contacts__info__item__value">Пятигорск, ул. Мира, 248</a>
+            </div>
+            <div class="contacts__row">
+              <div class="contacts__info__item">INSTAGRAM</div>
+              <a href="https://www.instagram.com/decorator_studio/" target="_blank" rel="nofollow noreferrer noopener" class="contacts__info__item__value">@decorator_studio</a>
+            </div>
+          </div>
+        </div>
+        <div class="contacts__right">
+          <div class="contacts__map">
+            <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A830585cc3ebf8d5f192a6edc52fcba92c9b624f6cc172cdbaad5d237f3ee3c8c&amp;source=constructor" width="555" height="347" frameborder="0"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="block block--gray">
+      <form method="post" action="/question/" id="questionForm">
+      <div class="contacts__inner">
+          <div class="contacts__form">
+            <h2 class="page__title">
+              Задать вопрос
+            </h2>
+            <p class="contacts__form__text">
+              Заполните все поля и в ближайшее время наш специалист свяжется с вами
+            </p>
+            <div class="contacts-form__item contacts-form__item--mb50">
+              <div class="contacts-form__name field-text field-text--tr">
+                <input name="firstname" id="contact-name" class="field-text__input" type="text" placeholder="Ваше имя" autocomplete="off" required>
+                <span class="field-text__bar"></span>
+                <label for="contact-name" class="field-text__label">Имя</label>
+              </div>
+              <div class="contacts-form__mail field-text field-text--tr">
+                <input name="email" id="contact-email" class="field-text__input" type="email" placeholder="E-mail" autocomplete="off" required>
+                <span class="field-text__bar"></span>
+                <label for="contact-email" class="field-text__label">E-mail</label>
+              </div>
+            </div>
+            <div class="contacts-form__item contacts-form__item--mb24 field-text field-text--tr">
+              <input name="text" id="contact-message" class="field-text__input" type="text" placeholder="Введите Ваш вопрос" autocomplete="off" required>
+              <span class="field-text__bar"></span>
+              <label for="contact-message" class="field-text__label">Ваш вопрос</label>
+            </div>
+            <div class="contacts-form__item contacts-form__item--mb48">
+              <div class="field-checkbox field-checkbox--sm">
+                <input type="checkbox" name="question-policy" id="question-policy" checked class="field-checkbox__input">
+                <label for="question-policy" class="field-checkbox__label">
+                  <span class="field-checkbox__icon">
+                    <span class="field-checkbox__icon-inner field-checkbox__icon-inner--wht"></span>
+                  </span>
+                  <span class="field-checkbox__caption">Нажимая кнопку отправить Вы соглашаетесь с условиями политики конфидециальности</span>
+                </label>
+              </div>
+            </div>
+            <div class="contact-result"></div>
+            <div class="contacts-form__item">
+              <div class="contacts-form__button">
+                <button  class="btn">Отправить</button>
+              </div>
+            </div>
+          </div>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>

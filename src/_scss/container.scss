@@ -1,0 +1,20 @@
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 24px;
+
+  &--lg {
+    max-width: 1920px;
+    padding: 0 48px;
+  }
+
+  &--pd-0 {
+    padding: 0;
+  }
+
+  @media ($m-xxl) {
+    &-xxl--pd-0 {
+      padding: 0;
+    }
+  }
+}

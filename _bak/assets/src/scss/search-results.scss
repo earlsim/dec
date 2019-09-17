@@ -1,0 +1,30 @@
+.search-results__inner {
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #F5F5F5;
+
+  @media ($m-s) {
+    margin: 0;
+  }
+}
+
+.search-results__grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.search-results__grid-item {
+  width: 100%;
+
+  @media ($m-s) {
+    width: 50%;
+  }
+
+  @media ($m-m) {
+    width: 33.3333%;
+  }
+
+  @media ($m-l) {
+    width: 25%;
+  }
+}

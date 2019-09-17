@@ -1,0 +1,231 @@
+{$products = $wa->shop->products('type/3')}
+{$available = $wa->shop->settings('ignore_stock_count') || $product.count === null || $product.count > 0}
+{$product_available = $product.status}
+{$curSKU = $product.sku_id}
+{foreach $product.skus as $sku}
+{if $sku.id == $curSKU}
+{$curSKUName = $sku.sku}
+{/if}
+{/foreach}
+<div class="page">
+  <div class="container">
+    <div class="constructor">
+      <div class="block__inner">
+        <h2 class="block__title block__title--w100">Конструктор букетов</h2>
+        <div class="block__caption">Понравился букет?<br>Хотите подарить вашим близким приятные эмоции?</div>
+        <div class="block__content constructor__inner">
+          <div class="constructor__panel">
+            <div class="panel-step">
+              <div class="panel-step__header">
+                <div class="step-number">01</div>
+                <div class="step__header">Выбор цветка</div>
+              </div>
+              <div class="panel-step__body">
+                <div class="step-body__inner">
+                  <span class="step-flower__label">Цветы</span>
+                  <select class="step-flower" title="flower" name="flower" id="flower-select">
+                    {foreach $products as $p}
+                    <option {if $p.url == 'constructor'} selected {/if} value="{$p.url}">{$p.name}</option>
+                    {/foreach}
+                  </select>
+                </div>
+                <div class="product-card__qnt qnt-toggle js-product-qnt js-constr-qnt" data-construct>
+                  <div class="qnt-toggle__min" data-action="min"></div>
+                  <input title="qnt" type="text" name="quantity" class="qnt-toggle__val" value="11">
+                  <div class="qnt-toggle__max" data-action="max"></div>
+                </div>
+
+              </div>
+            </div>
+            <div class="panel-step js-construct-length">
+              <div class="panel-step__header">
+                <div class="step-number">02</div>
+                <div class="step__header">Длина</div>
+              </div>
+
+              <div class="panel-step__body js-length">
+                <div class="pick-option">
+                  {if $services}
+                  {foreach $services as $s}
+                  {if $s.name =='Длина'}
+                  {if isset($s.variants)}
+                  {foreach $s.variants as $v}
+                  <div class="length-toggle" data-price="{shop_currency($v.price, $s.currency, null, 0)}" data-action="{$v.name|escape}" value="{$v.id}"><span class="length-toggle__value" onclick>{$v.name|escape}</span></div>
+                  {/foreach}
+                  {else}
+                  <div class="">Нет опций</div>
+                  {/if}
+                  {/if}
+                  {/foreach}
+
+                </div>
+              </div>
+            </div>
+            <div class="panel-step">
+              <div class="panel-step__header">
+                <div class="step-number js-number-color">03</div>
+                <div class="step__header">Цвет</div>
+              </div>
+              <div class="panel-step__body js-color">
+                <div class="pick-option">
+
+                  {foreach $services as $s}
+                  {if $s.name == $product.name}
+                  {if isset($s.variants)}
+                  {$count = 1}
+                  {foreach $s.variants as $v}
+                  <div class="color-toggle color-toggle--{$v.name|escape} js-color-toggle" data-price="{shop_currency($v.price, $s.currency, null, 0)}" data-color="{$v.name|escape}" data-color-count='{$count}' onclick=""></div>
+                  {$count = $count + 1}
+                  {/foreach}
+                  {else}
+                  <div class="">Нет опций</div>
+                  {/if}
+                  {/if}
+
+                  {/foreach}
+
+                </div>
+              </div>
+            </div>
+            <div class="panel-step">
+              <div class="panel-step__header">
+                <div class="step-number js-number-pack">04</div>
+                <div class="step__header">Упаковка</div>
+              </div>
+              <div class="panel-step__body">
+                <div class="pick-option grid js-packing">
+                  {foreach $services as $s}
+                  {if $s.name =='Упаковка'}
+                  {if isset($s.variants)}
+                  {foreach $s.variants as $v}
+                  <div class="packing-option grid__c grid__c--mr-0-24" data-price="{shop_currency($v.price, $s.currency, null, 0)}">
+                    <div class="packing-option__inner">
+                      <div class="packing-option__pic">
+                        <img src="{$wa_theme_url}assets/img/packing/craft.png" alt="">
+                      </div>
+                      <div class="packing-option__info">
+                        <div class="pack-info__name">{$v.name|escape}</div>
+                        <div class="pack-info__price">{shop_currency($v.price, $s.currency, null, 0)} <span>₽</span></div>
+                      </div>
+                    </div>
+                  </div>
+                  {/foreach}
+                  {else}
+                  <div class="">Нет опций</div>
+                  {/if}
+                  {/if}
+                  {/foreach}
+                  {/if}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="constructor__result">
+            <div class="result-card">
+              <div class="result-card__pic">
+                {$product_image_ids = array_keys($product.images)}
+                {$color_1_first_img = $wa->shop->imgUrl($product.images[$product_image_ids[0]], '970')}{if empty($color_1_first_img)}{$color_1_first_img = $wa->shop->productImgUrl($product, '1500')}{/if}
+                {$color_1_second_img = $wa->shop->imgUrl($product.images[$product_image_ids[1]], '970')}{if empty($color_1_second_img)}{$color_1_second_img = $wa->shop->productImgUrl($product, '1500')}{/if}
+                {$color_1_third_img = $wa->shop->imgUrl($product.images[$product_image_ids[2]], '970')}{if empty($color_1_third_img)}{$color_1_third_img = $wa->shop->productImgUrl($product, '1500')}{/if}
+                {$color_1_fourth_img = $wa->shop->imgUrl($product.images[$product_image_ids[3]], '970')}{if empty($color_1_fourth_img)}{$color_1_fourth_img = $wa->shop->productImgUrl($product, '1500')}{/if}
+                {$color_2_first_img = $wa->shop->imgUrl($product.images[$product_image_ids[4]], '970')}{if empty($color_2_first_img)}{$color_2_first_img = $wa->shop->productImgUrl($product, '1500')}{/if}
+                {$color_2_second_img = $wa->shop->imgUrl($product.images[$product_image_ids[5]], '970')}{if empty($color_2_second_img)}{$color_2_second_img = $wa->shop->productImgUrl($product, '1500')}{/if}
+                {$color_2_third_img = $wa->shop->imgUrl($product.images[$product_image_ids[6]], '970')}{if empty($color_2_third_img)}{$color_2_third_img = $wa->shop->productImgUrl($product, '1500')}{/if}
+                {$color_2_fourth_img = $wa->shop->imgUrl($product.images[$product_image_ids[7]], '970')}{if empty($color_2_fourth_img)}{$color_2_fourth_img = $wa->shop->productImgUrl($product, '1500')}{/if}
+                {$color_3_first_img = $wa->shop->imgUrl($product.images[$product_image_ids[8]], '970')}{if empty($color_3_first_img)}{$color_3_first_img = $wa->shop->productImgUrl($product, '1500')}{/if}
+                {$color_3_second_img = $wa->shop->imgUrl($product.images[$product_image_ids[9]], '970')}{if empty($color_3_second_img)}{$color_3_second_img = $wa->shop->productImgUrl($product, '1500')}{/if}
+                {$color_3_third_img = $wa->shop->imgUrl($product.images[$product_image_ids[10]], '970')}{if empty($color_3_third_img)}{$color_3_third_img = $wa->shop->productImgUrl($product, '1500')}{/if}
+                {$color_3_fourth_img = $wa->shop->imgUrl($product.images[$product_image_ids[11]], '970')}{if empty($color_3_fourth_img)}{$color_3_fourth_img = $wa->shop->productImgUrl($product, '1500')}{/if}
+                {$color_4_first_img = $wa->shop->imgUrl($product.images[$product_image_ids[12]], '970')}{if empty($color_4_first_img)}{$color_4_first_img = $wa->shop->productImgUrl($product, '1500')}{/if}
+                {$color_4_second_img = $wa->shop->imgUrl($product.images[$product_image_ids[13]], '970')}{if empty($color_4_second_img)}{$color_4_second_img = $wa->shop->productImgUrl($product, '1500')}{/if}
+                {$color_4_third_img = $wa->shop->imgUrl($product.images[$product_image_ids[14]], '970')}{if empty($color_4_third_img)}{$color_4_third_img = $wa->shop->productImgUrl($product, '1500')}{/if}
+                {$color_4_fourth_img = $wa->shop->imgUrl($product.images[$product_image_ids[15]], '970')}{if empty($color_4_fourth_img)}{$color_4_fourth_img = $wa->shop->productImgUrl($product, '1500')}{/if}
+                {$color_5_first_img = $wa->shop->imgUrl($product.images[$product_image_ids[16]], '970')}{if empty($color_5_first_img)}{$color_5_first_img = $wa->shop->productImgUrl($product, '1500')}{/if}
+                {$color_5_second_img = $wa->shop->imgUrl($product.images[$product_image_ids[17]], '970')}{if empty($color_5_second_img)}{$color_5_second_img = $wa->shop->productImgUrl($product, '1500')}{/if}
+                {$color_5_third_img = $wa->shop->imgUrl($product.images[$product_image_ids[18]], '970')}{if empty($color_5_third_img)}{$color_5_third_img = $wa->shop->productImgUrl($product, '1500')}{/if}
+                {$color_5_fourth_img = $wa->shop->imgUrl($product.images[$product_image_ids[19]], '970')}{if empty($color_5_fourth_img)}{$color_5_fourth_img = $wa->shop->productImgUrl($product, '1500')}{/if}
+                {$color_6_first_img = $wa->shop->imgUrl($product.images[$product_image_ids[20]], '970')}{if empty($color_6_first_img)}{$color_6_first_img = $wa->shop->productImgUrl($product, '1500')}{/if}
+                {$color_6_second_img = $wa->shop->imgUrl($product.images[$product_image_ids[21]], '970')}{if empty($color_6_second_img)}{$color_6_second_img = $wa->shop->productImgUrl($product, '1500')}{/if}
+                {$color_6_third_img = $wa->shop->imgUrl($product.images[$product_image_ids[22]], '970')}{if empty($color_6_third_img)}{$color_6_third_img = $wa->shop->productImgUrl($product, '1500')}{/if}
+                {$color_6_fourth_img = $wa->shop->imgUrl($product.images[$product_image_ids[23]], '970')}{if empty($color_6_fourth_img)}{$color_6_fourth_img = $wa->shop->productImgUrl($product, '1500')}{/if}
+                {if $wa->shop->productImgHtml($product, '500x0')}
+                {$imgUrl =  $wa->shop->productImgUrl($p, '1500')}
+                {$wa->shop->productImgHtml($product, '1000x0', ['class' => 'result-pic__img', 'data-color-1-first-src'=> $color_1_first_img, 'data-color-1-second-src'=> $color_1_second_img, 'data-color-1-third-src'=> $color_1_third_img, 'data-color-1-fourth-src'=> $color_1_fourth_img, 'data-color-2-first-src'=> $color_2_first_img,'data-color-2-second-src'=> $color_2_second_img, 'data-color-2-third-src'=> $color_2_third_img, 'data-color-2-fourth-src'=> $color_2_fourth_img,'data-color-3-first-src'=> $color_3_first_img,'data-color-3-second-src'=> $color_3_second_img, 'data-color-3-third-src'=> $color_3_third_img, 'data-color-3-fourth-src'=> $color_3_fourth_img,'data-color-4-first-src'=> $color_4_first_img, 'data-color-4-second-src'=> $color_4_second_img, 'data-color-4-third-src'=> $color_4_third_img, 'data-color-4-fourth-src'=> $color_4_fourth_img, 'data-color-5-first-src'=> $color_5_first_img, 'data-color-5-second-src'=> $color_5_second_img, 'data-color-5-third-src'=> $color_5_third_img, 'data-color-5-fourth-src'=> $color_5_fourth_img, 'data-color-6-first-src'=> $color_6_first_img, 'data-color-6-second-src'=> $color_6_second_img, 'data-color-6-third-src'=> $color_6_third_img, 'data-color-6-fourth-src'=> $color_6_fourth_img,'data-original-src' => $color_1_first_img, 'alt' => $product.name, 'default' => "`$wa_theme_url`img/dummy600.png"])}
+                {else}
+                <img class="result-pic__img" alt="{$p.name}" title="{$p.name}" src="{$wa_theme_url}assets/img/dummy600.png">
+                {/if}
+              </div>
+              <div class="result-card__info js-result-price" data-new-price='{shop_currency($product.price, null, null, 0)}' data-price="{shop_currency($product.price, null, null, 0)}">
+                <div class="result-info__small-name">Букет</div>
+                <span class="result-info__qty">11</span>&ensp;<span class="result-info__color js-name-color"></span>&ensp;<div class="result-info__name"> {$product.summary|lower} </div>&ensp;<span class="result-info__length"></span>&ensp;<span class="result-info__pack"></span><br>
+                <div class="result-info__price js-price">{shop_currency($product.price, null, null, 0)*11}</div><span> ₽</span>
+              </div>
+              <button type="submit" class="btn btn--full reqConstructor">заказать букет</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="users-bouquet">
+      <div class="block__inner">
+        <h2 class="block__title block__title--w100">Букеты других пользователей</h2>
+        <div class="block__caption">Посмотрите букеты других пользователей которые были собраны в нашем конструкторе букетов</div>
+        <div class="block__content">
+          <div class="users-bouquet__items">
+            <div class="grid grid--m-mr-64">
+              {$boquet_list = $boquet->getList()}
+              {$count = 1}
+              {foreach $boquet_list as $l}
+              <div class="grid__c grid__c--s-1-2 grid__c--m-1-3 grid__c--m-pd-64 {if $count > 3} spoiler-content {/if}" >
+                <div class="product-card-toggle js-toggle">
+                  <div class="product-card-toggle__front">
+                    <div class="product-card js-item" data-name="" data-price="4000" data-sku="fBH" data-smallpic="/wa-data/public/shop/products/33/00/33/images/111/111.200x0.jpg" data-id="33">
+                      <a  class="product-card__pic">
+                        <img class="product-card__img js-item-image" data-original-src="{$l.picture}" alt="{$l.flowers}" title="{$l.flowers}" src="{$l.picture}">
+                      </a>
+                      <small class="product-card__sub-title">Конструктор букетов</small>
+                      <a class="product-card__title product-card__title--mh135">{$l.flowers}</a>
+                      <div class="product-card__price"><span class="product-card__price__value">{$l.price}</span>₽</div>
+                      <div class="product-card__favorites js-product-to-favorites" style="display: none">
+                        <svg class="svg-icon">
+                          <use xlink:href="#i-heart"></use>
+                        </svg>
+                      </div>
+                      <div href="#" class="product-card__cart js-product-add" onclick="">
+                        <svg class="svg-icon">
+                          <use xlink:href="#i-shopping-cart"></use>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="product-card-toggle__back">
+                    <div class="product-card product-card--back js-item" data-name="" data-price="4000" data-sku="S0N0fB1tcH" data-smallpic="/wa-data/public/shop/products/33/00/33/images/111/111.200x0.jpg" data-id="33" data-summary="Короткое описание">
+                      <a  class="product-card__pic">
+                        <img class="product-card__img js-item-image" data-original-src='{$l.picture}' src="{$l.picture}">
+                      </a>
+                      <small class="product-card__sub-title">Конструктор букетов</small>
+                      <a class="product-card__title product-card__title--mh135 js-constructor-name">{$l.flowers}</a>
+                      <a href="#" id="modal-order-btn" class="product-card__buy-quick btn btn--full js-modal-order reqConstructor" data-boquets >Быстрый
+                        заказ</a>
+                      <a href="/cart" class="product-card__to-cart btn">В корзину</a>
+                      <a href="#" class="product-card__continue btn js-product-close">Продолжить</a>
+                      <div class="product-card__manage">
+                        <div class="product-card__price"><span class="product-card__price__value">{$l.price}</span>₽</div>
+                      </div>
+                      <div class="product-card__close js-product-close" data-construct >
+                        <div class="product-card__close-inner"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {$count = $count + 1}
+              {/foreach}
+            </div>
+          </div>
+          <a class="catalog-bouquets__more js-showmore-constructor">Показать еще</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

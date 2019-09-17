@@ -1,0 +1,21 @@
+<div class="block">
+  <div class="container">
+    <div class="block__inner">
+      <div class="block__title">Instagram</div>
+      <div class="block__content">
+          {$images = shopInwidgetPlugin::getImages()}
+        <div class="swiper-container js-inst-slider">
+          <div class="swiper-wrapper">
+            {foreach $images as $item => $value}
+            <div class="swiper-slide inst-slide">
+              <a href="{$value->link}" class="inst-slid__link"  title="{$value->text}" target="_blank" rel="nofollow noreferrer noopener">
+                <img class="inst-slide__img" src="{$value->small}" alt="{$value->text}">
+              </a>
+            </div>
+            {/foreach}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

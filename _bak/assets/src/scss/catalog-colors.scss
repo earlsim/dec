@@ -1,0 +1,65 @@
+.catalog-colors__grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -10px 0 0 -10px;
+}
+
+.catalog-colors__item {
+  width: auto;
+  padding: 10px 0 0 10px;
+
+  @media ($m-l) {
+    width: 16.6666%;
+  }
+}
+
+.catalog-colors__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  border: 1px solid transparent;
+  transition: .2s;
+  cursor: pointer;
+
+  &:hover {
+    color: #fff;
+    border-color: #000;
+  }
+
+  &.is-disabled {
+    pointer-events: none;
+  }
+}
+
+.catalog-colors__card-wrap {
+  position: relative;
+}
+
+.catalog-colors__card-radio {
+  position: absolute;
+  opacity: 0;
+}
+
+.catalog-colors__card-checkbox {
+  position: absolute;
+  opacity: 0;
+}
+
+.catalog-colors__card-wrap > input:checked ~ .catalog-colors__card {
+  color: #fff;
+  border-color: #000;
+}
+
+.catalog-colors__card-title {
+  font-family: $f-oswald;
+  font-size: 14px;
+  line-height: 1.5em;
+}
+
+.catalog-colors__color-block {
+  width: 21px;
+  height: 21px;
+}

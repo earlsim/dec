@@ -1,0 +1,164 @@
+.field-text {
+  position: relative;
+
+  &:before {
+    // content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: $c-block;
+  }
+
+  &:after {
+    // content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: $c-main;
+  }
+
+  &.has-error {
+    & ~ .field-text__label {
+      color: red;
+    }
+
+    & .field-text__input {
+      border-bottom: 2px solid red;
+      color: red;
+    }
+  }
+
+  &.is-success {
+    & ~ .field-text__label {
+      color: green;
+    }
+
+    & .field-text__input {
+      border-bottom: 2px solid green;
+      color: green;
+    }
+  }
+
+  &--tr {
+    & .field-text__input {
+      background-color: transparent;
+      border-bottom: 2px solid $c-white;
+    }
+  }
+  &--w-t {
+    & .field-text__input {
+      color: $c-block;
+    }
+      }
+  &--white {
+    & .field-text__input {
+      background-color: transparent;
+      border-bottom: 2px solid $c-text-secondary;
+
+      @include placeholder {
+        color: #F3F4F5;
+      }
+    }
+
+    & .field-text__label {
+      color: #F3F4F5;
+    }
+
+    & .field-text__bar {
+       background-color: #FFF;
+    }
+  }
+}
+
+.field-text__input {
+  width: 100%;
+  height: 64px;
+  font-size: 18px;
+  line-height: 1.75em;
+  color: $c-text-primary;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid $c-block;
+
+  &:-webkit-autofill{
+    -webkit-box-shadow: inset 0 0 0 50px #fff !important;
+  }
+
+  @include placeholder {
+    transition: all .4s;
+  }
+
+  &:required {
+    @include placeholder {
+      opacity: 0;
+    }
+  }
+
+  &:focus {
+    & ~ .field-text__bar {
+      width: 100%;
+    }
+
+    & ~ .field-text__label {
+      color: $c-text-secondary;
+      top: 0;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    @include placeholder {
+      opacity: 1;
+    }
+  }
+
+  &:valid {
+    & ~ .field-text__bar {
+      /*
+      width: 100%;
+      background-color: green;
+       */
+    }
+
+    & ~ .field-text__label {
+      color: $c-text-secondary;
+      top: 0;
+      font-size: 12px;
+    }
+  }
+
+  &:read-only {
+    & ~ .field-text__label {
+      color: $c-text-secondary;
+      top: 0;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.field-text__bar {
+  position:absolute;
+  pointer-events:none;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: $c-main;
+  transition: all .4s;
+}
+
+.field-text__label {
+  position:absolute;
+  pointer-events:none;
+  top: 50%;
+  left: 0;
+  font-size: 18px;
+  line-height: 1.75em;
+  color: $c-text-primary;
+  transform: translateY(-50%);
+  transition: all .4s;
+}

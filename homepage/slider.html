@@ -1,0 +1,44 @@
+{if $promocards = $wa->shop->promos()}
+<!-- Head - begin -->
+<div id="head-slider" class="head-slider">
+  <div class="swiper-container js-head-slider">
+    <div class="swiper-wrapper">
+      {foreach $promocards as $promo}
+      <div class="swiper-slide head-slide">
+        <div class="container">
+          <div class="head-slide__container">
+            {if !empty($promo.body)}{$promo.body}{/if}
+          </div>
+        </div>
+      </div>
+      {/foreach}
+    </div>
+    <div class="head-slider__pagination js-head-slider-pagination"></div>
+    <div class="head-slider__nav">
+      <div class="head-slider__prev js-head-slider-prev">
+        <svg class="svg-icon">
+          <use xlink:href="#i-arrow"></use>
+        </svg>
+      </div>
+      <div class="head-slider__next js-head-slider-next">
+        <svg class="svg-icon">
+          <use xlink:href="#i-arrow"></use>
+        </svg>
+      </div>
+    </div>
+    <div class="head-slider__social head-social">
+      <a href="https://www.instagram.com/decorator_studio/" target="_blank" class="head-social__link">
+        <svg class="svg-icon">
+          <use xlink:href="#i-inst"></use>
+        </svg>
+      </a>
+    </div>
+    <div class="head-slider__scroll">
+      <svg class="svg-icon">
+        <use xlink:href="#i-mouse"></use>
+      </svg>
+    </div>
+  </div>
+</div>
+{/if}
+<!-- Head - end -->

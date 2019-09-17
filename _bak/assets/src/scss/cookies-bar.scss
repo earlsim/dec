@@ -1,0 +1,41 @@
+.cookies-bar {
+  z-index: 9999;
+  position: fixed;
+  display: none;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255,255,255,0.9);
+}
+.cookies-bar__inner {
+  position: relative;
+  display: flex;
+  padding: 8px 36px 8px 0;
+  font-size: 15px;
+
+  &.text {
+    max-width: 100%;
+  }
+
+  & > p:not(:last-child) {
+    margin-bottom: 0;
+  }
+}
+
+.cookies-bar__close {
+  position: absolute;
+  z-index: 3;
+  top: 3px;
+  bottom: 3px;
+  right: 0;
+  width: 36px;
+  height: 36px;
+  font-size: 36px;
+  font-weight: 300;
+  line-height: 36px;
+  color: $c-main;
+  background-color: transparent;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+}

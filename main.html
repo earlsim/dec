@@ -1,0 +1,11 @@
+{if $wa->currentUrl() == '/' or $page.id == 10}
+{include file="`$wa_active_theme_path`/home.html" inline}
+{elseif $page}
+{include file="`$wa_active_theme_path`/page.html" inline}
+{elseif $error_code}
+{include file="`$wa_active_theme_path`/error.html" inline}
+{elseif $wishpage}
+{include file="`$wa_active_theme_path`/error.html" inline}
+{else}
+{include file="`$wa_active_theme_path`/shop.html" inline}
+{/if}

@@ -1,0 +1,107 @@
+{$wa->title("Заказы - Студия ярких событий Декораторъ")}
+<div class="page">
+  <div class="container container--no-mw">
+    {$products = $wa->shop->products()}
+    <div class="my-orders">
+      <h1 class="page__title page__title--mb48">
+        Заказы
+      </h1>
+      {$counter = 0}
+      {foreach $orders as $o}
+      {$prod = $wa->shop->product($o)}
+
+      <div class="my-orders__item">
+        <div class="item-header js-order-header {if $counter == 0} is-active{/if}">
+          <div id="order-{$o.id}" class="item-header__info">
+            <span class="info__id {if $counter == 0} is-active{/if}">{$o.id_str}</span>
+            <span class="info__date {if $counter == 0} is-active{/if}">от {$o.create_datetime}</span>
+            <div class="info__click-elem {if $counter == 0} is-active{/if} js-info-show"></div>
+
+          </div>
+        </div>
+        <div class="item-body {if $counter == 0} is-active{/if}">
+          <div class="item-body__status">
+            <span class="item__body__status-name">Статус: </span>{$o.state->getName()}
+            {if $o.shipping_name}
+            <span class="item__body__status-name">Доставка: </span>{$o.shipping_name|escape}
+            {else}
+            &nbsp;
+            {/if}
+            <!--{if $o.payment_name}-->
+            <!--<span class="item__body__status-name">Оплата: </span>-->
+            <!--{$o.payment_name|escape}-->
+            <!--{else}-->
+            <!--&nbsp;-->
+            <!--{/if}-->
+          </div>
+          <div class="item-body__list">
+            {if !empty($o.items)}
+            {foreach $o.items as $i}
+            {foreach $i.product_id as $p}
+            {$p = $wa->shop->product($i.product_id)}
+            {$curSKU = $p.sku_id}
+            {foreach $p.skus as $sku}
+              {if $sku.id==$curSKU}
+                {$curSKUName =$sku.sku}
+              {/if}
+            {/foreach}
+            <div class="item__body__list product-order">
+              <div class="product-order-item">
+                <div class="product-order-item__content">
+                  <div class="product-order__pic">
+                    <img class="product-order__img" src="{$wa->shop->productImgUrl($p, '200x0')}" alt="">
+                    {/foreach}
+                  </div>
+                  <div class="product-order__text">
+                    <div class="product-order__sku">{$curSKUName}</div>
+                    <div class="product-order__name">{$p.name}</div>
+                    <div class="product-order__qnt">Колиество: {$i.quantity}</div>
+                  </div>
+                </div>
+                <div class="product-order-item__inner-price">
+                  <div class="product-order-item__price">
+                  <span>{number_format($p.price, 0, ',', ' ' )}</span>
+                  <span>₽</span>
+                  <span>X</span>
+                  <span>{$i.quantity}</span>
+                </div>
+                  <div class="product-order-item__price">
+                  <span>{number_format($p.price, 0, ',', ' ' )}</span>
+                  <span>₽</span>
+                </div>
+                </div>
+              </div>
+            </div>
+            {/foreach}
+            {/if}
+          </div>
+          <div class="item-body__summary">
+            <div class="summary__deliv">
+              <span>Доставка</span>
+              <span></span>
+              <span>{number_format($o.shipping, 0, ',', ' ' )}</span>
+              <span> ₽</span>
+            </div>
+            <div class="summary__final">
+              <span>Итого</span>
+              <span></span>
+              <span>{number_format($o.total, 0, ',', ' ' )}</span>
+              <span> ₽</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      {$counter = $counter +1}
+      {foreachelse}
+      <div class="page__empty">[`You have no order history yet.`]</div>
+      {/foreach}
+    </div>
+  </div>
+</div>
+
+{$wa->globals('isMyAccount', true)}
+
+<!-- plugin hook: 'frontend_my_orders' -->
+{* @event frontend_my_orders.%plugin_id% *}
+{foreach $frontend_my_orders as $_}{$_}{/foreach}

@@ -1,0 +1,170 @@
+.header {
+  &--absolute {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  &--light {
+    & .header__inner {
+      &:before {
+        background-color: transparent;
+      }
+    }
+
+    & .header__login,
+    & .header__logo,
+    & .header__phone,
+    & .header__like,
+    & .header__cart {
+      color: #FFF;
+    }
+  }
+}
+
+.header__inner {
+  position: relative;
+  z-index: 100;
+
+  &:before {
+    content: '';
+    position: absolute;
+    z-index: 110;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #FFF;
+    box-shadow: 0 0 64px rgba(72, 22, 93, 0.1);
+    transition: all .4s;
+  }
+}
+
+.header__container {
+  position: relative;
+  z-index: 125;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+
+  @media ($m-m) {
+    padding: 24px 48px;
+  }
+}
+
+.header__logo {
+  color: $c-main;
+  transition: all .4s;
+
+  @media ($m-l) {
+    flex-basis: 20%;
+  }
+}
+
+.header__menu {
+  order: -1;
+
+  @media ($m-ml) {
+    order: 0;
+  }
+}
+
+.header__menu-btn {
+  display: block;
+
+  & .svg-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  @media ($m-m) {
+    display: none;
+  }
+}
+
+.header__menu-container {
+  // position: absolute;
+  display: none;
+
+  @media ($m-m) {
+    display: block;
+  }
+}
+
+.header__bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  @media ($m-l) {
+    flex-basis: 20%;
+  }
+}
+
+.header__phone {
+  margin-right: 24px;
+  font-family: $f-secondary;
+  font-size: 16px;
+  line-height: .8em;
+  font-weight: 700;
+  color: $c-text-secondary;
+  transition: all .4s;
+  display: none;
+
+  @media ($m-s) {
+    display: block;
+  }
+
+  @media ($m-l) {
+    margin-right: 24px;
+    font-size: 20px;
+  }
+
+  @media ($m-xl) {
+    margin-right: 32px;
+  }
+
+  @media ($m-xxl) {
+    margin-right: 64px;
+    font-size: 24px;
+  }
+}
+
+.header__login {
+  flex-shrink: 0;
+  margin-right: 24px;
+  width: 18px;
+  height: 18px;
+  transition: all .4s;
+}
+
+.header__like {
+  flex-shrink: 0;
+  margin-right: 24px;
+  width: 20.9px;
+  height: 18.23px;
+  transition: all .4s;
+}
+
+.header-logo {
+  display: block;
+  width: 80px;
+  height: 38px;
+
+  @media ($ma-ml) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+
+  @media ($m-l) {
+    width: 161.55px;
+    height: 76px;
+    margin-bottom: 12px;
+  }
+}

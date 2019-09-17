@@ -1,0 +1,123 @@
+.header-cart-product {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid $c-block;
+  padding: 0 16px 0 0;
+}
+
+.header-cart-product__pic {
+  position: relative;
+  flex-shrink: 0;
+  width: 30%;
+  padding-top: 20%;
+  max-width: 96px;
+  max-height: 96px;
+}
+
+.header-cart-product__img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.header-cart-product__content {
+  flex-grow: 1;
+  margin-left: 24px;
+  padding: 16px 0;
+}
+
+.header-cart-product__code {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 1.35em;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+}
+
+.header-cart-product__name {
+  display: block;
+  margin-top: 4px;
+  font-size: 20px;
+  line-height: 1.25em;
+  font-weight: 500;
+}
+
+.header-cart-product__qnt {
+  margin-top: 8px;
+  font-size: 16px;
+  line-height: 1.25em;
+  color: $c-text-primary;
+}
+
+.header-cart-product__price {
+  position: absolute;
+  right: 27px;
+  bottom: 14px;
+
+  & span {
+    &:first-child {
+      font-family: $f-secondary;
+      font-size: 18px;
+      line-height: 1em;
+      color: $c-text-secondary;
+    }
+    &:last-child {
+      font-size: 14px;
+      line-height: 1.45em;
+      color: $c-text-secondary;
+    }
+  }
+}
+
+.header-cart-product__close {
+  position: absolute;
+  top: 14px;
+  right: 24px;
+  transform: rotate(45deg);
+}
+
+.header-cart-product__close-inner {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  border-radius: 100%;
+  transition: background-color .4s;
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    background-color: $c-block;
+    border-radius: 2px;
+    transition: background-color .4s;
+  }
+
+  &:before {
+    width: 18px;
+    height: 2px;
+  }
+
+  &:after {
+    width: 2px;
+    height: 18px;
+  }
+
+  &:hover {
+    background-color: $c-block;
+
+    &:before,
+    &:after {
+      background-color: #FFF;
+    }
+  }
+}

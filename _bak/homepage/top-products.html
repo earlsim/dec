@@ -1,0 +1,165 @@
+{if $wa->isMobile()}
+{$products_on_page = 6}
+{else}
+{$products_on_page = 16}
+{/if}
+{$prod_count = count($wa->shop->productSet("bestsellers"))}
+{$pages_count = ceil($prod_count/$products_on_page)}
+{$curr_page = $smarty.get.page-1}
+{if $curr_page < 0}{$curr_page = 0}{/if}
+{$products = $wa->shop->productSet('bestsellers', $products_on_page*$curr_page, $products_on_page)}
+{if $products}
+<div class="block">
+  <div class="container">
+    <div class="block__head">
+      <div class="block__title">
+        Топ товаров
+      </div>
+    </div>
+  </div>
+  <div class="block__content js-catalog">
+    <div class="m-line-products hide-s">
+      <div class="m-line-products__grid js-product-list">
+        {foreach $products as $product}
+        {$prod = $wa->shop->product($product.id)}
+        <div class="m-line-products__grid-item js-item" data-id="{$product.id}">
+          <div class="product-card">
+            <div class="product-card__headline">
+              {if $prod->features["skidka"]}
+              <span class="product-card__headline-label">-{$prod->features["skidka"]}% {if ($prod->features["bolshaya_kartochka"] && $productTotal >= 15 && $isMobile == false) || ($prod->features["bolshaya_kartochka"] && $productTotal >= 15 && $isMobile == false)}скидки{/if}</span>
+              {else}
+              <div></div>
+              {/if}
+              {if $wa->user()->isAuth()}
+                {if $wishArray = $wa->user()->get('wishlist', true, false)}
+                  {if in_array($product.id, explode(',', $wishArray))}
+                    {$itemInWish = true}
+                  {else}
+                    {$itemInWish = false}
+                  {/if}
+                {/if}
+              {else}
+                {if $wishArray = $wa->storage('wishlist')}
+                  {if in_array($product.id, explode(',', $wishArray))}
+                    {$itemInWish = true}
+                  {else}
+                    {$itemInWish = false}
+                  {/if}
+                {/if}
+              {/if}
+              <div class="product-card__headline-icon js-item-wish {if $itemInWish}is-active{/if}">
+                <svg class="svg-icon">
+                  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-fav-f"></use>
+                </svg>
+              </div>
+            </div>
+            <a href="{$product.frontend_url}" title="{$product.name}" class="product-card__pic">
+              <div class="product-card__pic-lay" style="background-image: url({$wa->shop->productImgUrl($product, '300')});"></div>
+            </a>
+            <div class="products-card__content">
+              <a href="{$product.frontend_url}" title="{$product.name}" class="product-card__title">{$product.name}</a>
+              <div class="product-card__info">
+                <div class="product-card__price-wrap">
+                  <div class="product-card__price {if $product.compare_price > 0}product-card__price--red{/if}">
+                    <span>{shop_currency($product.price, null, null, 0)}</span> ₽
+                  </div>
+                  {if $product.compare_price > 0}
+                  <div class="product-card__oldprice">
+                    <span>{shop_currency($product.compare_price, null, null, 0)}</span> ₽
+                  </div>
+                  {/if}
+                </div>
+                <a href="{$product.frontend_url}" title="{$product.name}" data-type="card" class="product-card__btn">
+                  <svg class="svg-icon">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-bag"></use>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/foreach}
+      </div>
+    </div>
+    <div class="line-products show-s">
+      <div class="container">
+        <div class="line-products__slider">
+          <div id="h-top-products" class="swiper-container">
+            <div class="swiper-wrapper">
+              {foreach $products as $product}
+              {$prod = $wa->shop->product($product.id)}
+              <div class="swiper-slide">
+                <div class="product-card">
+                  <div class="product-card__headline">
+                    {if $prod->features["skidka"]}
+                    <span class="product-card__headline-label">-{$prod->features["skidka"]}% {if ($prod->features["bolshaya_kartochka"] && $productTotal >= 15 && $isMobile == false) || ($prod->features["bolshaya_kartochka"] && $productTotal >= 15 && $isMobile == false)}скидки{/if}</span>
+                    {else}
+                    <div></div>
+                    {/if}
+                    {if $wa->user()->isAuth()}
+                      {if $wishArray = $wa->user()->get('wishlist', true, false)}
+                        {if in_array($product.id, explode(',', $wishArray))}
+                          {$itemInWish = true}
+                        {else}
+                          {$itemInWish = false}
+                        {/if}
+                      {/if}
+                    {else}
+                      {if $wishArray = $wa->storage('wishlist')}
+                        {if in_array($product.id, explode(',', $wishArray))}
+                          {$itemInWish = true}
+                        {else}
+                          {$itemInWish = false}
+                        {/if}
+                      {/if}
+                    {/if}
+                    <div class="product-card__headline-icon js-item-wish {if $itemInWish}is-active{/if}">
+                      <svg class="svg-icon">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-fav-f"></use>
+                      </svg>
+                    </div>
+                  </div>
+                  <a href="{$product.frontend_url}" title="{$product.name}" class="product-card__pic">
+                    <div class="product-card__pic-lay" style="background-image: url({$wa->shop->productImgUrl($product, '300')});"></div>
+                  </a>
+                  <div class="products-card__content">
+                    <a href="{$product.frontend_url}" title="{$product.name}" class="product-card__title">{$product.name}</a>
+                    <div class="product-card__info">
+                      <div class="product-card__price-wrap">
+                        <div class="product-card__price {if $product.compare_price > 0}product-card__price--red{/if}">
+                          <span>{shop_currency($product.price, null, null, 0)}</span> ₽
+                        </div>
+                        {if $product.compare_price > 0}
+                        <div class="product-card__oldprice">
+                          <span>{shop_currency($product.compare_price, null, null, 0)}</span> ₽
+                        </div>
+                        {/if}
+                      </div>
+                      <a href="{$product.frontend_url}" title="{$product.name}" data-type="card" class="product-card__btn">
+                        <svg class="svg-icon">
+                          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-bag"></use>
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/foreach}
+            </div>
+          </div>
+        </div>
+        <div id="top-products-srollbar" class="line-products__scrollbar">
+        </div>
+      </div>
+    </div>
+  </div>
+  {if $wa->isMobile()}
+  {include file="`$wa_active_theme_path`/chunks/pagination.html" hide_mobb=1 products_count=$prod_count inline per_page=$products_on_page total=$pages_count attrs=['class' => "pagination"]}
+  {/if}
+  <div class="block__more hide-s js-showmore">
+    <button class="block__more-btn btn btn--bdBlack js-showmore-btn">
+      Показать ещё
+    </button>
+  </div>
+</div>
+{/if}

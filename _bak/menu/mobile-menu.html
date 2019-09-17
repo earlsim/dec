@@ -1,0 +1,129 @@
+<div class="m-menu js-m-menu" style="display: none;">
+    <div class="m-menu__search">
+      <div class="search-form">
+        <div class="search-form__input">
+          <div class="search-form__input-icon">
+            <svg class="svg-icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-user"></use>
+            </svg>
+          </div>
+          <form method="get" action="{$wa->getUrl('shop/frontend/search')}">
+            <input tid="search" type="search" name="query" class="search-form__input-control" {if !empty($query)}value="{$query}"{/if} placeholder="Я ищу...">
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="m-menu-cat-btn js-menu-btn">
+      <div class="m-menu-cat-btn__caption">Каталог товаров</div>
+      <div class="m-menu-cat-btn__icon"></div>
+    </div>
+    <div class="m-menu-cat">
+      {$categories = $wa->shop->categories(0, 1, true)}
+      {$curcat = $category.id}
+      {foreach $categories as $category}
+      {if $category.childs}
+      <div class="m-menu-cat__item js-m-menu-item">
+        <div class="m-menu-cat__title"><span>{mb_substr($category.name, 0, 1)}</span>{mb_substr($category.name, 1)}</div>
+
+        <div class="m-menu-cat__wrap js-m-menu-subitem">
+          {foreach $category.childs as $sc}
+          <div class="m-menu-cat__sub">
+            {if $sc.id == $curcat}
+            <a href="{$sc.url}" class="m-menu-cat__sub-link is-active">{$sc.name|escape}</a>
+            {else}
+            <a href="{$sc.url}" class="m-menu-cat__sub-link">{$sc.name|escape}</a>
+            {/if}
+          </div>
+          {/foreach}
+        </div>
+      </div>
+      {else}
+      <a href="{$category.url}" class="m-menu-cat__item">
+        <div class="m-menu-cat__title m-menu-cat__title--link"><span>{mb_substr($category.name, 0, 1)}</span>{mb_substr($category.name, 1)}</div>
+      </a>
+      {/if}
+
+      {/foreach}
+    </div>
+
+    <div class="m-menu__item m-menu__item--icon">
+      <div class="m-menu__title">
+        <div class="m-menu__title-icon">
+          <svg class="svg-icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-user"></use></svg>
+        </div>
+        {if $wa->userId()}
+        <a href="/my/" class="m-menu__title-caption">{$wa->user('firstname','')}</a>
+        <div class="m-menu__tag">
+          <a href="/?logout" class="m-menu__tag-caption m-menu__tag-caption--logout">Выход</a>
+        </div>
+        {else}
+        <a href="/login/" class="m-menu__title-caption">Войти в личный кабинет</a>
+        {/if}
+      </div>
+    </div>
+    <a href="/cart/" class="m-menu__item m-menu__item--icon">
+      <div class="m-menu__title">
+        <div class="m-menu__title-icon">
+          <svg class="svg-icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-cart"></use></svg>
+        </div>
+        <div class="m-menu__title-caption">Корзина</div>
+        <div class="m-menu__tag">
+          <div class="m-menu__tag-caption">Товаров</div>
+          <div class="m-menu__tag-count">{$wa->shop->cart->count()}</div>
+        </div>
+      </div>
+    </a>
+    {if $wa->user()->isAuth()}
+    {if $wishArray = $wa->user()->get('wishlist', true, false)}
+    {$wish_count = (count(explode(',', $wishArray)))}
+    {else}
+    {$wish_count = 0}
+    {/if}
+    {else}
+    {if $wishArray = $wa->storage('wishlist')}
+    {$wish_count = (count(explode(',', $wishArray)))}
+    {else}
+    {$wish_count = 0}
+    {/if}
+    {/if}
+    <a href="/wishlist/" class="m-menu__item m-menu__item--icon">
+      <div class="m-menu__title">
+        <div class="m-menu__title-icon">
+          <svg class="svg-icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-user"></use></svg>
+        </div>
+        <div class="m-menu__title-caption">Избранное</div>
+        <div class="m-menu__tag">
+          <div class="m-menu__tag-caption">Товаров</div>
+          <div class="m-menu__tag-count">{$wish_count}</div>
+        </div>
+      </div>
+    </a>
+    {$items = $wa->menu->get(1)}
+    {foreach $items as $item}
+    <div class="m-menu__item">
+      <a href="{$item.url}" class="m-menu__title">
+        {$item.name}
+      </a>
+    </div>
+    {/foreach}
+    <div class="m-menu__item js-m-submenu">
+      <div class="m-menu-btn">
+        <div class="m-menu-btn__caption">Поддержка</div>
+        <div class="m-menu-btn__icon"></div>
+      </div>
+      <div class="m-menu__sub">
+        {$items = $wa->menu->get(5)}
+        {foreach $items as $item}
+        <a href="{$item.url}" class="m-menu__sub-link">{$item.name}</a>
+        {/foreach}
+      </div>
+    </div>
+    <div class="m-menu__bottom">
+      <div class="m-menu-bottom">
+        <div class="m-menu-bottom__social">
+          {$wa->block("social")}
+        </div>
+        <a href="#popup-callback" class="btn btn--bold m-menu-bottom__btn js-mfp">Заказать звонок</a>
+      </div>
+    </div>
+</div>

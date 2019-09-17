@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>New WebPack Bundle</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta property="og:title" content="" />
+    <meta property="og:type" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" style="height: 0; width: 0; position: absolute; top: -99999px; left: -99999px; visibility: hidden;">
+    <symbol id="i-logo" viewBox="0 0 315.26 100">
+        <path d="M15.61 33.25v17.59a3.43 3.43 0 0 0 .66 2.23 4.7 4.7 0 0 0 2.33 1.28v1.35H0v-1.34a4.42 4.42 0 0 0 2.31-1.22A3.47 3.47 0 0 0 3 50.88V7.82a3.3 3.3 0 0 0-.67-2.22A4.93 4.93 0 0 0 0 4.33V3h47.26a3.45 3.45 0 0 0 2.28-.66A4.69 4.69 0 0 0 50.79 0H52v15.53h-1.21a4.73 4.73 0 0 0-1.25-2.33 3.36 3.36 0 0 0-2.28-.66H15.61v11.57H35.5a3.4 3.4 0 0 0 2.26-.66A4.83 4.83 0 0 0 39 21.12h1.26v15.13H39a4.76 4.76 0 0 0-1.25-2.33 3.35 3.35 0 0 0-2.28-.66zm58.73.75v16.84a3.43 3.43 0 0 0 .66 2.24 4.7 4.7 0 0 0 2.33 1.28v1.34h-18.6v-1.34A4.42 4.42 0 0 0 61 53.14a3.47 3.47 0 0 0 .67-2.27V7.82a3.3 3.3 0 0 0-.66-2.22 4.93 4.93 0 0 0-2.33-1.27V3h34.63a58.74 58.74 0 0 1 10.26.67 17.89 17.89 0 0 1 6.31 2.48q5.71 3.71 5.7 12.13 0 6.38-3.52 10t-11.34 5.19l10 13.91a30.61 30.61 0 0 0 4.38 5.24 7.76 7.76 0 0 0 3.71 1.77v1.31H96.66v-1.34q2.46-.65 2.46-2.12a6.5 6.5 0 0 0-1.51-3.13L87 34zm0-9.54h19.09a16.46 16.46 0 0 0 6.42-.95c1.94-.84 2.92-2.52 2.92-5 0-2.23-.69-3.78-2.06-4.66s-3.81-1.32-7.29-1.32H74.34zm92.88 18h-24.28l-2.75 5.73a8.06 8.06 0 0 0-1 3.24c0 1.51 1 2.48 3 2.88v1.39h-19.33v-1.34a5 5 0 0 0 2.65-1.07 12.15 12.15 0 0 0 2.06-3.15l19.24-38.93a8.9 8.9 0 0 0 1.07-3.86c0-1.28-.87-2.28-2.64-3V3h20.48v1.35c-1.72.69-2.59 1.75-2.59 3.2a8.66 8.66 0 0 0 1.17 3.81l20 37.74a17.54 17.54 0 0 0 2.59 4 5.79 5.79 0 0 0 2.87 1.28v1.32h-21.52v-1.34c2.06-.34 3.08-1.3 3.08-2.86a8.18 8.18 0 0 0-1.17-3.61zm-3.82-7.42l-8.62-16.93-8.21 16.93zM208.61 21v29.84a3.4 3.4 0 0 0 .67 2.25 4.73 4.73 0 0 0 2.32 1.27v1.34h-17.45v-1.34a4.42 4.42 0 0 0 2.31-1.22 3.47 3.47 0 0 0 .67-2.27V7.82a3.3 3.3 0 0 0-.66-2.22 4.93 4.93 0 0 0-2.33-1.27V3h20.23v1.33q-2.07.51-2.07 1.83a4.07 4.07 0 0 0 1.51 2.63l28.33 28v-29a3.36 3.36 0 0 0-.66-2.23 4.56 4.56 0 0 0-2.33-1.26V3h17.45v1.33a4.56 4.56 0 0 0-2.33 1.24 3.4 3.4 0 0 0-.66 2.23v43a3.44 3.44 0 0 0 .66 2.23 4.69 4.69 0 0 0 2.33 1.28v1.39h-18.85v-1.34c1.38-.27 2.07-.85 2.07-1.72a2.22 2.22 0 0 0-.56-1.37c-.39-.47-1.24-1.38-2.59-2.75zm86.31-8.45v38.29a3.43 3.43 0 0 0 .66 2.23 4.69 4.69 0 0 0 2.33 1.28v1.35h-18.6v-1.34a4.44 4.44 0 0 0 2.31-1.22 3.45 3.45 0 0 0 .68-2.27V12.53h-15.54a3.45 3.45 0 0 0-2.28.66 4.77 4.77 0 0 0-1.25 2.33H262V0h1.26a4.58 4.58 0 0 0 1.2 2.31 3.39 3.39 0 0 0 2.28.67h43.77a3.48 3.48 0 0 0 2.28-.66A4.69 4.69 0 0 0 314 0h1.25v15.52H314a4.74 4.74 0 0 0-1.25-2.33 3.36 3.36 0 0 0-2.28-.66z" />
+        <path d="M225.62 78.72H222v20.94h-3.19V78.72h-3.61V76h10.41zM205 99.66h-8.56V76h8.4v2.7h-5.2v7.49h4.82v2.71h-4.82V97h5.35zm-20.29 0h-8.56V76h3.19v21h5.35zM137.3 78.72h-3.61v20.94h-3.2V78.72h-3.62V76h10.42zm-21.57 15.35q0 5.93-5.31 5.93-5.82 0-5.82-5.89V76h3.19v16.75a10.43 10.43 0 0 0 .45 3.72 1.94 1.94 0 0 0 2 1c1 0 1.66-.36 1.91-1.08a13.14 13.14 0 0 0 .39-3.85V76h3.19zM88.72 88q0-6.73-.8-8.31a2.53 2.53 0 0 0-2.36-1.58A2.55 2.55 0 0 0 83 80a20.58 20.58 0 0 0-.69 6.4v1.3a34.27 34.27 0 0 0 .57 7.3 2.6 2.6 0 0 0 2.68 2.31A2.68 2.68 0 0 0 87.78 96q.93-1.3.93-7.17zM79 87.78q0-7.7 1.51-10t5-2.26q4 0 5.28 2.53T92 87.2a38.53 38.53 0 0 1-.58 8.18 5.72 5.72 0 0 1-2 3.35 7.88 7.88 0 0 1-7.8.07 5.91 5.91 0 0 1-2-3.21 31.25 31.25 0 0 1-.62-7.81zM163.39 96.25l-8.63-16.93-8.21 16.93z"
+            fill="#e00007" />
+    </symbol>
+    <symbol id="i-arrow" viewBox="0 0 14.86 16.71">
+        <path d="M6.51 16.71L5.8 16l7.14-7.14H0v-1h12.95L5.8.71 6.51 0l8.14 8.14.21.21-8.35 8.36z" />
+    </symbol>
+    <symbol id="i-bag" viewBox="0 0 28.09 29">
+        <path d="M28.09 29H0L2.08 3.59H8V0h12v3.59h6zm-27-1H27L25.08 4.59H3zM9 3.59h10V1H9z" />
+    </symbol>
+    <symbol id="i-chevron" viewBox="0 0 9.41 6.12">
+        <path d="M4.71 6.12L0 1.41 1.41 0l3.3 3.29L8 0l1.41 1.41-4.7 4.71z" />
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 11.91 8.62">
+        <path d="M4.71 8.62L0 3.91 1.41 2.5l3.3 3.29L10.5 0l1.41 1.41-7.2 7.21z" />
+    </symbol>
+    <symbol id="i-chevron-m" viewBox="0 0 5.06 8.71">
+        <path d="M.71 8.71L0 8l3.65-3.65L0 .71.71 0l4.35 4.35L.71 8.71z" />
+    </symbol>
+    <symbol id="i-fb" viewBox="0 0 9.32 20">
+        <path d="M6.2 6.55V4.83a3.8 3.8 0 0 1 0-.6 1.17 1.17 0 0 1 .16-.42.67.67 0 0 1 .41-.29 2.94 2.94 0 0 1 .76-.08H9.3V0H6.54a4.48 4.48 0 0 0-3.43 1.13 4.78 4.78 0 0 0-1 3.34v2.08H0V10h2.06v10H6.2V10H9l.36-3.45z" />
+    </symbol>
+    <symbol id="i-ok" viewBox="0 0 12.01 20">
+        <path d="M5 14.09a7.77 7.77 0 0 1-4.13-1.48c-.15-.12-.3-.23-.44-.36a1.18 1.18 0 0 1-.16-1.67 1.18 1.18 0 0 1 1.57-.35 2.43 2.43 0 0 1 .34.2 6.8 6.8 0 0 0 7.53.07 2 2 0 0 1 .73-.38 1.15 1.15 0 0 1 1.32.53 1.12 1.12 0 0 1-.08 1.47 6.09 6.09 0 0 1-2.18 1.41 10.28 10.28 0 0 1-2.5.56l.27.29 3.46 3.47a1.14 1.14 0 0 1 .27 1.34 1.36 1.36 0 0 1-1.28.8 1.25 1.25 0 0 1-.81-.41 92.21 92.21 0 0 1-2.61-2.63c-.25-.26-.37-.21-.59 0-.87.9-1.76 1.79-2.66 2.67a1.11 1.11 0 0 1-1.34.24 1.36 1.36 0 0 1-.79-1.25 1.25 1.25 0 0 1 .42-.84l3.41-3.42z" />
+        <path d="M6 10.12a5.06 5.06 0 1 1 5.09-5 5.06 5.06 0 0 1-5.09 5zm2.48-5.06A2.48 2.48 0 1 0 6 7.54a2.47 2.47 0 0 0 2.48-2.48z" />
+    </symbol>
+    <symbol id="i-twitter" viewBox="0 0 20 16.25">
+        <path d="M20 1.92a8.19 8.19 0 0 1-2.36.65A4.12 4.12 0 0 0 19.45.3a8.27 8.27 0 0 1-2.61 1A4.11 4.11 0 0 0 9.85 5 11.65 11.65 0 0 1 1.39.75a4.11 4.11 0 0 0 1.27 5.48A4.1 4.1 0 0 1 .8 5.71v.05a4.11 4.11 0 0 0 3.29 4A4.16 4.16 0 0 1 3 9.93a3.94 3.94 0 0 1-.77-.08 4.1 4.1 0 0 0 3.84 2.85A8.23 8.23 0 0 1 1 14.46a8.71 8.71 0 0 1-1-.06 11.6 11.6 0 0 0 6.29 1.85A11.59 11.59 0 0 0 18 4.57V4a8.19 8.19 0 0 0 2-2.08z" />
+    </symbol>
+    <symbol id="i-vk" viewBox="0 0 20 11.41">
+        <path d="M19.89 10.31l-.07-.13a10.36 10.36 0 0 0-2-2.3q-.67-.64-.84-.85a.8.8 0 0 1-.15-.84 7.86 7.86 0 0 1 .94-1.36l.68-.89Q20.21 1.49 20 .82l-.06-.1a.61.61 0 0 0-.32-.17 1.64 1.64 0 0 0-.67 0h-3a.39.39 0 0 0-.21 0h-.19a.46.46 0 0 0-.11.11.71.71 0 0 0-.1.18 17 17 0 0 1-1.11 2.34q-.39.65-.71 1.12a5.38 5.38 0 0 1-.54.7 3.77 3.77 0 0 1-.4.36q-.18.14-.27.11h-.18a.69.69 0 0 1-.23-.26 1.15 1.15 0 0 1-.12-.41v-.42-.5-.44-.86-.73-.57a2.41 2.41 0 0 0 0-.47 1.62 1.62 0 0 0-.11-.33.56.56 0 0 0-.21-.25A1.2 1.2 0 0 0 11 .14 6.93 6.93 0 0 0 9.62 0a6.83 6.83 0 0 0-2.49.25 1.4 1.4 0 0 0-.4.31q-.19.23-.05.25a1.28 1.28 0 0 1 .89.45l.06.13a2 2 0 0 1 .15.48 4.83 4.83 0 0 1 .09.76 8.11 8.11 0 0 1 0 1.3q-.05.54-.1.84a1.69 1.69 0 0 1-.14.49 2.06 2.06 0 0 1-.13.23l-.05.05a.78.78 0 0 1-.28.05.66.66 0 0 1-.35-.15A2.5 2.5 0 0 1 6.39 5a5.36 5.36 0 0 1-.51-.71q-.28-.41-.58-1.04l-.17-.3Q5 2.66 4.71 2.1T4.23 1A.69.69 0 0 0 4 .69h-.05L3.76.57 3.52.5.67.52a.73.73 0 0 0-.59.2L0 .78a.34.34 0 0 0 0 .17.83.83 0 0 0 .06.28Q.69 2.7 1.42 4.06t1.28 2.2q.54.83 1.1 1.57t.74.95l.29.31.26.25a6.18 6.18 0 0 0 .73.6 12.51 12.51 0 0 0 1.07.69 5.82 5.82 0 0 0 1.37.55 4.73 4.73 0 0 0 1.52.17H11a.83.83 0 0 0 .55-.23v-.05a.69.69 0 0 0 .08-.19 1.06 1.06 0 0 0 0-.29 3.43 3.43 0 0 1 .07-.81 2.12 2.12 0 0 1 .18-.54 1.33 1.33 0 0 1 .22-.31.9.9 0 0 1 .18-.15h.08a.66.66 0 0 1 .59.16 3.46 3.46 0 0 1 .64.6q.3.36.71.81a4.9 4.9 0 0 0 .73.67l.21.12a2.53 2.53 0 0 0 .54.23 1.17 1.17 0 0 0 .58.05h2.67a1.21 1.21 0 0 0 .61-.13.52.52 0 0 0 .26-.29.81.81 0 0 0 0-.35 1.31 1.31 0 0 0-.01-.34z" />
+    </symbol>
+    <symbol id="i-wish" viewBox="0 0 38.41 30.91">
+        <path d="M19.21 30.91L0 11.71 11.71 0l7.5 7.5 7.5-7.5 11.7 11.71zm-17.8-19.2l17.8 17.79L37 11.71 26.71 1.41l-7.5 7.5-7.5-7.5z" />
+    </symbol>
+    <symbol id="i-wish-f" viewBox="0 0 37 29.5">
+        <path d="M11 0L0 11l18.5 18.5L37 11 26 0l-7.5 7.5z" />
+    </symbol>
+    <symbol id="i-zoom" viewBox="0 0 26.76 26.86">
+        <path d="M26.05 26.86l-8.28-8.31-2.93 2.94H6.57L0 14.89V6.6L6.57 0h8.27l6.57 6.6v8.29l-2.93 2.95 8.28 8.32zM7 20.49h7.44l6-6V7l-6-6H7L1 7v7.47zm7.64-10.38v1h-3.57v3.57h-1v-3.57H6.78v-1h3.29V6.8h1v3.31" />
+    </symbol>
+    <symbol id="i-search" viewBox="0 0 26.76 26.86">
+        <path d="M26.05 26.86l-8.28-8.31-2.93 2.94H6.57L0 14.89V6.6L6.57 0h8.27l6.57 6.6v8.29l-2.93 2.95 8.28 8.32zM7 20.49h7.44l6-6V7l-6-6H7L1 7v7.47z" />
+    </symbol>
+    <symbol id="i-user" viewBox="0 0 26.46 30.2">
+        <path d="M8.16 30.2H8l-8-7.35 8.16-7.91 5.07 4.91 5.07-4.91 8.16 7.91-8 7.3h-5.27zm.2-1h9.75L25 22.83l-6.7-6.5-5.07 4.91-5.07-4.9-6.7 6.5z" />
+        <path d="M13.23 16.32L4.81 8.16 13.23 0l8.42 8.16zm-7-8.16l7 6.77 7-6.77-7-6.77z" />
+    </symbol>
+    <symbol id="i-aleskeroff" viewBox="0 0 153 37">
+        <path d="M10.64 5.38l-2.89 8h5.72zm10.64 16.29h-5l-1.71-4.83h-8l-1.71 4.83H0L8.21.1h4.86z" />
+        <path d="M24.7 21.67h-4.3V.13h4.3zM32.68 8.73c-1.91 0-3.22 1.35-3.48 3.51h6.87c-.2-1.9-1.22-3.51-3.39-3.51zm.16 13.39c-4.83 0-8-3.28-8-8.17s3.28-8.34 7.82-8.34c4.73 0 7.72 3.45 7.72 8.93V15H29.2c.07 2.69 1.35 4.17 3.65 4.17a3.15 3.15 0 0 0 3.15-2.3h4.14a7.19 7.19 0 0 1-7.29 5.26z" />
+        <path d="M49.5 10.57c-.26-1.64-1.25-2.13-3-2.13-1.5 0-2.39.56-2.39 1.56 0 1.31 1.35 1.48 3.81 2 2.82.56 6.08 1.31 6.08 4.83 0 3.28-2.69 5.29-7.16 5.29-3.91 0-7.26-1.54-7.32-5.55h4.07c.13 1.87 1.35 2.59 3.35 2.59 1.74 0 2.86-.76 2.86-1.94 0-1.35-1.28-1.58-3.51-2.1-2.76-.62-6.44-1.05-6.44-4.79 0-3.05 2.5-4.79 6.87-4.79 3.58 0 6.67 1.35 6.8 5zM63.17 11.82l6.57 9.85h-5.23l-4.27-6.93-1.77 1.64v5.29h-4.2V.13h4.2v11.52L64 6.07h5z" />
+        <path d="M74.89 8.73c-1.91 0-3.22 1.35-3.48 3.51h6.87c-.17-1.9-1.22-3.51-3.39-3.51zm.16 13.39c-4.83 0-8-3.28-8-8.17s3.32-8.34 7.85-8.34c4.73 0 7.72 3.45 7.72 8.93V15H71.44c.07 2.69 1.35 4.17 3.65 4.17a3.15 3.15 0 0 0 3.19-2.27h4.14a7.25 7.25 0 0 1-7.37 5.23zM92.76 9.75a8.87 8.87 0 0 0-1.68-.16c-3 0-4.14 2.13-4.14 5v7.11h-4.3V6.07h4.07V9a5.33 5.33 0 0 1 5.06-3.22 4.89 4.89 0 0 1 .92.1z" />
+        <path d="M95.65 13.86c0 3.18 1.38 5.06 3.78 5.06s3.78-1.87 3.78-5.09-1.41-5-3.81-5-3.75 1.94-3.75 5.03zm11.86 0c0 5-3.19 8.27-8.08 8.27s-8.08-3.32-8.08-8.27 3.22-8.27 8.15-8.27 8.01 3.31 8.01 8.27z" />
+        <path d="M116 3.25c-.69 0-1-.07-1.41-.07-1.54 0-1.9.3-1.9 1.61V6h3.06v3h-3v12.67h-4.34V9h-2.56V6h2.56v-.78c0-3.58 1.48-5.22 5.39-5.22.76 0 1.48.07 2.23.1z" />
+        <path d="M124.42 3.25c-.69 0-1-.07-1.41-.07-1.54 0-1.9.3-1.9 1.61V6h3.06v3h-3v12.67h-4.3V9h-2.53V6h2.56v-.78c0-3.58 1.41-5.19 5.32-5.19.75 0 1.48.07 2.23.1zM127.48 16.94h-4.79v4.73h4.79zM139.07 9.75a8.88 8.88 0 0 0-1.68-.16c-3 0-4.14 2.13-4.14 5v7.11H129V6.07h4V9a5.33 5.33 0 0 1 5.06-3.22 4.88 4.88 0 0 1 .92.1z" />
+        <path d="M153 21.67h-4.07v-2.2a5.8 5.8 0 0 1-5.09 2.66c-3.38 0-5.45-1.84-5.45-5.58V6h4.34v9c0 2 .16 3.55 2.63 3.55 2.69 0 3.38-2.07 3.38-4.4v-8H153zM83.23 31.62c0 1.41.72 2.33 1.81 2.33s1.77-.85 1.77-2.3c0-1.15-.53-2.27-1.81-2.27-1.08 0-1.77.86-1.77 2.24zm4.53 2.92h-.92v-.85a2 2 0 0 1-1.94 1c-1.64 0-2.73-1.18-2.73-3.09 0-1.64.85-3.09 2.66-3.09a2.25 2.25 0 0 1 1.94 1v-3h1v8zM89.44 34.54h-1v-5.81h1zm0-6.86h-1v-1.19h1zM90.85 31.65c0 1.31.69 2.13 1.71 2.13s1.74-.89 1.74-2.3-.66-2.13-1.74-2.13-1.71.89-1.71 2.3zm4.37 2.27a3.53 3.53 0 0 1-.36 1.94 2.6 2.6 0 0 1-2.33 1.08c-1.18 0-2.3-.39-2.46-1.74h1c.1.69.59 1 1.51 1 1.18 0 1.71-.56 1.74-1.94v-.72a1.92 1.92 0 0 1-1.87 1.08c-1.54 0-2.56-1.15-2.56-3 0-1.58.89-3.12 2.59-3.12a2 2 0 0 1 1.84 1v-.85h.89v5.22zM96.9 34.54h-1v-5.81h1zm0-6.86h-1v-1.19h1zM100.15 29.51H99v3.39c0 .53 0 .85.66.85a3 3 0 0 0 .53 0v.82a5.37 5.37 0 0 1-.72.07c-1.48 0-1.38-.72-1.38-2v-3.16h-1v-.79h1V27h1v1.74h1.15z" />
+        <path d="M102.88 31.88c-.72.1-1.64.16-1.64 1.12 0 .59.46 1 1.15 1 .92 0 1.77-.62 1.77-1.35v-1.13a2.23 2.23 0 0 1-1.28.36zm2.82 2.66a1.53 1.53 0 0 1-.66.1.78.78 0 0 1-.85-.85 2.55 2.55 0 0 1-2.14.92c-1.15 0-1.87-.62-1.87-1.64s.69-1.64 2.07-1.81 1.87-.13 1.87-.92c0-.62-.46-1-1.35-1s-1.35.33-1.45 1.18h-.92c0-1.25.92-2 2.43-2a2.74 2.74 0 0 1 1.84.56 2.08 2.08 0 0 1 .39 1.54c0 .89-.07 1.74-.07 2.59 0 .43.1.56.39.56a.56.56 0 0 0 .23 0zM106.92 26.53h-1v8h1zM111.19 25.67h-.72V37h.72zM115.69 31.68c0 1.38.72 2.23 1.81 2.23s1.77-.92 1.77-2.3-.72-2.27-1.77-2.27c-1.32.04-1.81 1.19-1.81 2.34zm0-2.17a2.14 2.14 0 0 1 1.94-1c1.58 0 2.63 1.18 2.63 3.05s-1.08 3.12-2.69 3.12a2.1 2.1 0 0 1-1.94-1v.85h-.92v-8h1v3zM123.8 29.58h-.26c-1.58 0-1.87 1.21-1.87 2.53v2.46h-1v-5.84h.92V30a2.06 2.06 0 0 1 2.14-1.38zM126.13 31.88c-.72.1-1.64.16-1.64 1.12 0 .59.46 1 1.15 1 .92 0 1.77-.62 1.77-1.35v-1.13a2.23 2.23 0 0 1-1.28.36zm2.87 2.66a1.53 1.53 0 0 1-.66.1.78.78 0 0 1-.85-.85 2.55 2.55 0 0 1-2.13.92c-1.15 0-1.87-.62-1.87-1.64s.69-1.64 2.07-1.81 1.87-.13 1.87-.92c0-.62-.46-1-1.35-1s-1.35.33-1.45 1.18h-.92c0-1.25.92-2 2.43-2a2.74 2.74 0 0 1 1.84.56 2.08 2.08 0 0 1 .39 1.54c0 .89-.07 1.74-.07 2.59 0 .43.1.56.39.56a.56.56 0 0 0 .23 0zM130.07 29.61a2.24 2.24 0 0 1 2-1.08c1.41 0 1.94.79 1.94 2.13v3.87h-1v-3.44c0-.92-.07-1.74-1.25-1.74s-1.68 1-1.68 2.1v3.09h-1v-5.81h.92zM135.43 31.62c0 1.41.72 2.33 1.81 2.33s1.77-.85 1.77-2.3c0-1.15-.52-2.27-1.81-2.27-1.12 0-1.77.86-1.77 2.24zm4.57 2.92h-1v-.85a2 2 0 0 1-1.94 1c-1.64 0-2.73-1.18-2.73-3.09 0-1.64.85-3.09 2.66-3.09a2.25 2.25 0 0 1 1.94 1v-3h1v8zM141.63 34.54h-1v-5.81h1zm0-6.86h-1v-1.19h1zM143.24 29.61a2.24 2.24 0 0 1 2-1.08c1.41 0 1.94.79 1.94 2.13v3.87h-1v-3.44c0-.92-.07-1.74-1.25-1.74s-1.68 1-1.68 2.1v3.09h-1v-5.81h.92zM148.57 31.65c0 1.31.69 2.13 1.71 2.13s1.74-.89 1.74-2.3-.66-2.13-1.74-2.13-1.71.89-1.71 2.3zm4.34 2.27a3.54 3.54 0 0 1-.36 1.94 2.6 2.6 0 0 1-2.33 1.08c-1.18 0-2.3-.39-2.46-1.74h1c.1.69.59 1 1.51 1 1.18 0 1.71-.56 1.74-1.94v-.72a1.92 1.92 0 0 1-1.87 1.08c-1.54 0-2.56-1.15-2.56-3 0-1.58.89-3.12 2.6-3.12a2 2 0 0 1 1.84 1v-.85h.89v5.22z" />
+    </symbol>
+    <symbol id="i-spinner" viewBox="0 0 50 50">
+        <circle cx="25" cy="10" r="2"></circle>
+        <circle opacity=".3" cx="25" cy="40" r="2"></circle>
+        <circle opacity=".3" cx="32.5" cy="12" r="2"></circle>
+        <circle opacity=".3" cx="17.5" cy="38" r="2"></circle>
+        <circle opacity=".93" cx="17.5" cy="12" r="2"></circle>
+        <circle opacity=".3" cx="32.5" cy="38" r="2"></circle>
+        <circle opacity=".65" cx="10" cy="25" r="2"></circle>
+        <circle opacity=".3" cx="40" cy="25" r="2"></circle>
+        <circle opacity=".86" cx="12" cy="17.5" r="2"></circle>
+        <circle opacity=".3" cx="38" cy="32.5" r="2"></circle>
+        <circle opacity=".44" cx="12" cy="32.5" r="2"></circle>
+        <circle opacity=".3" cx="38" cy="17.5" r="2"></circle>
+    </symbol>
+    <symbol id="i-fav-f" viewBox="0 0 33 31">
+        <path d="M16.5,0l4.08,11.59L33,11.84l-9.9,7.41L26.7,31,16.5,24,6.3,31,9.9,19.25,0,11.84l12.42-.25Z" />
+    </symbol>
+    <symbol id="i-mastercard" viewBox="0 0 255.75 198.45">
+        <path d="M46.54 198v-13.16c0-5-3.07-8.34-8.34-8.34a8.66 8.66 0 0 0-7.46 3.73 7.68 7.68 0 0 0-7-3.73 7.09 7.09 0 0 0-6.15 3.07v-2.63H13V198h4.61v-11.62c0-3.73 2-5.49 5-5.49s4.61 2 4.61 5.49V198h4.61v-11.62c0-3.73 2.2-5.49 5-5.49 3.07 0 4.61 2 4.61 5.49V198zm68.27-21.07h-7.46v-6.37h-4.61v6.37h-4.17v4.17h4.17v9.66c0 4.83 2 7.68 7.24 7.68a12.28 12.28 0 0 0 5.71-1.54l-1.32-4a7.22 7.22 0 0 1-4 1.1c-2.2 0-3.07-1.32-3.07-3.51v-9.44h7.46v-4.17zm39.08-.44a6.19 6.19 0 0 0-5.49 3.07v-2.63h-4.61V198h4.61v-11.84c0-3.51 1.54-5.49 4.39-5.49a12.85 12.85 0 0 1 2.85.44l1.32-4.39a14.49 14.49 0 0 0-3.07-.22zm-59.05 2.2a15.07 15.07 0 0 0-8.56-2.2c-5.27 0-8.78 2.63-8.78 6.81 0 3.51 2.63 5.49 7.24 6.15l2.2.22c2.41.44 3.73 1.1 3.73 2.2 0 1.54-1.76 2.63-4.83 2.63a12.12 12.12 0 0 1-7-2.2l-2.2 3.51a15.52 15.52 0 0 0 9 2.63c6.15 0 9.66-2.85 9.66-6.81 0-3.73-2.85-5.71-7.24-6.37l-2.2-.22c-2-.22-3.51-.66-3.51-2 0-1.54 1.54-2.41 4-2.41a15.83 15.83 0 0 1 6.59 1.76l2-3.73zm122.49-2.2a6.19 6.19 0 0 0-5.49 3.07v-2.63h-4.61V198h4.61v-11.84c0-3.51 1.54-5.49 4.39-5.49a12.85 12.85 0 0 1 2.85.44l1.32-4.39a14.49 14.49 0 0 0-3.07-.22zm-58.83 11c0 6.37 4.39 11 11.2 11a10.92 10.92 0 0 0 7.46-2.41L175 192.3a8.87 8.87 0 0 1-5.49 2c-3.73 0-6.37-2.63-6.37-6.81a6.48 6.48 0 0 1 6.37-6.81 8.87 8.87 0 0 1 5.49 2l2.2-3.73a10.92 10.92 0 0 0-7.46-2.41c-6.81 0-11.2 4.61-11.2 11zm42.59 0v-10.55h-4.61v2.63a7.93 7.93 0 0 0-6.59-3.07c-5.93 0-10.54 4.61-10.54 11s4.61 11 10.54 11c3.07 0 5.27-1.1 6.59-3.07V198h4.61zm-16.9 0c0-3.73 2.41-6.81 6.37-6.81 3.73 0 6.37 2.85 6.37 6.81 0 3.73-2.63 6.81-6.37 6.81a6.47 6.47 0 0 1-6.37-6.81zm-55.1-11c-6.15 0-10.54 4.39-10.54 11s4.39 11 10.76 11a13.43 13.43 0 0 0 8.56-2.85l-2.2-3.29a10.49 10.49 0 0 1-6.15 2.2c-2.85 0-5.71-1.32-6.37-5h15.59v-1.76c.22-6.81-3.73-11.2-9.66-11.2zm0 4c2.85 0 4.83 1.76 5.27 5h-11a5.56 5.56 0 0 1 5.71-5zm114.37 7V168.6h-4.61v11a7.93 7.93 0 0 0-6.59-3.07c-5.93 0-10.54 4.61-10.54 11s4.61 11 10.54 11c3.07 0 5.27-1.1 6.59-3.07V198h4.61zm-16.9 0c0-3.73 2.41-6.81 6.37-6.81 3.73 0 6.37 2.85 6.37 6.81 0 3.73-2.63 6.81-6.37 6.81a6.47 6.47 0 0 1-6.37-6.81zm-154.11 0v-10.55h-4.62v2.63a7.93 7.93 0 0 0-6.59-3.07c-5.93 0-10.54 4.61-10.54 11s4.61 11 10.54 11c3.07 0 5.27-1.1 6.59-3.07V198h4.61zm-17.12 0c0-3.73 2.41-6.81 6.37-6.81 3.73 0 6.37 2.85 6.37 6.81 0 3.73-2.63 6.81-6.37 6.81a6.47 6.47 0 0 1-6.38-6.83z" />
+        <path fill="#999" d="M93.3 16.9h69.15v124.25H93.3z" />
+        <path d="M97.69 79a79.24 79.24 0 0 1 30.07-62.1A79 79 0 1 0 79 158.06a78.54 78.54 0 0 0 48.73-16.9A78.91 78.91 0 0 1 97.69 79z"
+            fill="#4d4d4d" />
+        <path d="M255.75 79A78.95 78.95 0 0 1 128 141.15a79.2 79.2 0 0 0 0-124.25A78.95 78.95 0 0 1 255.75 79z" fill="#b2b2b2" />
+    </symbol>
+    <symbol id="i-visa" viewBox="0 0 1000.05 323.65">
+        <path fill="#4d4d4d" d="M433.35 318.98h-81.01l50.67-313.3h81.01l-50.67 313.3zM727 13.34A199.64 199.64 0 0 0 654.36 0c-80 0-136.36 42.66-136.68 103.65-.66 45 40.33 70 71 85 31.34 15.33 42 25.34 42 39-.32 21-25.33 30.66-48.65 30.66-32.34 0-49.67-5-76-16.67l-10.67-5L484 307c19 8.66 54 16.34 90.35 16.67 85 0 140.34-42 141-107 .32-35.67-21.33-63-68-85.33-28.33-14.34-45.69-24-45.69-38.67.33-13.33 14.68-27 46.66-27 26.34-.67 45.69 5.66 60.34 12L716 81l11-67.65zM834.69 208c6.67-18 32.34-87.66 32.34-87.66-.34.67 6.66-18.33 10.66-30l5.66 27S898.7 192.33 902 208zm100-202.31H872c-19.32 0-34 5.66-42.34 26L709.36 319h85s14-38.67 17-47h104c2.33 11 9.67 47 9.67 47h75L934.69 5.68zM284.68 5.68l-79.34 213.64-8.67-43.32C182 126 136 71.68 84.67 44.67l72.67 274H243l127.33-313h-85.65z" />
+        <path d="M131.67 5.68H1.33L0 12c101.67 26 169 88.67 196.67 164L168.34 32c-4.66-20-19-25.68-36.67-26.34z" fill="#848484" />
+    </symbol>
+    <symbol id="i-settings" viewBox="0 0 20 24">
+        <path d="M0 4a1 1 0 0 1 1-1h7a1 1 0 0 1 0 2H1a1 1 0 0 1-1-1zM11 4a1 1 0 0 1 1-1h7a1 1 0 0 1 0 2h-7a1 1 0 0 1-1-1zM0 12a1 1 0 0 1 1-1h9a1 1 0 0 1 0 2H1a1 1 0 0 1-1-1zM13 12a1 1 0 0 1 1-1h5a1 1 0 0 1 0 2h-5a1 1 0 0 1-1-1zM0 20a1 1 0 0 1 1-1h5a1 1 0 0 1 0 2H1a1 1 0 0 1-1-1zM9 20a1 1 0 0 1 1-1h9a1 1 0 0 1 0 2h-9a1 1 0 0 1-1-1z" />
+        <path d="M7 7V1a1 1 0 0 1 2 0v6a1 1 0 0 1-2 0zM13 15V9a1 1 0 0 1 2 0v6a1 1 0 0 1-2 0zM5 23v-6a1 1 0 0 1 2 0v6a1 1 0 0 1-2 0z" />
+    </symbol>
+    <symbol id="i-close" viewBox="0 0 13.71 13.71">
+        <path d="M13 13.71L6.85 7.56.71 13.71 0 13l6.15-6.15L0 .71.71 0l6.14 6.15L13 0l.71.71-6.15 6.14L13.71 13l-.71.71z" />
+    </symbol>
+    <symbol id="i-f" viewBox="0 0 18.71 20">
+        <path d="M5.61 18.26v-6.32h7.15a1.17 1.17 0 0 1 .82.24A1.65 1.65 0 0 1 14 13h.45V7.58H14a1.82 1.82 0 0 1-.45.84 1.27 1.27 0 0 1-.82.23H5.61V4.5H17a1.18 1.18 0 0 1 .82.24 1.74 1.74 0 0 1 .45.83h.45V0h-.45a1.82 1.82 0 0 1-.45.84 1.29 1.29 0 0 1-.82.23H0v.48A1.82 1.82 0 0 1 .84 2a1.21 1.21 0 0 1 .23.8v15.47a1.22 1.22 0 0 1-.24.81 1.58 1.58 0 0 1-.83.44V20h6.69v-.48a1.64 1.64 0 0 1-.84-.46 1.21 1.21 0 0 1-.24-.8z" />
+    </symbol>
+</svg>
+
+<body>
+
+    <div class="headline">
+        <div class="container">
+            <div class="headline__inner">
+                <div class="headline__left">
+                    <div class="headline__links">
+                        <div class="grid20">
+                            <div class="grid20__item">
+                                <a href="/where-to-buy/" class="headline__link">Адреса магазинов</a>
+                            </div>
+                            <div class="grid20__item">
+                                <a href="/delivery/" class="headline__link">Доставка</a>
+                            </div>
+                            <div class="grid20__item">
+                                <a href="/payment/" class="headline__link">Оплата</a>
+                            </div>
+                            <div class="grid20__item">
+                                <a href="/warranty/" class="headline__link">Гарантия</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="headline__right">
+                    <a href="/login" class="headline__link headline__link--login">Вход / Регистрация</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <header class="header">
+        <div class="container">
+            <div class="header__inner">
+                <div class="header__col header__col--left">
+                    <div data-id="mobile-menu" class="header__menu-btn js-menu-btn js-m-menu-btn hide-s">
+                        <div class="menu-btn">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="header__nav show-s">
+                        <div class="grid30">
+                            <div class="grid30__item">
+                                <div data-id="parent-cat-11" class="header__nav-link nope js-menu-btn">Для него</div>
+                            </div>
+                            <div class="grid30__item">
+                                <div data-id="parent-cat-1" class="header__nav-link nope js-menu-btn">Для нее</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="header__col header__col--center">
+                    <a href="/" class="header__logo">
+                        <svg class="svg-icon">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-logo"></use>
+                        </svg>
+                    </a>
+                </div>
+                <div class="header__col header__col--right">
+                    <div class="header__search search-field__wrap show-m">
+                        <form method="get" action="/search/" class="search-field__input">
+                            <input tid="search" name="query" type="text" class="search-field__input-control"
+                                placeholder="Поиск">
+                            <div class="search-field__input-icon">
+                                <svg class="svg-icon">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-search"></use>
+                                </svg>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="header__buttons">
+                        <div class="grid30 grid30--mob15">
+                            <div class="grid30__item grid30__item--mob15">
+                                <div class="header__item">
+                                    <div class="header__item-icon header__item-icon--search show-s--hide-m js-search-btn">
+                                        <svg class="svg-icon">
+                                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-search"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="grid30__item grid30__item--mob15">
+                                <a href="/wishlist/" title="Избранное" class="header__item">
+                                    <div class="header__item-icon header__item-icon--wishlist js-header-wish-count ">
+                                        <svg class="svg-icon">
+                                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-fav-f"></use>
+                                        </svg>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="grid30__item grid30__item--mob15">
+                                <a href="/cart/" title="Корзина" class="header__item">
+                                    <div class="header__item-icon">
+                                        <svg class="svg-icon">
+                                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-bag"></use>
+                                        </svg>
+                                    </div>
+                                    <div class="header__baloon js-header-cart-baloon"></div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header__search-wrap js-search-wrap">
+            <div class="search-block">
+                <form class="search-block__input">
+                    <input type="text" name="search" class="search-block__input-control" placeholder="Я ищу...">
+                    <button class="search-block__input-btn">
+                        <svg class="svg-icon">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-arrow"></use>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div id="parent-cat-11" class="header__menu">
+            <div class="menu">
+                <div class="container">
+                    <div class="menu__inner">
+                        <div class="menu__row">
+                            <div class="menu__col">
+                                <div class="menu__col-title">Обувь</div>
+                                <div class="menu__col-list">
+                                    <div class="menu__col-item">
+                                        <a href="/man/shoes/shoes" class="menu__col-link">Туфли</a>
+                                    </div>
+                                    <div class="menu__col-item">
+                                        <a href="/man/shoes/boots" class="menu__col-link">Ботинки</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="menu__col">
+                                <div class="menu__col-title">Сумки</div>
+                                <div class="menu__col-list">
+                                    <div class="menu__col-item">
+                                        <a href="/man/bags/travel-bags" class="menu__col-link">Дорожные</a>
+                                    </div>
+                                    <div class="menu__col-item">
+                                        <a href="/man/bags/backpacks" class="menu__col-link">Рюкзаки</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="menu__col">
+                                <div class="menu__col-title">Аксессуары</div>
+                                <div class="menu__col-list">
+                                    <div class="menu__col-item">
+                                        <a href="/man/accessories/charms" class="menu__col-link">Брелоки</a>
+                                    </div>
+                                    <div class="menu__col-item">
+                                        <a href="/man/accessories/ties" class="menu__col-link">Галстуки</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="parent-cat-1" class="header__menu">
+            <div class="menu">
+                <div class="container">
+                    <div class="menu__inner">
+                        <div class="menu__row">
+                            <div class="menu__col">
+                                <div class="menu__col-title">Обувь</div>
+                                <div class="menu__col-list">
+                                    <div class="menu__col-item">
+                                        <a href="/woman/shoes/shoes" class="menu__col-link">Туфли</a>
+                                    </div>
+                                    <div class="menu__col-item">
+                                        <a href="/woman/shoes/loafers" class="menu__col-link">Лоферы и слиперы</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="menu__col">
+                                <div class="menu__col-title">Сумки</div>
+                                <div class="menu__col-list">
+                                    <div class="menu__col-item">
+                                        <a href="/woman/bags/backpacks" class="menu__col-link">Рюкзаки</a>
+                                    </div>
+                                    <div class="menu__col-item">
+                                        <a href="/woman/bags/travel-bags" class="menu__col-link">Дорожные</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="menu__col">
+                                <div class="menu__col-title">Аксессуары</div>
+                                <div class="menu__col-list">
+                                    <div class="menu__col-item">
+                                        <a href="/woman/accessories/hats" class="menu__col-link">Головные уборы</a>
+                                    </div>
+                                    <div class="menu__col-item">
+                                        <a href="/woman/accessories/charms" class="menu__col-link">Брелоки</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+    <div id="body-wrapper" class="wrapper js-wrapper">
+        <div class="page">
+            <div class="page__breadcrubms">
+                <div class="breadcrumbs">
+                    <div class="container">
+                        <div class="breadcrumbs__inner">
+                            <div class="breadcrumbs__grid">
+                                <div class="breadcrumbs__grid-item">
+                                    <a href="/" class="breadcrumbs__link">Главная</a>
+                                </div>
+                                <div class="breadcrumbs__grid-item">
+                                    <div class="breadcrumbs__icon">
+                                        <svg class="svg-icon">
+                                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-chevron-m"></use>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="breadcrumbs__grid-item">
+                                    <a href="/news/" class="breadcrumbs__link">Новости</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        <div class="page__head show-l">
+            <div class="container">
+                <div class="page__head-row">
+                    <div class="page__head-col">
+                        <div class="page__title">Новости</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page__content">
+            <div class="news">
+                <div class="container">
+                    <div class="news-block">
+                        <div class="news-block__grid">
+
+                            <div class="news-block__item">
+                                <div class="news__card">
+                                    <div class="news__card-pic">
+                                        <img src="assets/img/news/1.jpg" alt="">
+                                    </div>
+                                    <div class="news__card-content">
+                                        <div class="news__card-title">Lorem Ipsum - это текст-"рыба",
+                                            часто используемый в вэб-дизайне</div>
+                                        <div class="news__card-subtitle">01 августа 2018</div>
+                                        <div class="news__card-text">"Lorem ipsum dolor sit amet, consectetur
+                                            adipiscing elit,
+                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                                        <div class="news__card-btn btn btn--bd ">Читать</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="news-block__item">
+                                <div class="news__card">
+                                    <div class="news__card-pic">
+                                        <img src="assets/img/news/2.jpg" alt="">
+                                    </div>
+                                    <div class="news__card-content">
+                                        <div class="news__card-title">Lorem Ipsum - это текст-"рыба",
+                                            часто используемый в вэб-дизайне</div>
+                                        <div class="news__card-subtitle">01 августа 2018</div>
+                                        <div class="news__card-text">"Lorem ipsum dolor sit amet, consectetur
+                                            adipiscing elit,
+                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                                        <div class="news__card-btn btn btn--bd">Читать</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="news-block__item">
+                                <div class="news__card">
+                                    <div class="news__card-pic">
+                                        <img src="assets/img/news/3.jpg" alt="">
+                                    </div>
+                                    <div class="news__card-content">
+                                        <div class="news__card-title">Lorem Ipsum - это текст-"рыба",
+                                            часто используемый в вэб-дизайне</div>
+                                        <div class="news__card-subtitle">01 августа 2018</div>
+                                        <div class="news__card-text">"Lorem ipsum dolor sit amet, consectetur
+                                            adipiscing elit,
+                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                                        <div class="news__card-btn btn btn--bd">Читать</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="news-block__item">
+                                <div class="news__card">
+                                    <div class="news__card-pic">
+                                        <img src="assets/img/news/4.jpg" alt="">
+                                    </div>
+                                    <div class="news__card-content">
+                                        <div class="news__card-title">Lorem Ipsum - это текст-"рыба",
+                                            часто используемый в вэб-дизайне</div>
+                                        <div class="news__card-subtitle">01 августа 2018</div>
+                                        <div class="news__card-text">"Lorem ipsum dolor sit amet, consectetur
+                                            adipiscing elit,
+                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                                        <div class="news__card-btn btn btn--bd">Читать</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="news-block__item">
+                                <div class="news__card">
+                                    <div class="news__card-pic">
+                                        <img src="assets/img/news/5.jpg" alt="">
+                                    </div>
+                                    <div class="news__card-content">
+                                        <div class="news__card-title">Lorem Ipsum - это текст-"рыба",
+                                            часто используемый в вэб-дизайне</div>
+                                        <div class="news__card-subtitle">01 августа 2018</div>
+                                        <div class="news__card-text">"Lorem ipsum dolor sit amet, consectetur
+                                            adipiscing elit,
+                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                                        <div class="news__card-btn btn btn--bd">Читать</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="news-block__item">
+                                <div class="news__card">
+                                    <div class="news__card-pic">
+                                        <img src="assets/img/news/6.jpg" alt="">
+                                    </div>
+                                    <div class="news__card-content">
+                                        <div class="news__card-title">Lorem Ipsum - это текст-"рыба",
+                                            часто используемый в вэб-дизайне</div>
+                                        <div class="news__card-subtitle">01 августа 2018</div>
+                                        <div class="news__card-text">"Lorem ipsum dolor sit amet, consectetur
+                                            adipiscing elit,
+                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                                        <div class="news__card-btn btn btn--bd">Читать</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page__bottom">
+            <div class="container">
+                <div class="pagination js-pagination show-l--flex">
+                    <div class="pagination__list">
+                        <div class="pagination__grid grid20 js-pagination-items">
+                            <a href="/news" class="pagination__item js-pagination-item-active grid20__item is-active">
+                                <div class="pagination__btn">
+                                    <span>1</span>
+                                </div>
+                            </a>
+                            <a href="/news/?page2" class="pagination__item js-pagination-item grid20__item">
+                                <div class="pagination__btn">
+                                    <span>2</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="pagination__arrows">
+                        <div class="pagination__controls">
+                            <div class="pagination__arrow is-disabled">
+                                <a rel="prev" href="/news" class="pagination__arrow-btn rotate--180">
+                                    <svg class="svg-icon">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-arrow"></use>
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="pagination__arrow">
+                                <a rel="prev" href="/news/?page2" class="pagination__arrow-btn">
+                                    <svg class="svg-icon">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-arrow"></use>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <footer class="footer">
+            <div class="container container--s-nopd">
+                <div class="footer__inner">
+                    <div class="footer__col footer__col--left">
+                        <div class="footer__col-block">
+                            <a href="/" class="footer__logo">
+                                <svg class="svg-icon">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-logo"></use>
+                                </svg>
+                            </a>
+                            <div class="footer__logo-subtitle">
+                                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                    incididunt ut labore</p>
+                            </div>
+                            <div class="footer__payments">
+                                <div class="footer__payments-grid">
+                                    <div class="footer__payments-item">
+                                        <div class="footer__payments-card" style="width: 68px; height: 40px;">
+                                            <svg class="svg-icon">
+                                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-mastercard"></use>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="footer__payments-item">
+                                        <div class="footer__payments-card" style="width: 65px; height: 20px;">
+                                            <svg class="svg-icon">
+                                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-visa"></use>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer__m-nav hide-m">
+                            <div class="m-catalog">
+                                <div class="m-catalog__block">
+                                    <div class="m-catalog__nav">
+                                        <div class="m-catalog__nav-list js-m-catalog-list">
+
+                                            <div class="m-catalog__nav-item js-m-catalog-item">
+                                                <div class="m-catalog__nav-btn js-m-catalog-btn">
+                                                    <div data-catid="1" class="m-catalog__nav-label m-catalog__nav-label--fz16">Для
+                                                        нее</div>
+                                                    <div class="m-catalog__nav-icon">
+                                                        <svg class="svg-icon">
+                                                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-chevron-m"></use>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div class="m-catalog__sub js-m-catalog-sub">
+                                                    <div class="m-catalog__sub-list">
+                                                        <div class="m-catalog__sub-item">
+                                                            <a data-catid="2" href="/woman/shoes" class="m-catalog__sub-btn">
+                                                                <div class="m-catalog__sub-label m-catalog__sub-label--fz16">Обувь</div>
+                                                            </a>
+                                                        </div>
+                                                        <div class="m-catalog__sub-item">
+                                                            <a data-catid="3" href="/woman/bags" class="m-catalog__sub-btn">
+                                                                <div class="m-catalog__sub-label m-catalog__sub-label--fz16">Сумки</div>
+                                                            </a>
+                                                        </div>
+                                                        <div class="m-catalog__sub-item">
+                                                            <a data-catid="4" href="/woman/accessories" class="m-catalog__sub-btn">
+                                                                <div class="m-catalog__sub-label m-catalog__sub-label--fz16">Аксессуары</div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="m-catalog">
+                                <div class="m-catalog__block">
+                                    <div class="m-catalog__nav">
+                                        <div class="m-catalog__nav-list js-m-catalog-list">
+
+                                            <div class="m-catalog__nav-item js-m-catalog-item">
+                                                <div class="m-catalog__nav-btn js-m-catalog-btn">
+                                                    <div data-catid="11" class="m-catalog__nav-label m-catalog__nav-label--fz16">Для
+                                                        него</div>
+                                                    <div class="m-catalog__nav-icon">
+                                                        <svg class="svg-icon">
+                                                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-chevron-m"></use>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                                <div class="m-catalog__sub js-m-catalog-sub">
+                                                    <div class="m-catalog__sub-list">
+                                                        <div class="m-catalog__sub-item">
+                                                            <a data-catid="12" href="/man/shoes" class="m-catalog__sub-btn">
+                                                                <div class="m-catalog__sub-label m-catalog__sub-label--fz16">Обувь</div>
+                                                            </a>
+                                                        </div>
+                                                        <div class="m-catalog__sub-item">
+                                                            <a data-catid="13" href="/man/bags" class="m-catalog__sub-btn">
+                                                                <div class="m-catalog__sub-label m-catalog__sub-label--fz16">Сумки</div>
+                                                            </a>
+                                                        </div>
+                                                        <div class="m-catalog__sub-item">
+                                                            <a data-catid="14" href="/man/accessories" class="m-catalog__sub-btn">
+                                                                <div class="m-catalog__sub-label m-catalog__sub-label--fz16">Аксессуары</div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="m-menu__nav">
+                                <div class="m-menu__nav">
+                                    <div class="m-menu__nav-list js-m-menu-list">
+                                        <div class="m-menu__nav-item js-m-menu-item">
+                                            <a href="/where-to-buy/" class="m-menu__nav-btn">
+                                                <div class="m-menu__nav-label">Адреса магазинов</div>
+                                            </a>
+                                        </div>
+                                        <div class="m-menu__nav-item js-m-menu-item">
+                                            <a href="/delivery/" class="m-menu__nav-btn">
+                                                <div class="m-menu__nav-label">Доставка</div>
+                                            </a>
+                                        </div>
+                                        <div class="m-menu__nav-item js-m-menu-item">
+                                            <a href="/payment/" class="m-menu__nav-btn">
+                                                <div class="m-menu__nav-label">Оплата</div>
+                                            </a>
+                                        </div>
+                                        <div class="m-menu__nav-item js-m-menu-item">
+                                            <a href="/warranty/" class="m-menu__nav-btn">
+                                                <div class="m-menu__nav-label">Гарантия</div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer__nav show-m">
+                            <div class="footer__nav-row">
+                                <div class="footer__nav-col">
+                                    <a href="#" class="footer__nav-title">Для него</a>
+                                    <div class="footer__nav-list">
+                                        <a href="#" class="footer__nav-item">Обувь</a>
+                                        <a href="#" class="footer__nav-item">Одежда</a>
+                                        <a href="#" class="footer__nav-item">Аксессуары</a>
+                                    </div>
+                                </div>
+                                <div class="footer__nav-col">
+                                    <a href="#" class="footer__nav-title">Для неё</a>
+                                    <div class="footer__nav-list">
+                                        <a href="#" class="footer__nav-item">Обувь</a>
+                                        <a href="#" class="footer__nav-item">Одежда</a>
+                                        <a href="#" class="footer__nav-item">Аксессуары</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer__col footer__col--right">
+                        <div class="footer__col-block">
+                            <a href="tel:+79000000000" class="footer__phone">
+                                + 7 900 000 00 00
+                            </a>
+                            <div class="footer__social social">
+                                <div class="social__grid">
+                                    <div class="social__item">
+                                        <a target="_blank" rel="nofollow noreferrer noopener" href="http://facebook.com"
+                                            class="social__btn">
+                                            <svg class="svg-icon">
+                                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-fb"></use>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                    <div class="social__item">
+                                        <a href="http://vk.com" target="_blank" rel="nofollow noreferrer noopener"
+                                            class="social__btn">
+                                            <svg class="svg-icon">
+                                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-vk"></use>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                    <div class="social__item">
+                                        <a href="http://twitter.com" target="_blank" rel="nofollow noreferrer noopener"
+                                            class="social__btn">
+                                            <svg class="svg-icon">
+                                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-twitter"></use>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                    <div class="social__item">
+                                        <a href="http://ok.ru" target="_blank" rel="nofollow noreferrer noopener" class="social__btn">
+                                            <svg class="svg-icon">
+                                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-ok"></use>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="footer__btn btn">
+                                Свяжитесь с нами
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <div class="sub-footer">
+            <div class="container">
+                <div class="sub-footer__inner">
+                    <div class="sub-footer__links">
+                        <div class="sub-footer__links-grid">
+                            <div class="sub-footer__links-item">
+                                <a href="/user-agreement/" class="sub-footer__links-link">Пользовательское соглашение</a>
+                            </div>
+                            <div class="sub-footer__links-item">
+                                <a href="/privacy/" class="sub-footer__links-link">Согласие на обработку персональных
+                                    данных</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="https://aleskeroff.ru/" target="_blank" rel="nofollow noreferrer noopener" class="sub-footer__copyright">
+                        <svg class="svg-icon">
+                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-aleskeroff"></use>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+</body>
+
+</html>

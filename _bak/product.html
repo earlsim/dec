@@ -1,0 +1,682 @@
+<div data-type="product" class="page__content page__content--nomg" itemscope itemtype="http://schema.org/Product">
+  <div class="container container--xxs-nopd">
+    <form id="cart-form{if $wa->get('cart')}-dialog{/if}" method="post" action="{$wa->getUrl('/frontendCart/add')}" class="product">
+      <div class="product__main-info">
+        <div class="product__photos">
+          <div class="product__brand">
+            <div class="product__brand-pic">
+              <img src="{$wa_theme_url}assets/img/brands/tods.png" alt="Tod's">
+            </div>
+          </div>
+          {if $product->features["skidka"]}
+          <span class="product__discount-label">-{$product->features["skidka"]}% {if ($product->features["bolshaya_kartochka"] && $productTotal >= 15 && $isMobile == false) || ($product->features["bolshaya_kartochka"] && $productTotal >= 15 && $isMobile == false)}скидки{/if}</span>
+          {/if}
+          <div id="product-photo-slider" class="swiper-container">
+            <div class="swiper-wrapper">
+              {if count($product.images) > 1 || (count($product.images) === 1)}
+              {foreach $product.images as $image}
+              <div class="swiper-slide js-product-pic">
+                <div class="product__photos-pic">
+                  <img src="{$wa->shop->imgUrl($image, '1000')}" alt="{$product.name} - {$product.summary}">
+                </div>
+              </div>
+              {/foreach}
+              {/if}
+            </div>
+          </div>
+          <div id="product-photo-slider-prev" class="product__photos-arrow product__photos-arrow--left">
+            <svg class="svg-icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-arrow"></use>
+            </svg>
+          </div>
+          <div id="product-photo-slider-next" class="product__photos-arrow product__photos-arrow--right">
+            <svg class="svg-icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-arrow"></use>
+            </svg>
+          </div>
+          <div id="product-photo-slider-dots" class="product__photos-dots"></div>
+          <div class="product__photos-zoom js-zoom-btn">
+            <svg class="svg-icon">
+              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-zoom"></use>
+            </svg>
+          </div>
+        </div>
+        <div class="product__info add2cart">
+          <div class="product__info-title-wrap">
+            <div class="product__info-title" itemprop="name">{$product.name}</div>
+            {$curSKU = $product.sku_id}
+            {foreach $product.skus as $sku}
+              {if $sku.id == $curSKU}
+                {$curSKUName = $sku.sku}
+              {/if}
+            {/foreach}
+            <div class="product__info-subtitle sku">Артикул: <span>{$curSKUName}</span></div>
+          </div>
+          
+          <div class="product__info-prices">
+            {if $product.compare_price}
+            <div class="product__info-oldprice compare-at-price">
+              <span>{number_format($product.compare_price, 0, ',', ' ' )}</span> ₽
+            </div>
+            <div class="product__info-price product__info-price--red price">
+              <span>{number_format($product.price, 0, ',', ' ' )}</span> ₽
+            </div>
+            {else}
+            <div class="product__info-price price">
+              <span>{number_format($product.price, 0, ',', ' ' )}</span> ₽
+            </div>
+            {/if}
+            <input type="hidden" name="product_id" value="{$product.id}">
+          </div>
+          
+          {if $product.sku_type}
+
+          {$default_sku_features = $product.sku_features}
+          {$product_available = $product.status}
+          <!-- list all SKUs for Schema.org markup -->
+          {foreach $product.skus as $sku}
+          <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+            {$sku_available =  $product.status && $sku.available && ($wa->shop->settings('ignore_stock_count') || $sku.count === null || $sku.count > 0)}
+            {if $sku.name}<meta itemprop="name" content="{$sku.name|escape}">{/if}
+            <meta itemprop="price" content="{shop_currency($sku.price, $product.currency)}">
+            <meta itemprop="priceCurrency" content="{$wa->shop->currency()}">
+            {if (!($sku.count === null) && $sku.count <= 0)}
+                <link itemprop="availability" href="http://schema.org/OutOfStock" />
+            {else}
+                <link itemprop="availability" href="http://schema.org/InStock" />
+            {/if}
+          </div>
+          {/foreach}
+          {/if}
+          <div class="product__vars">
+            {foreach $features_selectable as $f}
+            {if $f.type != 'color'}
+              {if $f.code != 'top_material'}
+              <div class="product__vars-row product__vars-row--size">
+                <div class="product__vars-col product__vars-col--label">
+                  <span>Размер:</span>
+                </div>
+                <div class="product__vars-col">
+                  <div class="product__vars-select js-sizes">
+                    <div class="field__select">
+                      <label for="sizes" class="field__select-icon js-select-btn">
+                        <svg class="svg-icon">
+                          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-chevron"></use>
+                        </svg>
+                      </label>
+                      <select name="sizes" id="sizes" class="field__select-control js-sizes-control">
+                        <option value="">Выберите размер</option>
+                        {foreach $f.values as $v_id => $v}
+                        <option data-value="{$v_id}" value="{$v_id}">{$v}</option>
+                        {/foreach}
+                      </select>
+                      <input type="hidden" data-feature-id="{$f.id}" class="sku-feature" name="features[{$f.id}]" value="{ifset($default_sku_features[$f.id])}">
+                    </div>
+                  </div>
+                </div>
+                <div class="product__vars-col product__vars-col--link">
+                  <a href="#sizes-popup" class="product__vars-link js-mfp">Таблица размеров</a>
+                </div>
+              </div>
+              {/if}
+            {elseif $f.type == 'color'}
+            <div class="product__vars-row product__vars-row--color">
+              <div class="product__vars-col product__vars-col--label">
+                <span>Цвет:</span>
+              </div>
+              <div class="product__vars-col product__vars-col--grow">
+                <div class="catalog-colors">
+                  <div class="catalog-colors__grid js-inline-select">
+                    {foreach $f.values as $v_id => $v}
+                    <div class="catalog-colors__item">
+                      <div data-value="{$v_id}" class="catalog-colors__card-wrap {if $v_id == ifset($default_sku_features[$f.id])}selected{/if} js-colors-item">
+                        <input id="colors-{$v_id}" type="radio" name="colors" class="catalog-colors__card-checkbox" {if $v_id == ifset($default_sku_features[$f.id])}checked{/if}>
+                        <label for="colors-{$v_id}" class="catalog-colors__card">
+                          {if $v->style == 'color:#000000;background-color:#FFFFFF;'}
+                          <div class="catalog-colors__color-block" style="{$v->style};border:1px solid #000000;"></div>
+                          {else}
+                          <div class="catalog-colors__color-block" style="{$v->style};"></div>
+                          {/if}
+                        </label>
+                      </div>
+                    </div>
+                    {/foreach}
+                    <input type="hidden" data-feature-id="{$f.id}" class="sku-feature" name="features[{$f.id}]" value="{ifset($default_sku_features[$f.id])}">
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/if}
+            {/foreach}
+            <div class="product__vars-row product__vars-row--actions">
+              <div class="product__vars-col">
+                <button class="btn btn--h40 btn--w210 js-procuct-tocart">Добавить в корзину</button>
+              </div>
+              <div class="product__vars-col product__vars-col--fav">
+                <div class="product__tofav js-product-tofav-btn">
+                  <div class="product__tofav-icon">
+                    <svg class="svg-icon">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-fav-f"></use>
+                    </svg>
+                  </div>
+                  <div class="product__tofav-link">
+                    <span>Добавить в избранное</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="product__info-links">
+            <a href="#" class="product__info-link">Задать вопрос о товаре</a>
+          </div>
+          <div class="product__info-bottom">
+            <div class="share">
+              {$cururl = $wa->currentUrl(false, true)}
+              <div class="share__title">Поделиться:</div>
+              <div class="share__content social social--nomg">
+                <div class="social__grid">
+                  <div class="social__item">
+                    <a href="https://www.facebook.com/sharer.php?u=http://frantoutlet.com{$cururl}&summary={$product.summary}&title={$product.name}&description={$product.summary}&picture=http://frantoutlet.com/{$wa->shop->imgUrl($image, '1000')}" target="_blank" rel="nofollow noreferrer noopener" class="social__btn">
+                      <svg class="svg-icon">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-fb"></use>
+                      </svg>
+                    </a>
+                  </div>
+                  <div class="social__item">
+                    <a href="https://vk.com/share.php?url=http://frantoutlet.com{$cururl}&title={$product.name} - Frant-Outlet&image=http://frantoutlet.com{$wa->shop->imgUrl($image, '1000')}" target="_blank" rel="nofollow noreferrer noopener" class="social__btn">
+                      <svg class="svg-icon">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-vk"></use>
+                      </svg>
+                    </a>
+                  </div>
+                  <div class="social__item">
+                    <a href="http://twitter.com/share?url=http://frantoutlet.com{$cururl}&title={$product.name} - Frant-Outlet&imageUrl=http://frantoutlet.com/{$wa->shop->imgUrl($image, '1000')}&text={$product.summary}" target="_blank" rel="nofollow noreferrer noopener" class="social__btn">
+                      <svg class="svg-icon">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-twitter"></use>
+                      </svg>
+                    </a>
+                  </div>
+                  <div class="social__item">
+                    <a href="https://connect.ok.ru/offer?url=http://frantoutlet.com{$cururl}&title={$product.name} - Frant-Outlet&imageUrl=http://frantoutlet.com/{$wa->shop->imgUrl($image, '1000')}" target="_blank" rel="nofollow noreferrer noopener" class="social__btn">
+                      <svg class="svg-icon">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-ok"></use>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <script>
+          ( function($) {
+              $.getScript("{$wa_theme_url}assets/js/product.js?v{$wa_theme_version}", function() {
+                if (typeof Product === "function") {
+                  new Product('#cart-form{if $wa->get('cart')}-dialog{/if}', {
+                      currency: {json_encode($currency_info)}
+                      {if count($product.skus) > 1 or $product.sku_type}
+                          ,services: {json_encode($sku_services)}
+                      {/if}
+                      {if $product.sku_type}
+                          ,features: {json_encode($sku_features_selectable)}
+                      {/if}
+                  });
+                }
+              });
+          })(jQuery);
+        </script>
+      </div>
+      <div class="product__stocks-title">Наличие в магазинах:</div>
+      <div class="product__stocks js-stocks">
+        {function name=in_stock n=0 low=5 critical=2}
+          {if $n > $low or $n === null}
+          <span class="product__stocks-value">{$n} шт</span>
+          {elseif $n > $critical}
+          <span class="product__stocks-value">{$n} шт</span>
+          {elseif $n > 0}
+          <span class="product__stocks-value product__stocks-value--red">{$n} шт</span>
+          {else}
+          <span class="product__stocks-value product__stocks-value--gray">Нет в наличии</span>
+          {/if}
+        {/function}
+        {foreach $product.skus as $sku}
+        <div class="product__stocks-inner js-stocks-section sku-{$sku.id}-stock" {if $sku.id != $product.sku_id}style="display:none"{/if}>
+          {if $sku.stock}
+          {foreach $stocks as $stock_id => $stock}
+          <div class="product__stocks-row">
+            {if isset($sku.stock[$stock_id])}
+                {$stock_count = $sku.stock[$stock_id]}
+            {else}
+                {$stock_count = null}
+            {/if}
+            <div class="product__stocks-col product__stocks-col--name">{$stock.name}</div>
+            <div class="product__stocks-col product__stocks-col--separator"></div>
+            <div class="product__stocks-col product__stocks-col--value">{in_stock n=$stock_count low=$stock.low_count critical=$stock.critical_count}</div>
+          </div>
+              {/foreach}
+          {else}
+              {in_stock n=$sku.count}
+          {/if}            
+        </div>
+        {/foreach}
+        {if $product.sku_type}
+        <div class="product__stocks-msg sku-no-stock" style="display: none;">
+            <strong class="stock-none">[`Product with the selected option combination is not available for purchase`]</strong>
+        </div>
+        {/if}
+        
+      </div>
+      <div class="product__about">
+        <div class="product__about-tabs">
+          <div class="product__about-tab is-active">
+            <span>Характеристики</span>
+          </div>
+        </div>
+        <div class="product__about-content">
+          <div class="product__params">
+            {if false || !$product.summary}
+            <div class="product__params-row">
+              <div class="product__params-col product__params-col--name">Описание:</div>
+              <div class="product__params-col product__params-col--value">{$product.summary}</div>
+            </div>
+            {/if}
+            {if $product.features}
+              {foreach $product.features as $f_code => $f_value}
+                {$_true_params = ["weight", "brand", "model", "width", "height", "depth", "color", "manufacturer"]}
+                {$_is_good_param = ($f_code|in_array:$_true_params)}
+                {$_itemprop = ""}
+                {if $_is_good_param}
+                    {$_itemprop = $f_code}
+                {/if}
+              <div class="product__params-row">
+                <div class="product__params-col product__params-col--name">{$features[$f_code].name|escape}:</div>
+                <div class="product__params-col product__params-col--value" itemprop="{$_itemprop|escape}">
+                    {if is_array($f_value)}
+                    {if $features[$f_code].type == 'color'}
+                        {implode('<br /> ', $f_value)}
+                    {else}
+                        {implode(', ', $f_value)}
+                    {/if}
+                    {else}
+                        {$f_value}
+                    {/if}
+                </div>
+              </div>
+              {/foreach}
+            {/if}
+
+          </div>
+        </div>
+      </div>
+      {$upselling = $product->upSelling(12)}
+      {$crossselling = $product->crossSelling(12)}
+      {if $upselling || $crossseling}
+
+      {if $crossseling}
+      {$sellarray = $crossseling}
+      {elseif $upselling}
+      {$sellarray = $upselling}
+      {/if}
+
+      <div class="product__similar">
+        <div class="product__similar-title">Похожие товары</div>
+        <div class="product__similar-body">
+          <div class="m-line-products hide-s">
+            <div class="m-line-products__grid">
+              {foreach $sellarray as $product}
+              {$prod = $wa->shop->product($product.id)}
+              <div class="m-line-products__grid-item js-item" data-id="{$product.id}">
+                <div class="product-card">
+                  <div class="product-card__headline">
+                    {if $prod->features["skidka"]}
+                    <span class="product-card__headline-label">-{$prod->features["skidka"]}% {if ($prod->features["bolshaya_kartochka"] && $productTotal >= 15 && $isMobile == false) || ($prod->features["bolshaya_kartochka"] && $productTotal >= 15 && $isMobile == false)}скидки{/if}</span>
+                    {else}
+                    <div></div>
+                    {/if}
+                    {if $wa->user()->isAuth()}
+                      {if $wishArray = $wa->user()->get('wishlist', true, false)}
+                        {if in_array($product.id, explode(',', $wishArray))}
+                          {$itemInWish = true}
+                        {else}
+                          {$itemInWish = false}
+                        {/if}
+                      {/if}
+                    {else}
+                      {if $wishArray = $wa->storage('wishlist')}
+                        {if in_array($product.id, explode(',', $wishArray))}
+                          {$itemInWish = true}
+                        {else}
+                          {$itemInWish = false}
+                        {/if}
+                      {/if}
+                    {/if}
+                    <div class="product-card__headline-icon js-item-wish {if $itemInWish}is-active{/if}">
+                      <svg class="svg-icon">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-fav-f"></use>
+                      </svg>
+                    </div>
+                  </div>
+                  <a href="{$product.frontend_url}" title="{$product.name}" class="product-card__pic">
+                    <div class="product-card__pic-lay" style="background-image: url({$wa->shop->productImgUrl($product, '300')});"></div>
+                  </a>
+                  <div class="products-card__content">
+                    <a href="{$product.frontend_url}" title="{$product.name}" class="product-card__title">{$product.name}</a>
+                    <div class="product-card__info">
+                      <div class="product-card__price-wrap">
+                        <div class="product-card__price {if $product.compare_price > 0}product-card__price--red{/if}">
+                          <span>{shop_currency($product.price, null, null, 0)}</span> ₽
+                        </div>
+                        {if $product.compare_price > 0}
+                        <div class="product-card__oldprice">
+                          <span>{shop_currency($product.compare_price, null, null, 0)}</span> ₽
+                        </div>
+                        {/if}
+                      </div>
+                      <a href="{$product.frontend_url}" title="{$product.name}" data-type="card" class="product-card__btn">
+                        <svg class="svg-icon">
+                          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-bag"></use>
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/foreach}
+            </div>
+          </div>
+          <div class="line-products show-s">
+            <div class="container">
+              <div class="line-products__slider">
+                <div id="similar-products-slider" class="swiper-container">
+                  <div class="swiper-wrapper">
+                    {foreach $sellarray as $product}
+                    {$prod = $wa->shop->product($product.id)}
+                    <div class="swiper-slide">
+                      <div class="product-card">
+                        <div class="product-card__headline">
+                          {if $prod->features["skidka"]}
+                          <span class="product-card__headline-label">-{$prod->features["skidka"]}% {if ($prod->features["bolshaya_kartochka"] && $productTotal >= 15 && $isMobile == false) || ($prod->features["bolshaya_kartochka"] && $productTotal >= 15 && $isMobile == false)}скидки{/if}</span>
+                          {else}
+                          <div></div>
+                          {/if}
+                          {if $wa->user()->isAuth()}
+                            {if $wishArray = $wa->user()->get('wishlist', true, false)}
+                              {if in_array($product.id, explode(',', $wishArray))}
+                                {$itemInWish = true}
+                              {else}
+                                {$itemInWish = false}
+                              {/if}
+                            {/if}
+                          {else}
+                            {if $wishArray = $wa->storage('wishlist')}
+                              {if in_array($product.id, explode(',', $wishArray))}
+                                {$itemInWish = true}
+                              {else}
+                                {$itemInWish = false}
+                              {/if}
+                            {/if}
+                          {/if}
+                          <div class="product-card__headline-icon js-item-wish {if $itemInWish}is-active{/if}">
+                            <svg class="svg-icon">
+                              <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-fav-f"></use>
+                            </svg>
+                          </div>
+                        </div>
+                        <a href="{$product.frontend_url}" title="{$product.name}" class="product-card__pic">
+                          <div class="product-card__pic-lay" style="background-image: url({$wa->shop->productImgUrl($product, '300')});"></div>
+                        </a>
+                        <div class="products-card__content">
+                          <a href="{$product.frontend_url}" title="{$product.name}" class="product-card__title">{$product.name}</a>
+                          <div class="product-card__info">
+                            <div class="product-card__price-wrap">
+                              <div class="product-card__price {if $product.compare_price > 0}product-card__price--red{/if}">
+                                <span>{shop_currency($product.price, null, null, 0)}</span> ₽
+                              </div>
+                              {if $product.compare_price > 0}
+                              <div class="product-card__oldprice">
+                                <span>{shop_currency($product.compare_price, null, null, 0)}</span> ₽
+                              </div>
+                              {/if}
+                            </div>
+                            <a href="{$product.frontend_url}" title="{$product.name}" data-type="card" class="product-card__btn">
+                              <svg class="svg-icon">
+                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-bag"></use>
+                              </svg>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {/foreach}
+                  </div>
+                </div>
+              </div>
+              <div class="line-products__controls">
+                <div class="line-products__controls-wrap">
+                  <div class="line-products__controls-grid">
+                    <div class="line-products__controls-item">
+                      <div class="line-products__controls-btn rotate--180" id="similar-products-slider-prev" tabindex="0" role="button" aria-label="Previous slide">
+                        <svg class="svg-icon">
+                          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-arrow"></use>
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="line-products__controls-item">
+                      <div class="line-products__controls-btn" id="similar-products-slider-next" tabindex="0" role="button" aria-label="Next slide">
+                        <svg class="svg-icon">
+                          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#i-arrow"></use>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/if}
+    </form>
+  </div>
+</div>
+
+{if false}
+  <div class="container">
+  <div class="page__head page__head--hidemob">
+    <h1 class="page__title">
+      {$last = end($breadcrumbs)}
+      {$last.name}
+    </h1>
+  </div>
+</div>
+
+<div class="container container--pd0">
+  <div class="product js-item" data-id="{$product.id}">
+    <div class="product__pic-wrap">
+      <div class="product__pic-twrap">
+      <div class="product__pic-thumbs js-pic-thumbs">
+        {if count($product.images) > 1 || (count($product.images) === 1)}
+        {foreach $product.images as $image}
+        <div class="product__pic-thumb js-product-thumb {if $image.id == $product.image_id && empty($video)}selected{/if}">
+            {$wa->shop->imgHtml($image, '80x80')}
+        </div>
+        {/foreach}
+        {/if}
+      </div>
+      <div class="product__pic-more arrow-btn js-pic-thumbs-more"></div>
+      </div>
+      <div class="product__pic-viewbox">
+        <div class="product__tagline">
+          {if $product->features["novinka"]["value"] == 1}
+          <div class="product-tag product-tag--left product-tag--orange">Новинка</div>
+          {/if}
+          <div class="product-tag product-tag--right product-tag--gray product-tag--ttu">{$product->features["sokhrannost_monety"]}</div>
+        </div>
+
+
+
+          {if $product.images}
+
+          <div class="slider">
+            <div class="slider__inner">
+              <div id="product-image-slider" class="slider__container slider__container--product-img swiper-container">
+                <div class="swiper-wrapper">
+                  {foreach $product.images as $image}
+                  <div class="swiper-slide js-product-gallery-item">
+                    {$imgUrl = $wa->shop->imgUrl($image, '1500')}
+                    <div class="product__pic js-preview-image" data-src="{$imgUrl}">
+                      {$wa->shop->imgHtml($image, '450', ['title' => ''])}
+                      <div class="product__pic-overlay js-preview-overlay"></div>
+                    </div>
+                  </div>
+                  {/foreach}
+                </div>
+              </div>
+              <div class="slider__controls slider__controls--product-image">
+                <div class="container">
+                  <div class="slider__controls-inner">
+                    <div id="product-image-slider-pagination" class="slider__pagination"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/if}
+
+
+        <div class="product__zoom js-zoom-btn">
+          <div class="product__zoom-icon">
+            <svg class="svg-icon">
+              <use xlink:href="#i-zoom-in"></use>
+            </svg>
+          </div>
+          <div class="product__zoom-text">
+            Наведите курсор, чтобы увеличить
+          </div>
+        </div>
+        <div class="product__fav product__fav--mob">
+          <div class="product__tofav">
+            <svg class="svg-icon">
+              <use xlink:href="#i-user"></use>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="product__info">
+      <div class="product__preview-wrapper js-preview-wrapper">
+        <div class="product__preview js-preview"></div>
+      </div>
+      <h2 class="product__title">
+        {$product.name|escape}
+      </h2>
+      <div class="product__price">
+        <div class="product__costs">
+          <div class="product__cost product__cost--now">
+            {$product.price} руб
+          </div>
+          <div class="product__cost product__cost--old">
+            {if $product.compare_price > 0}{$product.compare_price} руб.{/if}
+          </div>
+        </div>
+        {if $wa->shop->product($p.id)->features["skidka"]}
+        <span class="product__discount product-tag product-tag--discount">
+          -{$wa->shop->product($p.id)->features["skidka"]}%
+        </span>
+        {/if}
+      </div>
+      <div class="product__desc">
+        <div class="p-desc">
+          <div class="p-desc__block p-desc__block--boxshadow">
+            <div class="p-desc__row p-desc__row--pd30 p-desc__row--qty">
+              <div class="p-desc__label">Количество</div>
+              <div class="p-desc__value p-desc__value--mobfsz">
+                {if !$product.count || $product.count > 1}
+                <div class="qty js-item-qty"> 
+                  <input type="hidden" class="js-item-qty-max" value="{if !$product.count}999{else}{$product.count}{/if}">
+                  <div class="qty__btn circle-btn circle-btn--qty circle-btn--minus js-item-qty-dec"></div>
+                  <input type="text" name="quantity" value="1" class="qty__input qty__input--cart js-item-qty-input">
+                  <div class="qty__btn circle-btn circle-btn--qty circle-btn--plus js-item-qty-inc"></div>  
+                </div>
+                {/if}
+                {if !$product.count || $product.count > 10}<span class="qty__span">(в наличии более 10 шт)</span>{elseif $product.count == 1}<span class="qty__span qty__span--nomg">в наличии 1 шт</span>{else}<span class="qty__span">(в наличии {$product.count} шт)</span>{/if}
+              </div>
+              <div class="p-desc__msg js-item-msg"></div>
+            </div>
+            <div class="p-desc__row p-desc__row--pd30 p-desc__row--tocart">
+              <div class="product__tocart">
+                <button class="btn btn--tocart js-item-tocart">
+                  <div class="btn__icon btn__icon--left">
+                    <svg class="svg-icon">
+                      <use xlink:href="#i-cart"></use>
+                    </svg>
+                  </div>
+                  Добавить в корзину
+                </button>
+                <div class="product__fav js-item-wish {if $inWish}is-active{/if}">
+                  <div class="product__tofav">
+                    <svg class="svg-icon">
+                      <use xlink:href="#i-star-new"></use>
+                    </svg>
+                  </div>
+                  <span class="js-item-wish-span" data-text="{if $inWish}В избранное{else}В избранном{/if}">{if $inWish}В избранном{else}В избранное{/if}</span>
+                </div>
+              </div>
+            </div>
+            <div class="p-desc__row p-desc__row--pd30 p-desc__row--pays">
+              <div class="p-desc__label p-desc__label--pays">Оплата</div>
+              <div class="p-desc__value">
+                  <span class="product__paylink">Оплата картой,</span>
+                  <span class="product__paylink">Сбербанк,</span>
+                  <span class="product__paylink">QIWI</span>
+                <!-- <div class="product__payicon">
+                  <svg class="svg-icon">
+                    <use xlink:href="#i-user"></use>
+                  </svg>
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <div class="p-desc__block p-desc__block--mobibrbt">
+            {if $product.summary}
+            <div class="p-desc__row p-desc__row--pd30 p-desc__row--aligntop">
+              <div class="p-desc__label p-desc__label--gray">Описание:</div>
+              <div class="p-desc__value">{$product.summary}</div>
+            </div>
+            {/if}
+            {$params = []}
+            {foreach $product.features as $key => $item}
+              {if $features[$key].is_desc}
+                {$params[$key]=$item}
+              {/if}
+            {/foreach}
+            {foreach array_chunk($params, 2, true) as $row}
+            <div class="p-desc__row p-desc__row--pd15">
+              {foreach $row as $key => $item}
+              <div class="p-desc__col">
+                <div class="p-desc__row p-desc__row--aligntop">
+                  <div class="p-desc__label p-desc__label--gray">{$features[$key].name|escape}:</div>
+                  <div class="p-desc__value">{$item}</div>
+                </div>
+              </div>
+              {/foreach}
+            </div>
+            {/foreach}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{$upselling = $product->upSelling(12)}
+{if $upselling}
+{include file="`$wa_active_theme_path`/products/products-slider.html" inline upselling=$upselling}
+<div class="block block--pdt40">
+
+</div>
+{else}
+<div class="block block--pdt0">
+</div>
+{/if}
+{/if}

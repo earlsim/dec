@@ -1,0 +1,101 @@
+      <!-- Footer - begin -->
+      <footer class="footer">
+        <div class="footer__top footer-top">
+          <div class="footer-top__inner">
+            <div class="footer-top__about">
+              <div class="footer-top__logo">
+                <svg class="svg-icon">
+                  <use xlink:href="#i-logo"></use>
+                </svg>
+              </div>
+              <div class="footer-top__address">
+                <p>357600, Ставропольский край,
+                  г. Пятигорск, ул. Мира, 248</p>
+              </div>
+            </div>
+            <div class="footer-top__nav footer-nav">
+              <div class="footer-nav__col">
+                <div class="footer-nav__title">Каталог</div>
+                <div class="footer-nav__items">
+                	{$categories = $wa->shop->categories(0, 1, true)}
+                	{foreach $categories as $category}
+                  <a href="{$category.url}" class="footer-nav__item">{$category.name}</a>
+                  	{/foreach}
+                </div>
+              </div>
+              <div class="footer-nav__col">
+                <div class="footer-nav__title">Конструктор букетов</div>
+                <div class="footer-nav__items">
+                  {$items = $wa->menu->get(17)}
+                  {foreach $items as $item}
+                  <a href="{$item.url}" class="footer-nav__item">{$item.name}</a>
+                  {/foreach}
+                </div>
+              </div>
+              <div class="footer-nav__col">
+                <div class="footer-nav__title">Свадебный декор</div>
+                <div class="footer-nav__items">
+                  {$items = $wa->menu->get(20)}
+                  {foreach $items as $item}
+                  <a href="{$item.url}" class="footer-nav__item">{$item.name}</a>
+                  {/foreach}
+                </div>
+              </div>
+              <div class="footer-nav__col">
+                <div class="footer-nav__title">Доставка и оплата</div>
+                <div class="footer-nav__items">
+                  {$items = $wa->menu->get(21)}
+                  {foreach $items as $item}
+                  <a href="{$item.url}" class="footer-nav__item">{$item.name}</a>
+                  {/foreach}
+                </div>
+              </div>
+              <div class="footer-nav__col">
+                <div class="footer-nav__title">Контакты</div>
+                <div class="footer-nav__items">
+                  {$items = $wa->menu->get(22)}
+                  {foreach $items as $item}
+                  <a href="{$item.url}" class="footer-nav__item">{$item.name}</a>
+                  {/foreach}
+                </div>
+              </div>
+            </div>
+            <div class="footer-top__contact">
+              {$phone = str_replace(" ","",$wa->block('global.phone'))}
+              <a href="tel:{$phone}" class="footer-top__phone">{$wa->block("global.phone")}</a>
+              <div class="footer-top__social social">
+                <a href="{$wa->block("global.fb")}" class="social__item">
+                  <svg class="svg-icon">
+                    <use xlink:href="#i-fb"></use>
+                  </svg>
+                </a>
+                <a href="{$wa->block("global.vk")}" class="social__item">
+                  <svg class="svg-icon">
+                    <use xlink:href="#i-vk"></use>
+                  </svg>
+                </a>
+                <a href="{$wa->block("global.inst")}" class="social__item">
+                  <svg class="svg-icon">
+                    <use xlink:href="#i-inst"></use>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer__bottom footer-bottom">
+          <div class="footer-bottom__inner">
+            <div class="footer-bottom__info">
+              <div class="footer-bottom-item">© 2019 Все права защищены</div>
+              <a href="#" class="footer-bottom__item">Пользовательское соглашение</a>
+              <a href="#" class="footer-bottom__item">Политика конфидециальности</a>
+            </div>
+            <a href="#" class="footer-bottom__logo">
+              <svg class="svg-icon">
+                <use xlink:href="#i-studio"></use>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </footer>
+      <!-- Footer - end -->

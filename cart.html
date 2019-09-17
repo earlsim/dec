@@ -1,0 +1,79 @@
+{$wa->globals("hideCart", true)}
+{$wa->title("Корзина - Студия ярких событий Декораторъ")}
+<div class="main">
+  <div class="container">
+    <div id="shopping-cart-page" class="page">
+      
+      <h1 class="page__title page__title--data" data-cart-qnt data-content="{$cart.count}">Корзина</h1>
+      {if $cart.count == 0}
+      <div class="page__empty">Ваша корзина пуста</div>
+      {else}
+      {$cartTotal = number_format(shop_currency_html($cart.total,
+        null, null, 0), 0, '.', ' ')}
+      <div class="page__content">
+        <div class="shopping-cart">
+          <div class="shopping-cart__items">
+            {foreach $cart.items as $item}
+            <div class="shopping-cart-product js-product-cart-item" data-cart-prod="{$item.id}">
+              <div class="shopping-cart-product__content">
+                <div class="shopping-cart-product__pic">
+                  {if $wa->shop->productImgHtml($item.product, '200x0')}
+                  <img src="{$wa->shop->productImgUrl($item.product, '200x0')}" alt="{$item.product.name}" title="{$item.product.name}" class="shopping-cart-product__img">
+                  {else}
+                  <img class="shopping-cart-product__img" alt="{$item.product.name}" title="{$item.product.name}"
+                    src="{$wa_theme_url}assets/img/dummy200.png">
+                  {/if}
+                </div>
+                <div class="shopping-cart-product__text">
+                  <div class="shopping-cart-product__code">{$item.sku_code}</div>
+                  <a href="{$wa->shop->productUrl($item.product)}" class="shopping-cart-product__name" title="{$item.product.name|escape}">{$item.product.name|escape}</a>
+                  <div class="shopping-cart-product__desc">
+                    <p>{$item.product.description|truncate}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="shopping-cart-product__qnt qnt-toggle js-product-cart-qnt">
+                <div class="qnt-toggle__min" data-action="min"></div>
+                <input type="text" class="qnt-toggle__val" value="{$item.quantity}">
+                <div class="qnt-toggle__max" data-action="max"></div>
+              </div>
+              <div class="shopping-cart-product__price">
+                <span class="js-price-val">{number_format($item.product.price, 0, ',', ' ' )}</span>
+                <span>₽</span>
+                <span>x</span>
+                <span class="js-qnt-val">{$item.quantity}</span>
+              </div>
+              <div class="shopping-cart-product__sum">
+                <span class="js-sum-val">{number_format($item.full_price, 0, ',', ' ' )}</span>
+                <span>₽</span>
+              </div>
+              <div class="shopping-cart-product__close js-cart-product-delete">
+                <div class="shopping-cart-product__close-inner"></div>
+              </div>
+            </div>
+            {/foreach}
+          </div>
+          <div class="shopping-cart__bottom">
+            <!--
+            <div class="shopping-cart__delivery-price">
+              <span>Доставка</span>
+              <span></span>
+              <span>500</span>
+              <span>₽</span>
+            </div>
+            -->
+            <div class="shopping-cart__sum-price">
+              <span>Итого</span>
+              <span></span>
+              <span data-cart-sum>{$cartTotal}</span>
+              <span>₽</span>
+            </div>
+            <a href="/checkout/" class="shopping-cart__btn btn">Продолжить</a>
+          </div>
+        </div>
+      </div>
+
+      {/if}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+.tooltip {
+  position: relative;
+  padding: 24px 16px 22px 16px;
+  background: #FFFFFF;
+  box-shadow: 0 0 24px rgba(72, 22, 93, 0.15);
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 10px;
+    width: 16px;
+    height: 16px;
+    background: #FFF;
+    transform: rotate(45deg);
+    box-shadow: 0 0 24px rgba(72, 22, 93, 0.15);
+    user-select: none;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40px;
+    height: 20px;
+    background: #FFF;
+  }
+}
+
+.tooltip__title {
+  font-size: 12px;
+  line-height: 2.15em;
+  color: $c-text-secondary;
+  text-transform: uppercase;
+}
+
+.tooltip__text {
+  margin-top: 5px;
+  font-size: 16px;
+  line-height: 1.25em;
+}
