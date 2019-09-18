@@ -155,9 +155,10 @@
                 <img class="result-pic__img" alt="{$p.name}" title="{$p.name}" src="{$wa_theme_url}assets/img/dummy600.png">
                 {/if}
               </div>
+              <div class="result-card__num"><span class="js-span-qnt">11</span></div>
               <div class="result-card__info js-result-price" data-new-price='{shop_currency($product.price, null, null, 0)}' data-price="{shop_currency($product.price, null, null, 0)}">
                 <div class="result-info__small-name">Букет</div>
-                <span class="result-info__qty">11</span>&ensp;<span class="result-info__color js-name-color"></span>&ensp;<div class="result-info__name"> {$product.summary|lower} </div>&ensp;<span class="result-info__length"></span>&ensp;<span class="result-info__pack"></span><br>
+                <span class="result-info__qty js-constr-qty">11</span>&ensp;<span class="result-info__color js-name-color"></span>&ensp;<div class="result-info__name"> {$product.summary|lower} </div>&ensp;<span class="result-info__length"></span>&ensp;<span class="result-info__pack"></span><br>
                 <div class="result-info__price js-price">{shop_currency($product.price, null, null, 0)*11}</div><span> ₽</span>
               </div>
               <button type="submit" class="btn btn--full reqConstructor">заказать букет</button>

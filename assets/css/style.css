@@ -1558,6 +1558,8 @@ body {
     background-color: #ffafc9; }
   .color-toggle--purple {
     background-color: #dfc9df; }
+  .color-toggle--lavand {
+    background-color: #bb9fcf; }
   .color-toggle--crimson {
     background-color: #DC143C; }
   .color-toggle--vinous {
@@ -1676,15 +1678,37 @@ body {
   line-height: 44px; }
 
 .result-card__pic {
-  margin-bottom: 24px;
-  background-color: transparent;
   position: relative;
   height: 360px;
-  width: 256px; }
+  width: 256px;
+  margin-bottom: 24px;
+  background-color: transparent; }
   @media (min-width: 768px) {
     .result-card__pic {
       height: 446px;
       width: 446px; } }
+
+.result-card__num {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 72px;
+  height: 72px;
+  background-color: #48165D;
+  border-radius: 100%; }
+  .result-card__num span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    font-family: "Bebas Neue", Arial, sans-serif;
+    font-size: 24px;
+    line-height: 1em;
+    color: #F3F4F5;
+    transition: all .2s; }
+    .result-card__num span.is-active {
+      transform: translateY(-50%) translateX(-50%) scale3d(1.1, 1.1, 1);
+      color: #d69cef; }
 
 .result-pic__img {
   position: absolute;

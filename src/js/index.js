@@ -533,7 +533,9 @@ window.addEventListener('DOMContentLoaded', function () {
       }
 
       sum = sum - actualPrice;
-      $('.result-info__qty').html(parseInt(val,10));
+      $('.js-constr-qty').html(parseInt(val,10));
+      animateConstructorNum(val);
+      $('.js-span-qnt').html(parseInt(val,10));
     } else if (this.getAttribute('data-action') === 'max') {
       val = val + 1;
         if ( document.querySelector('.js-product-qnt').hasAttribute('data-construct') ) {
@@ -566,7 +568,8 @@ window.addEventListener('DOMContentLoaded', function () {
     }
     if (val % 10 && val < 10) { val = `0${val}`; }
     inputElement.value = val;
-    $('.result-info__qty').html(val);
+    $('.js-constr-qty').html(parseInt(val,10));
+    animateConstructorNum(val);
     priceElem.innerHTML = sum;
     colorNameChange();
   });
@@ -748,7 +751,8 @@ window.addEventListener('DOMContentLoaded', function () {
         priceElem.innerHTML = '0';
       } else {
         priceElem.innerHTML = sum;
-        $('.result-info__qty').html(parseInt(val,10));
+        $('.js-constr-qty').html(parseInt(val,10));
+        $('.js-span-qnt').html(parseInt(val,10));
       }
 
       wordForms(val);
@@ -2396,7 +2400,7 @@ $("body").on('submit', 'form.js-item', function () {
 
     return false;
   });
-// Constructor flower change Post request
+// Constructor flower change
 $(document).on('change', "#flower-select", function (e) {
   let val = $(e.target).val();
   if (val != "constructor") {
@@ -2418,6 +2422,8 @@ $(document).on('change', "#flower-select", function (e) {
       $('.js-color').replaceWith(tmp.find('.js-color'));
       $('.js-length').replaceWith(tmp.find('.js-length'));
       $('.js-packing').replaceWith(tmp.find('.js-packing'));
+      $('.js-span-qnt').replaceWith(tmp.find('.js-span-qnt'));
+
       $('.length-toggle').first().trigger('click');
       $('[data-color-count = 1]').trigger('click');
 
@@ -2648,6 +2654,14 @@ function colorNameChange() {
   var result = wordForm(count, [firstCase, secondCase, thirdCase]);
   $('.js-name-color').html(result);
 };
+
+function animateConstructorNum(val) {
+  let qnt = $('.js-span-qnt');
+  qnt.html(parseInt(val,10));
+  qnt.addClass('is-active');
+  setTimeout( ()=>(qnt.removeClass('is-active')),200);
+};
+
 //  length select
 $(document).on('click', '.length-toggle', function () {
   $(this).addClass('is-active');
@@ -2657,10 +2671,7 @@ $(document).on('click', '.length-toggle', function () {
   }
   var attr = $(this).attr('data-length-active');
   if (typeof attr !== typeof undefined && attr !== false) {
-    // $(this).removeAttr('data-length-active');
-    // recalculate();
-    // $(this).siblings().removeAttr('data-length-active');
-    // $('.result-info__length').html('');
+
   }
   else if (!attr) {
     $(this).siblings().removeAttr('data-length-active');

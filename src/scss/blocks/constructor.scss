@@ -206,6 +206,9 @@
   &--purple {
     background-color: #dfc9df;
   }
+  &--lavand {
+    background-color: #bb9fcf;
+  }
   &--crimson {
     background-color: #DC143C;
   }
@@ -350,15 +353,42 @@
 }
 
 .result-card__pic {
-  margin-bottom: 24px;
-  background-color: transparent;
   position: relative;
   height: 360px;
   width: 256px;
+  margin-bottom: 24px;
+  background-color: transparent;
 
   @media($m-s) {
     height:446px;
     width: 446px
+  }
+}
+
+.result-card__num {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 72px;
+  height: 72px;
+  background-color: $c-main;
+  border-radius: 100%;
+
+  span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    font-family: $f-secondary;
+    font-size: 24px;
+    line-height: 1em;
+    color: $c-block;
+    transition: all .2s;
+
+    &.is-active {
+      transform: translateY(-50%) translateX(-50%) scale3d(1.1,1.1,1);
+      color: #d69cef;
+    }
   }
 }
 .result-pic__img {
