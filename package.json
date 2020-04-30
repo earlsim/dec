@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "flatpickr": "^4.5.7",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "swiper": "^4.3.5",
     "vivus": "^0.4.4"
   }
